@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ln -f -s $(pwd)/sendpatch ~/bin/sendpatch
+ln -f -s $(pwd)/makelog ~/bin/makelog
+ln -f -s $(pwd)/makediff ~/bin/makediff
+ln -f -s $(pwd)/svnignore ~/bin/svnignore
+ln -f -s $(pwd)/unaccent ~/bin/unaccent

@@ -1,0 +1,666 @@
+#+TITLE:     Submit patches
+#+AUTHOR:    Fabrice Niessen
+#+EMAIL:     fni@xxx.com
+#+Time-stamp: <2012-04-18 Wed 16:44 Fabrice on MEDIACENTER>
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+
+#+SETUPFILE: bigblow.setup
+#+PROPERTY:  shebang #!/bin/bash
+
+* Commit guidelines
+
+This list hopes to help all of us to improve our commits.
+
+** Changes
+
+- Make commits of logical units.
+
+- Check for unnecessary whitespace before committing.
+
+- Do not check in commented out code or unneeded files.
+
+- Make sure that you have tests for the bug you are fixing.
+
+- Make sure that the test suite passes after your commit.
+
+- Do not attach your patch, but submit it "inline" in the mail body, /unless
+  you cannot teach your mailer to leave the formatting of the patch alone/.
+
+** Commit messages
+
+- The first line of the commit message should be a short description
+  (50 characters is the /soft/ limit), and should *skip the full stop*.
+
+- The body should provide a meaningful commit message, which:
+  + uses the *imperative present tense*: "fix bug", not "fixed bug" or "fixes
+    bug".
+  + includes motivation for the change, and contrasts its implementation with
+    previous behavior.
+
+Keep in mind that commit messages are often read *without* seeing the diffs, and
+without the possibility to see which other files you committed just before
+that particular commit!
+
+** Example
+
+#+begin_src text
+Short summary of changes
+
+More detailed explanatory text, if necessary. Wrap it to about 72 characters
+or so. In some contexts, the first line is treated as the subject of an email
+and the rest of the text as the body. The blank line separating the summary
+from the body is critical; some tools can get confused if you run the two
+together.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen is used for the bullet, with blank lines in between, but
+  conventions vary here
+
+- Use a hanging indent
+#+end_src
+
+** Real-life example                                                :noexport:
+
+With a cover letter: http://patchwork.madduck.net/patch/1141/
+
+* Code
+
+** Send patch
+   :PROPERTIES:
+   :tangle:   bin/sendpatch
+   :END:
+
+This script sends patches:
+
+- to the SVN repository (that is, /commits/ them)
+- to mailing lists (that is, /emails/ them)
+
+*** Configuration options
+
+**** Per project options
+
+#+begin_src sh
+mailto="mc-reviews@xxx.com"
+prefix="[PATCH]"
+excludefileregexp=""
+#+end_src
+
+**** Per user options
+
+#+begin_src sh
+patchfileprefix=""
+commitmsgfileprefix=""
+emailfileprefix=""
+asksubject="yes"
+autocommit="ask"
+autosendemail="ask"
+autodeletetmpfiles="ask"
+emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <johndoe@example.com>" -charset UTF-8'
+#+end_src
+
+**** Usage
+
+A commonly configured option could be:
+
+#+begin_src sh :tangle no
+excludefileregexp="(\.html|\.xml)"
+#+end_src
+
+Such default settings can be overridden in:
+
+1. =~/.sendpatchrc=
+2. =sendpatch.common= in the root directory of a working copy
+3. =sendpatch.params= in the root directory of a working copy
+
+in that order.
+
+Remember that those files must be with @Unix line endings@!
+
+*** Helper functions
+
+#+begin_src sh
+function die () {
+    echo "$(basename $0): $@" > /dev/stderr
+    exit 1
+}
+#+end_src
+
+#+begin_src sh
+function cecho () {
+    black="\e[30m"
+    red="\e[31m"
+    green="\e[32m"
+    yellow="\e[33m"
+    blue="\e[34m"
+    magenta="\e[35m"
+    cyan="\e[36m"
+    white="\e[37m"
+    reset="\e[0m"
+
+    color=${green}
+    echo -e -n "$color"
+    echo -e -n "$1"
+    echo -e "$reset"
+}
+#+end_src
+
+**** VCS in use
+
+#+begin_src sh
+function vcs_info () {
+    local default="tfs"
+
+    # recursively search for `.svn' directory
+    while [[ ! ( -d .svn ) && ( "$(pwd)" != "/" ) ]]; do
+        cd ..
+    done
+
+    if [[ -d .svn ]]; then
+        echo "svn"
+    else # not found
+        echo "$default"
+    fi
+}
+#+end_src
+
+*** Init
+
+#+begin_src sh
+tmpfile="/tmp/$(basename $0).$$"
+trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+userconfig=~/.sendpatchrc
+projectconfig=sendpatch.common
+userprojectconfig=sendpatch.params
+
+export vcs=$(vcs_info)
+echo "VC backend: $vcs"
+
+case $vcs in
+    svn)
+        VCS_STATUS="svn status --ignore-externals"
+        ;;
+    tfs)
+        VCS_STATUS="tf status"
+        ;;
+    *)
+        die "VCS backend is not supported"
+        ;;
+esac
+#+end_src
+
+*** Check current directory
+
+Note that, for TFS, we impose to find a =sendpatch.common= file in order to
+conclude that we're at the root directory of a working copy, or not.
+
+#+begin_src sh
+case $vcs in
+    svn)
+        [[ -d .svn ]] \
+            || die "\`$(pwd)' is not the root directory of a working copy"
+        ;;
+    tfs)
+        [[ -f $projectconfig ]] \
+            || die "\`$(pwd)' is not the root directory of a working copy"
+        ;;
+esac
+#+end_src
+
+*** Get URL of project
+
+#+begin_src sh
+case $vcs in
+    svn)
+        url=$(svn info | grep -E "^URL")/
+        ;;
+    tfs)
+        # get collection and project
+        tf workfold > $tmpfile
+        url=$(cat $tmpfile | tail -n 2 | sed "2{s/:.*//}")
+        ;;
+esac
+#+end_src
+
+*** Override settings
+
+#+begin_src sh
+[[ -f $userconfig ]] && source $userconfig
+[[ -f $projectconfig ]] && source $projectconfig
+[[ -f $userprojectconfig ]] && source $userprojectconfig
+#+end_src
+
+Default editor is =$EDITOR=. If not found, set Emacs.
+
+#+begin_src sh
+: ${EDITOR:="emacsclient"}
+which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
+#+end_src
+
+*** Display changed files
+
+Shows what files have been modified in your working copy, what files have been
+changed in the repository since your last update, and which files, if any,
+conflict with your modifications. The =-u= option is what forces the command to
+access the repository for this check.
+
+#+begin_src sh
+cecho "\nChanges to be committed:"
+case $vcs in
+    svn)
+        ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile
+        cat $tmpfile | cut -c 1-9 | grep -E "^M       \*" \
+            && die "a newer revision exists on the server"
+        cat $tmpfile | cut -c 1-9 | grep -E "^C" && die "conflicted item modification"
+        ;;
+    tfs)
+        export rootdirwin=$(cygpath -w -l "$(pwd)")
+        # echo "Root directory (in Windows format) : $rootdirwin"
+        ${VCS_STATUS} $@ > $tmpfile
+        # No idea why, but we can't directly pipe the output of `tf status'
+        # command
+        cat $tmpfile | grep -F -i "$rootdirwin" | tee $tmpfile.out
+        mv $tmpfile.out $tmpfile
+        ;;
+esac
+#+end_src
+
+*** Display ignored files
+
+#+begin_src sh
+cecho "\nFiles to be ignored:"
+case $vcs in
+    svn)
+        ${VCS_STATUS} $@ | grep -E "^\? " | grep -v " 0.*-"
+        ;;
+    tfs)
+        echo "XXX HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"
+        ;;
+esac
+#+end_src
+
+Stop if no changes are to be committed. Though, that may mean that you should
+=add= some of the files currently ignored; hence, it's good to make this check
+after having sent some information to the user...
+
+#+begin_src sh
+[[ $(cat $tmpfile | wc -l) -gt 0 ]] \
+    || die "no changes to send to the repository"
+#+end_src
+
+*** Ask for short log message
+
+#+begin_src sh
+if [[ "$asksubject" != "no" ]]; then
+    echo ""
+    read -p "Subject (short log): " subject
+fi
+#+end_src
+
+*** Generate name for patch files
+
+#+begin_src sh
+oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
+    | head -n 1 | cut -d "-" -f 1 | sed "s/^${patchfileprefix}00*//")
+newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
+filename="$newcounterpadded-$(echo "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
+
+patch=${patchfileprefix}${filename}.patch
+commitmsg=${commitmsgfileprefix}${filename}.log
+email=${emailfileprefix}${filename}.txt
+#+end_src
+
+*** Make patch file
+
+#+begin_src sh
+makediff $@ > $patch
+#+end_src
+
+=excludefileregexp= allows one to exclude useless or unreadable diffs from the
+email contents. That does not have any impact on the commit process itself...
+
+#+begin_src sh
+if [[ -n "$excludefileregexp" ]]; then
+    cat $patch |\
+    awk -v pattern="^Index: .*$excludefileregexp" \
+        'BEGIN {deleteline = 0;}
+         $0 ~ pattern {deleteline = 1; next;}
+         // && deleteline == 0 {print $0;}
+         /^Index: / && deleteline == 1 {print $0; deleteline = 0;}' \
+    > $patch.excluded 2> /dev/null
+else
+    cp $patch $patch.excluded
+fi
+#+end_src
+
+*** Edit log message
+
+#+begin_src sh
+# ask for commit message
+cat <<EOF > $email
+# Hey, Emacs! This is a -*- Diff -*- file
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored...
+# The FIRST LINE of the commit message should be a short description
+# and should skip the full stop. It will become the subject of the email.
+EOF
+{ echo "$subject"; makelog -f $patch | sort | uniq; echo -e "\n---"; echo -e "$url\n"; \
+  cat $patch.excluded; } >> $email
+mv $patch.excluded $patch
+echo -e "\nEdit commit log message and email to send..."
+"$EDITOR" $email
+test $? -eq 0 || die "edit failed"
+
+# remove comments from editable part
+sed '0,/^---$/{/^#.*$/d;}' < $email > $email.nocomment; mv $email.nocomment $email
+#+end_src
+
+*** Convert email contents into UTF-8
+
+#+begin_src sh
+# convert email into UTF-8
+case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
+    UTF-8*)
+        ;;
+    ASCII*)
+        ;;
+    ISO-8859*)
+        echo "Character encoding of diff output: ISO-8859... Converting it to UTF-8..."
+        cat $email | iconv -c -f ISO-8859-1 -t UTF-8 > $tmpfile
+        mv $tmpfile $email
+        ;;
+    *)
+        echo "Potential problems found in email file $email: $(file --brief $email)"
+        read -p "Continue? (y/n): " answer
+        case $answer in
+            y | yes)
+                ;;
+            *)
+                die "exiting..."
+                ;;
+        esac
+        ;;
+esac
+echo -e "Email:         $email"
+#+end_src
+
+*** Deduce log message for commit
+
+#+begin_src sh
+sed '/^---$/,$d' < $email > $commitmsg
+#+end_src
+
+*** Deduce subject line for email
+
+#+begin_src sh
+# # for debugging purpose
+# echo -e "\n-- First 3 lines of email --"
+# head -3 $email
+# echo "----------------------------"
+
+# get new subject for email (first line of log message)
+head -n 1 $email > $tmpfile
+
+# replace accented letters by their unaccented equivalent
+case "$(file --brief $tmpfile 2> /dev/null)" in
+    UTF-8*)
+        subject="$(cat $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"
+        ;;
+    ISO-8859*|ASCII*)
+        subject="$(cat $tmpfile | unaccent)"
+        ;;
+    *)
+        die "unknown character encoding: $(file --brief $tmpfile). Did you put the subject as first line?"
+        ;;
+esac
+
+# # for debugging purpose
+# echo -e "\n-- Subject (unaccented) ----"
+# echo $subject
+# echo "----------------------------"
+#+end_src
+
+*** Auto-commit changes
+
+*************** TODO Check what's going on when committing
+When there are multiple workspaces on your machine, are we sure that TF only
+checks in files which are in the current subtree?
+*************** END
+
+#+begin_src sh
+echo ""
+if [[ "$autocommit" = "ask" ]]; then
+    read -p "Commit? (y/n): " answer
+    case $answer in
+        y | yes)
+            askcommit="yes"
+            ;;
+        *)
+            askcommit="no"
+            ;;
+    esac
+fi
+
+if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
+    echo "Committing..."
+    case $vcs in
+        svn)
+            svn commit --file $commitmsg $@
+            ;;
+        tfs)
+            tf checkin /comment:@$commitmsg /noprompt $@
+            ;;
+    esac
+    rc=$?
+else
+    echo "Nothing gets committed..."
+    rc=0
+fi
+test $rc -eq 0 || die "commit failed"
+#+end_src
+
+*** Auto-send email
+
+#+begin_src sh
+echo ""
+if [[ "$autosendemail" = "ask" ]]; then
+    echo "Environment for sending email:"
+    # print the email command
+    eval echo $emailcommand
+    [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
+    [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
+    [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
+    read -p "Send email? (y/n): " answer
+    case $answer in
+        y | yes)
+            asksendemail="yes"
+            ;;
+        *)
+            asksendemail="no"
+            ;;
+    esac
+fi
+
+if [[ "$autosendemail" = "yes" || "$asksendemail" = "yes" ]]; then
+    echo "Sending email..."
+    eval "$emailcommand"
+    rc=$?
+else
+    echo "Nothing gets sent..."
+    rc=0
+fi
+test $rc -eq 0 || die "send email failed"
+#+end_src
+
+*** Auto-delete temporary files
+
+#+begin_src sh
+echo ""
+if [[ "$autodeletetmpfiles" = "ask" ]]; then
+    read -p "Delete temp files? (y/n): " answer
+    case $answer in
+        y | yes)
+            askdeletetmpfiles="yes"
+            ;;
+        *)
+            askdeletetmpfiles="no"
+            ;;
+    esac
+fi
+
+if [[ "$autodeletetmpfiles" = "yes" || "$askdeletetmpfiles" = "yes" ]]; then
+    echo "Deleting temp files..."
+    rm $patch $commitmsg $email
+    rc=$?
+else
+    echo "Nothing gets deleted..."
+    rc=0
+fi
+test $rc -eq 0 || die "delete temp files failed"
+#+end_src
+
+** Display list of files
+   :PROPERTIES:
+   :tangle:   bin/makelog
+   :END:
+
+Display a list of files to be committed, for the commit log message.
+
+#+begin_src sh
+# Usage: makelog [-f diff-file] [svn diff options]
+#
+# Make a log message for a change, including the header, and the relative
+# pathnames of the changed files. Output goes to stdout.
+#
+# If a you have a pre-existing diff file, use `-f diff-file' to use this file.
+
+echo ""
+
+{ if [ "$1" = "-f" ]
+then
+    cat $2
+else
+    svn diff $* 2>&1
+fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
+#+end_src
+
+Using =sed '/^Index:/!d'= (instead of =egrep "^Index:"=) allows to filter the
+lines we're interested in, even if the file contains binary characters (such
+as non-breakable spaces). On the other hand, =grep= would simply declare that
+"Binary file matches".
+
+** Display changes
+   :PROPERTIES:
+   :tangle:   bin/makediff
+   :END:
+
+Display the changes made to all target files, and display deleted and new
+files as well.
+
+#+begin_src sh
+# Usage: makediff [svn diff options]
+#
+# Make a diff file, ready for review. It contains the diffs of all files,
+# followed by the text of new files. Output goes to stdout.
+
+tmpfile="/tmp/$(basename $0).$$"
+trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+case $vcs in
+    svn)
+        svn diff $* > $tmpfile 2>&1
+        ;;
+    tfs)
+        tf diff $* /format:Unified > $tmpfile 2>&1
+        cat $tmpfile \
+            | grep -E -i -v "^(edit|modifier|add|ajouter|renommer): " \
+            | sed -r "s/^(File:|Fichier\o240:)/Index:/" > $tmpfile.out
+        mv $tmpfile.out $tmpfile
+        ;;
+esac
+cat $tmpfile
+#+end_src
+
+** Ignore elements
+   :PROPERTIES:
+   :tangle:   bin/svnignore
+   :END:
+
+Ignore multiple elements in one command.
+
+#+begin_src sh
+# Usage: svnignore . \*.o \*.exe \*.tmp
+
+target="$1"; shift
+svn propset svn:ignore "$(echo $* | tr ' ' '\n')" "$target"
+#+end_src
+
+** Unaccent
+   :PROPERTIES:
+   :tangle:   bin/unaccent
+   :END:
+
+Remove accents, replacing accented letters by their unaccented equivalent.
+
+#+begin_src sh :shebang #!/bin/sed -f
+s/\o240/ /g
+s/\o300/A/g
+s/\o301/A/g
+s/\o302/A/g
+s/\o304/A/g
+s/\o310/E/g
+s/\o311/E/g
+s/\o312/E/g
+s/\o313/E/g
+s/\o315/I/g
+s/\o316/I/g
+s/\o323/O/g
+s/\o324/O/g
+s/\o325/O/g
+s/\o326/O/g
+s/\o331/U/g
+s/\o332/U/g
+s/\o333/U/g
+s/\o334/U/g
+s/\o340/a/g
+s/\o341/a/g
+s/\o342/a/g
+s/\o344/a/g
+s/\o347/c/g
+s/\o350/e/g
+s/\o351/e/g
+s/\o352/e/g
+s/\o353/e/g
+s/\o355/i/g
+s/\o356/i/g
+s/\o357/i/g
+s/\o363/o/g
+s/\o364/o/g
+s/\o365/o/g
+s/\o366/o/g
+s/\o371/u/g
+s/\o372/u/g
+s/\o373/u/g
+s/\o374/u/g
+#+end_src
+
+** Install environment
+   :PROPERTIES:
+   :tangle:   bin/install-files
+   :END:
+
+Symlink the files.
+
+#+begin_src sh :results silent
+ln -f -s $(pwd)/sendpatch ~/bin/sendpatch
+ln -f -s $(pwd)/makelog ~/bin/makelog
+ln -f -s $(pwd)/makediff ~/bin/makediff
+ln -f -s $(pwd)/svnignore ~/bin/svnignore
+ln -f -s $(pwd)/unaccent ~/bin/unaccent
+#+end_src

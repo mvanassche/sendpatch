@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Usage: svnignore . \*.o \*.exe \*.tmp
+
+target="$1"; shift
+svn propset svn:ignore "$(echo $* | tr ' ' '\n')" "$target"

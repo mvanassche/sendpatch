@@ -1,0 +1,315 @@
+#!/bin/bash
+
+mailto="mc-reviews@xxx.com"
+prefix="[PATCH]"
+excludefileregexp=""
+
+patchfileprefix=""
+commitmsgfileprefix=""
+emailfileprefix=""
+asksubject="yes"
+autocommit="ask"
+autosendemail="ask"
+autodeletetmpfiles="ask"
+emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <johndoe@example.com>" -charset UTF-8'
+
+function die () {
+    echo "$(basename $0): $@" > /dev/stderr
+    exit 1
+}
+
+function cecho () {
+    black="\e[30m"
+    red="\e[31m"
+    green="\e[32m"
+    yellow="\e[33m"
+    blue="\e[34m"
+    magenta="\e[35m"
+    cyan="\e[36m"
+    white="\e[37m"
+    reset="\e[0m"
+
+    color=${green}
+    echo -e -n "$color"
+    echo -e -n "$1"
+    echo -e "$reset"
+}
+
+function vcs_info () {
+    local default="tfs"
+
+    # recursively search for `.svn' directory
+    while [[ ! ( -d .svn ) && ( "$(pwd)" != "/" ) ]]; do
+        cd ..
+    done
+
+    if [[ -d .svn ]]; then
+        echo "svn"
+    else # not found
+        echo "$default"
+    fi
+}
+
+tmpfile="/tmp/$(basename $0).$$"
+trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+userconfig=~/.sendpatchrc
+projectconfig=sendpatch.common
+userprojectconfig=sendpatch.params
+
+export vcs=$(vcs_info)
+echo "VC backend: $vcs"
+
+case $vcs in
+    svn)
+        VCS_STATUS="svn status --ignore-externals"
+        ;;
+    tfs)
+        VCS_STATUS="tf status"
+        ;;
+    *)
+        die "VCS backend is not supported"
+        ;;
+esac
+
+case $vcs in
+    svn)
+        [[ -d .svn ]] \
+            || die "\`$(pwd)' is not the root directory of a working copy"
+        ;;
+    tfs)
+        [[ -f $projectconfig ]] \
+            || die "\`$(pwd)' is not the root directory of a working copy"
+        ;;
+esac
+
+case $vcs in
+    svn)
+        url=$(svn info | grep -E "^URL")/
+        ;;
+    tfs)
+        # get collection and project
+        tf workfold > $tmpfile
+        url=$(cat $tmpfile | tail -n 2 | sed "2{s/:.*//}")
+        ;;
+esac
+
+[[ -f $userconfig ]] && source $userconfig
+[[ -f $projectconfig ]] && source $projectconfig
+[[ -f $userprojectconfig ]] && source $userprojectconfig
+
+: ${EDITOR:="emacsclient"}
+which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
+
+cecho "\nChanges to be committed:"
+case $vcs in
+    svn)
+        ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile
+        cat $tmpfile | cut -c 1-9 | grep -E "^M       \*" \
+            && die "a newer revision exists on the server"
+        cat $tmpfile | cut -c 1-9 | grep -E "^C" && die "conflicted item modification"
+        ;;
+    tfs)
+        export rootdirwin=$(cygpath -w -l "$(pwd)")
+        # echo "Root directory (in Windows format) : $rootdirwin"
+        ${VCS_STATUS} $@ > $tmpfile
+        # No idea why, but we can't directly pipe the output of `tf status'
+        # command
+        cat $tmpfile | grep -F -i "$rootdirwin" | tee $tmpfile.out
+        mv $tmpfile.out $tmpfile
+        ;;
+esac
+
+cecho "\nFiles to be ignored:"
+case $vcs in
+    svn)
+        ${VCS_STATUS} $@ | grep -E "^\? " | grep -v " 0.*-"
+        ;;
+    tfs)
+        echo "XXX HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"
+        ;;
+esac
+
+[[ $(cat $tmpfile | wc -l) -gt 0 ]] \
+    || die "no changes to send to the repository"
+
+if [[ "$asksubject" != "no" ]]; then
+    echo ""
+    read -p "Subject (short log): " subject
+fi
+
+oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
+    | head -n 1 | cut -d "-" -f 1 | sed "s/^${patchfileprefix}00*//")
+newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
+filename="$newcounterpadded-$(echo "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
+
+patch=${patchfileprefix}${filename}.patch
+commitmsg=${commitmsgfileprefix}${filename}.log
+email=${emailfileprefix}${filename}.txt
+
+makediff $@ > $patch
+
+if [[ -n "$excludefileregexp" ]]; then
+    cat $patch |\
+    awk -v pattern="^Index: .*$excludefileregexp" \
+        'BEGIN {deleteline = 0;}
+         $0 ~ pattern {deleteline = 1; next;}
+         // && deleteline == 0 {print $0;}
+         /^Index: / && deleteline == 1 {print $0; deleteline = 0;}' \
+    > $patch.excluded 2> /dev/null
+else
+    cp $patch $patch.excluded
+fi
+
+# ask for commit message
+cat <<EOF > $email
+# Hey, Emacs! This is a -*- Diff -*- file
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored...
+# The FIRST LINE of the commit message should be a short description
+# and should skip the full stop. It will become the subject of the email.
+EOF
+{ echo "$subject"; makelog -f $patch | sort | uniq; echo -e "\n---"; echo -e "$url\n"; \
+  cat $patch.excluded; } >> $email
+mv $patch.excluded $patch
+echo -e "\nEdit commit log message and email to send..."
+"$EDITOR" $email
+test $? -eq 0 || die "edit failed"
+
+# remove comments from editable part
+sed '0,/^---$/{/^#.*$/d;}' < $email > $email.nocomment; mv $email.nocomment $email
+
+# convert email into UTF-8
+case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
+    UTF-8*)
+        ;;
+    ASCII*)
+        ;;
+    ISO-8859*)
+        echo "Character encoding of diff output: ISO-8859... Converting it to UTF-8..."
+        cat $email | iconv -c -f ISO-8859-1 -t UTF-8 > $tmpfile
+        mv $tmpfile $email
+        ;;
+    *)
+        echo "Potential problems found in email file $email: $(file --brief $email)"
+        read -p "Continue? (y/n): " answer
+        case $answer in
+            y | yes)
+                ;;
+            *)
+                die "exiting..."
+                ;;
+        esac
+        ;;
+esac
+echo -e "Email:         $email"
+
+sed '/^---$/,$d' < $email > $commitmsg
+
+# # for debugging purpose
+# echo -e "\n-- First 3 lines of email --"
+# head -3 $email
+# echo "----------------------------"
+
+# get new subject for email (first line of log message)
+head -n 1 $email > $tmpfile
+
+# replace accented letters by their unaccented equivalent
+case "$(file --brief $tmpfile 2> /dev/null)" in
+    UTF-8*)
+        subject="$(cat $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"
+        ;;
+    ISO-8859*|ASCII*)
+        subject="$(cat $tmpfile | unaccent)"
+        ;;
+    *)
+        die "unknown character encoding: $(file --brief $tmpfile). Did you put the subject as first line?"
+        ;;
+esac
+
+# # for debugging purpose
+# echo -e "\n-- Subject (unaccented) ----"
+# echo $subject
+# echo "----------------------------"
+
+echo ""
+if [[ "$autocommit" = "ask" ]]; then
+    read -p "Commit? (y/n): " answer
+    case $answer in
+        y | yes)
+            askcommit="yes"
+            ;;
+        *)
+            askcommit="no"
+            ;;
+    esac
+fi
+
+if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
+    echo "Committing..."
+    case $vcs in
+        svn)
+            svn commit --file $commitmsg $@
+            ;;
+        tfs)
+            tf checkin /comment:@$commitmsg /noprompt $@
+            ;;
+    esac
+    rc=$?
+else
+    echo "Nothing gets committed..."
+    rc=0
+fi
+test $rc -eq 0 || die "commit failed"
+
+echo ""
+if [[ "$autosendemail" = "ask" ]]; then
+    echo "Environment for sending email:"
+    # print the email command
+    eval echo $emailcommand
+    [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
+    [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
+    [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
+    read -p "Send email? (y/n): " answer
+    case $answer in
+        y | yes)
+            asksendemail="yes"
+            ;;
+        *)
+            asksendemail="no"
+            ;;
+    esac
+fi
+
+if [[ "$autosendemail" = "yes" || "$asksendemail" = "yes" ]]; then
+    echo "Sending email..."
+    eval "$emailcommand"
+    rc=$?
+else
+    echo "Nothing gets sent..."
+    rc=0
+fi
+test $rc -eq 0 || die "send email failed"
+
+echo ""
+if [[ "$autodeletetmpfiles" = "ask" ]]; then
+    read -p "Delete temp files? (y/n): " answer
+    case $answer in
+        y | yes)
+            askdeletetmpfiles="yes"
+            ;;
+        *)
+            askdeletetmpfiles="no"
+            ;;
+    esac
+fi
+
+if [[ "$autodeletetmpfiles" = "yes" || "$askdeletetmpfiles" = "yes" ]]; then
+    echo "Deleting temp files..."
+    rm $patch $commitmsg $email
+    rc=$?
+else
+    echo "Nothing gets deleted..."
+    rc=0
+fi
+test $rc -eq 0 || die "delete temp files failed"

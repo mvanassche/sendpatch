@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Usage: makediff [svn diff options]
+#
+# Make a diff file, ready for review. It contains the diffs of all files,
+# followed by the text of new files. Output goes to stdout.
+
+tmpfile="/tmp/$(basename $0).$$"
+trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+case $vcs in
+    svn)
+        svn diff $* > $tmpfile 2>&1
+        ;;
+    tfs)
+        tf diff $* /format:Unified > $tmpfile 2>&1
+        cat $tmpfile \
+            | grep -E -i -v "^(edit|modifier|add|ajouter|renommer): " \
+            | sed -r "s/^(File:|Fichier\o240:)/Index:/" > $tmpfile.out
+        mv $tmpfile.out $tmpfile
+        ;;
+esac
+cat $tmpfile

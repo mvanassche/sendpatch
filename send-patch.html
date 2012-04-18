@@ -1,0 +1,1050 @@
+<!-- <xml version="1.0" encoding="utf-8"> -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Submit patches</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="title" content="Submit patches"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2012-04-18T16:44+0200"/>
+<meta name="author" content="Fabrice Niessen"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/htmlize.css"/>
+<script type="text/javascript" src="http://svn/mc/xxx/org-style/trunk/bigblow/js/bigblow.js"></script>
+<link rel="stylesheet" type="text/css" href="css/bigblow.css"/>
+<link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
+<script type="text/javascript" src="js/bigblow.js"></script>
+
+
+</head>
+<body>
+
+<div id="preamble">
+
+</div>
+
+<div id="content">
+<h1 class="title">Submit patches</h1>
+
+
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Commit guidelines</h2>
+<div class="outline-text-2" id="text-1">
+
+
+<p>
+This list hopes to help all of us to improve our commits.
+</p>
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Changes</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<ul>
+<li>Make commits of logical units.
+
+</li>
+<li>Check for unnecessary whitespace before committing.
+
+</li>
+<li>Do not check in commented out code or unneeded files.
+
+</li>
+<li>Make sure that you have tests for the bug you are fixing.
+
+</li>
+<li>Make sure that the test suite passes after your commit.
+
+</li>
+<li>Do not attach your patch, but submit it "inline" in the mail body, <i>unless   you cannot teach your mailer to leave the formatting of the patch alone</i>.
+</li>
+</ul>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Commit messages</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+<ul>
+<li>The first line of the commit message should be a short description
+  (50 characters is the <i>soft</i> limit), and should <b>skip the full stop</b>.
+
+</li>
+<li>The body should provide a meaningful commit message, which:
+<ul>
+<li>uses the <b>imperative present tense</b>: "fix bug", not "fixed bug" or "fixes
+    bug".
+</li>
+<li>includes motivation for the change, and contrasts its implementation with
+    previous behavior.
+</li>
+</ul>
+
+</li>
+</ul>
+
+
+<p>
+Keep in mind that commit messages are often read <b>without</b> seeing the diffs, and
+without the possibility to see which other files you committed just before
+that particular commit!
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Example</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+
+
+
+<pre class="src src-text">Short summary of changes
+
+More detailed explanatory text, if necessary. Wrap it to about 72 characters
+or so. In some contexts, the first line is treated as the subject of an email
+and the rest of the text as the body. The blank line separating the summary
+from the body is critical; some tools can get confused if you run the two
+together.
+
+Further paragraphs come after blank lines.
+
+- Bullet points are okay, too
+
+- Typically a hyphen is used for the bullet, with blank lines in between, but
+  conventions vary here
+
+- Use a hanging indent
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Code</h2>
+<div class="outline-text-2" id="text-2">
+
+
+
+</div>
+
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Send patch</h3>
+<div class="outline-text-3" id="text-2-1">
+
+
+<p>
+This script sends patches:
+</p>
+<ul>
+<li>to the SVN repository (that is, <i>commits</i> them)
+</li>
+<li>to mailing lists (that is, <i>emails</i> them)
+</li>
+</ul>
+
+
+
+</div>
+
+<div id="outline-container-2-1-1" class="outline-4">
+<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Configuration options</h4>
+<div class="outline-text-4" id="text-2-1-1">
+
+
+
+</div>
+
+<div id="outline-container-2-1-1-1" class="outline-5">
+<h5 id="sec-2-1-1-1"><span class="section-number-5"></span> Per project options</h5>
+<div class="outline-text-5" id="text-2-1-1-1">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-variable-name">mailto</span>=<span class="org-string">"mc-reviews@xxx.com"</span>
+<span class="org-variable-name">prefix</span>=<span class="org-string">"[PATCH]"</span>
+<span class="org-variable-name">excludefileregexp</span>=<span class="org-string">""</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-1-2" class="outline-5">
+<h5 id="sec-2-1-1-2"><span class="section-number-5"></span> Per user options</h5>
+<div class="outline-text-5" id="text-2-1-1-2">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-variable-name">patchfileprefix</span>=<span class="org-string">""</span>
+<span class="org-variable-name">commitmsgfileprefix</span>=<span class="org-string">""</span>
+<span class="org-variable-name">emailfileprefix</span>=<span class="org-string">""</span>
+<span class="org-variable-name">asksubject</span>=<span class="org-string">"yes"</span>
+<span class="org-variable-name">autocommit</span>=<span class="org-string">"ask"</span>
+<span class="org-variable-name">autosendemail</span>=<span class="org-string">"ask"</span>
+<span class="org-variable-name">autodeletetmpfiles</span>=<span class="org-string">"ask"</span>
+<span class="org-variable-name">emailcommand</span>=<span class="org-string">'blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe &lt;<a href="mailto:johndoe&#64;example.com">johndoe&#64;example.com</a>&gt;" -charset UTF-8'</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-1-3" class="outline-5">
+<h5 id="sec-2-1-1-3"><span class="section-number-5"></span> Usage</h5>
+<div class="outline-text-5" id="text-2-1-1-3">
+
+
+<p>
+A commonly configured option could be:
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-variable-name">excludefileregexp</span>=<span class="org-string">"(\.html|\.xml)"</span>
+</pre>
+
+
+<p>
+Such default settings can be overridden in:
+</p>
+<ol>
+<li><code>~/.sendpatchrc</code>
+</li>
+<li><code>sendpatch.common</code> in the root directory of a working copy
+</li>
+<li><code>sendpatch.params</code> in the root directory of a working copy
+</li>
+</ol>
+
+
+<p>
+in that order.
+</p>
+<p>
+Remember that those files must be with <span class="alert">Unix line endings</span>!
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-1-2" class="outline-4">
+<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Helper functions</h4>
+<div class="outline-text-4" id="text-2-1-2">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">die</span> () {
+    <span class="org-builtin">echo</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0): $@"</span> &gt; /dev/stderr
+    <span class="org-keyword">exit</span> 1
+}
+</pre>
+
+
+
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">cecho</span> () {
+    <span class="org-variable-name">black</span>=<span class="org-string">"\e[30m"</span>
+    <span class="org-variable-name">red</span>=<span class="org-string">"\e[31m"</span>
+    <span class="org-variable-name">green</span>=<span class="org-string">"\e[32m"</span>
+    <span class="org-variable-name">yellow</span>=<span class="org-string">"\e[33m"</span>
+    <span class="org-variable-name">blue</span>=<span class="org-string">"\e[34m"</span>
+    <span class="org-variable-name">magenta</span>=<span class="org-string">"\e[35m"</span>
+    <span class="org-variable-name">cyan</span>=<span class="org-string">"\e[36m"</span>
+    <span class="org-variable-name">white</span>=<span class="org-string">"\e[37m"</span>
+    <span class="org-variable-name">reset</span>=<span class="org-string">"\e[0m"</span>
+
+    <span class="org-variable-name">color</span>=${<span class="org-variable-name">green</span>}
+    <span class="org-builtin">echo</span> -e -n <span class="org-string">"$color"</span>
+    <span class="org-builtin">echo</span> -e -n <span class="org-string">"$1"</span>
+    <span class="org-builtin">echo</span> -e <span class="org-string">"$reset"</span>
+}
+</pre>
+
+
+
+</div>
+
+<div id="outline-container-2-1-2-1" class="outline-5">
+<h5 id="sec-2-1-2-1"><span class="section-number-5"></span> VCS in use</h5>
+<div class="outline-text-5" id="text-2-1-2-1">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">vcs_info</span> () {
+    <span class="org-builtin">local</span> <span class="org-variable-name">default</span>=<span class="org-string">"tfs"</span>
+
+    <span class="org-comment-delimiter"># </span><span class="org-comment">recursively search for `.svn' directory</span>
+    <span class="org-keyword">while</span> [[ <span class="org-negation-char">!</span> ( -d .svn ) &amp;&amp; ( <span class="org-string">"$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span> != <span class="org-string">"/"</span> ) ]]; <span class="org-keyword">do</span>
+        <span class="org-builtin">cd</span> ..
+    <span class="org-keyword">done</span>
+
+    <span class="org-keyword">if</span> [[ -d .svn ]]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"svn"</span>
+    <span class="org-keyword">else</span> <span class="org-comment-delimiter"># </span><span class="org-comment">not found</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"$default"</span>
+    <span class="org-keyword">fi</span>
+}
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-1-3" class="outline-4">
+<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Init</h4>
+<div class="outline-text-4" id="text-2-1-3">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-variable-name">tmpfile</span>=<span class="org-string">"/tmp/$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0).$$"</span>
+<span class="org-keyword">trap</span> <span class="org-string">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+<span class="org-variable-name">userconfig</span>=~/.sendpatchrc
+<span class="org-variable-name">projectconfig</span>=sendpatch.common
+<span class="org-variable-name">userprojectconfig</span>=sendpatch.params
+
+<span class="org-builtin">export</span> <span class="org-variable-name">vcs</span>=$(<span class="org-sh-quoted-exec">vcs_info</span>)
+<span class="org-builtin">echo</span> <span class="org-string">"VC backend: $vcs"</span>
+
+<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"svn status --ignore-externals"</span>
+        ;;
+    tfs)
+        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>
+        ;;
+    *)
+        die <span class="org-string">"VCS backend is not supported"</span>
+        ;;
+<span class="org-keyword">esac</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-4" class="outline-4">
+<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Check current directory</h4>
+<div class="outline-text-4" id="text-2-1-4">
+
+
+<p>
+Note that, for TFS, we impose to find a <code>sendpatch.common</code> file in order to
+conclude that we're at the root directory of a working copy, or not.
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        [[ -d .svn ]] <span class="org-sh-escaped-newline">\</span>
+            || die <span class="org-string">"\`$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)' is not the root directory of a working copy"</span>
+        ;;
+    tfs)
+        [[ -f $<span class="org-variable-name">projectconfig</span> ]] <span class="org-sh-escaped-newline">\</span>
+            || die <span class="org-string">"\`$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)' is not the root directory of a working copy"</span>
+        ;;
+<span class="org-keyword">esac</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-5" class="outline-4">
+<h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> Get URL of project</h4>
+<div class="outline-text-4" id="text-2-1-5">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">svn</span> info | grep -E <span class="org-string">"^URL"</span>)/
+        ;;
+    tfs)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">get collection and project</span>
+        tf workfold &gt; $<span class="org-variable-name">tmpfile</span>
+        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | tail -n 2 | sed <span class="org-string">"2{s/:.*//}"</span>)
+        ;;
+<span class="org-keyword">esac</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-6" class="outline-4">
+<h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span> Override settings</h4>
+<div class="outline-text-4" id="text-2-1-6">
+
+
+
+
+
+<pre class="src src-sh">[[ -f $<span class="org-variable-name">userconfig</span> ]] &amp;&amp; <span class="org-builtin">source</span> $<span class="org-variable-name">userconfig</span>
+[[ -f $<span class="org-variable-name">projectconfig</span> ]] &amp;&amp; <span class="org-builtin">source</span> $<span class="org-variable-name">projectconfig</span>
+[[ -f $<span class="org-variable-name">userprojectconfig</span> ]] &amp;&amp; <span class="org-builtin">source</span> $<span class="org-variable-name">userprojectconfig</span>
+</pre>
+
+
+<p>
+Default editor is <code>$EDITOR</code>. If not found, set Emacs.
+</p>
+
+
+
+<pre class="src src-sh">: ${<span class="org-variable-name">EDITOR</span>:=<span class="org-string">"emacsclient"</span>}
+which <span class="org-string">"$EDITOR"</span> &gt; /dev/null 2&gt;&amp;1 || die <span class="org-string">"editor not found"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-7" class="outline-4">
+<h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span> Display changed files</h4>
+<div class="outline-text-4" id="text-2-1-7">
+
+
+<p>
+Shows what files have been modified in your working copy, what files have been
+changed in the repository since your last update, and which files, if any,
+conflict with your modifications. The <code>-u</code> option is what forces the command to
+access the repository for this check.
+</p>
+
+
+
+<pre class="src src-sh">cecho <span class="org-string">"\nChanges to be committed:"</span>
+<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        ${<span class="org-variable-name">VCS_STATUS</span>} -u $<span class="org-variable-name">@</span> | grep -E -v <span class="org-string">"^\? "</span> | tee $<span class="org-variable-name">tmpfile</span>
+        cat $<span class="org-variable-name">tmpfile</span> | cut -c 1-9 | grep -E <span class="org-string">"^M       \*"</span> <span class="org-sh-escaped-newline">\</span>
+            &amp;&amp; die <span class="org-string">"a newer revision exists on the server"</span>
+        cat $<span class="org-variable-name">tmpfile</span> | cut -c 1-9 | grep -E <span class="org-string">"^C"</span> &amp;&amp; die <span class="org-string">"conflicted item modification"</span>
+        ;;
+    tfs)
+        <span class="org-builtin">export</span> <span class="org-variable-name">rootdirwin</span>=$(<span class="org-sh-quoted-exec">cygpath</span> -w -l <span class="org-string">"$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span>)
+        <span class="org-comment-delimiter"># </span><span class="org-comment">echo "Root directory (in Windows format) : $rootdirwin"</span>
+        ${<span class="org-variable-name">VCS_STATUS</span>} $<span class="org-variable-name">@</span> &gt; $<span class="org-variable-name">tmpfile</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">No idea why, but we can't directly pipe the output of `tf status'</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">command</span>
+        cat $<span class="org-variable-name">tmpfile</span> | grep -F -i <span class="org-string">"$rootdirwin"</span> | tee $<span class="org-variable-name">tmpfile</span>.out
+        mv $<span class="org-variable-name">tmpfile</span>.out $<span class="org-variable-name">tmpfile</span>
+        ;;
+<span class="org-keyword">esac</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-8" class="outline-4">
+<h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span> Display ignored files</h4>
+<div class="outline-text-4" id="text-2-1-8">
+
+
+
+
+
+<pre class="src src-sh">cecho <span class="org-string">"\nFiles to be ignored:"</span>
+<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        ${<span class="org-variable-name">VCS_STATUS</span>} $<span class="org-variable-name">@</span> | grep -E <span class="org-string">"^\? "</span> | grep -v <span class="org-string">" 0.*-"</span>
+        ;;
+    tfs)
+        <span class="org-builtin">echo</span> <span class="org-string">"</span><span class="org-string"><span class="org-myXkeywords-error">XXX</span></span><span class="org-string"> HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"</span>
+        ;;
+<span class="org-keyword">esac</span>
+</pre>
+
+
+<p>
+Stop if no changes are to be committed. Though, that may mean that you should
+<code>add</code> some of the files currently ignored; hence, it's good to make this check
+after having sent some information to the user&hellip;
+</p>
+
+
+
+<pre class="src src-sh">[[ $(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | wc -l) -gt 0 ]] <span class="org-sh-escaped-newline">\</span>
+    || die <span class="org-string">"no changes to send to the repository"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-9" class="outline-4">
+<h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span> Ask for short log message</h4>
+<div class="outline-text-4" id="text-2-1-9">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">if</span> [[ <span class="org-string">"$asksubject"</span> != <span class="org-string">"no"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">""</span>
+    <span class="org-builtin">read</span> -p <span class="org-string">"Subject (short log): "</span> subject
+<span class="org-keyword">fi</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-10" class="outline-4">
+<h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span> Generate name for patch files</h4>
+<div class="outline-text-4" id="text-2-1-10">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-variable-name">oldcounter</span>=$(<span class="org-sh-quoted-exec">ls</span> ${<span class="org-variable-name">patchfileprefix</span>}0???-*.patch 2&gt; /dev/null | sort --reverse <span class="org-sh-escaped-newline">\</span>
+    | head -n 1 | cut -d <span class="org-string">"-"</span> -f 1 | sed <span class="org-string">"s/^${patchfileprefix}00*//"</span>)
+<span class="org-variable-name">newcounterpadded</span>=$(<span class="org-sh-quoted-exec">printf</span> <span class="org-string">"%04d"</span> <span class="org-string">"$(( oldcounter + 1 ))"</span>)
+<span class="org-variable-name">filename</span>=<span class="org-string">"$newcounterpadded-$(</span><span class="org-sh-quoted-exec">echo</span><span class="org-string"> "</span>$<span class="org-variable-name">subject</span><span class="org-string">" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"</span>
+
+<span class="org-variable-name">patch</span>=${<span class="org-variable-name">patchfileprefix</span>}${<span class="org-variable-name">filename</span>}.patch
+<span class="org-variable-name">commitmsg</span>=${<span class="org-variable-name">commitmsgfileprefix</span>}${<span class="org-variable-name">filename</span>}.log
+<span class="org-variable-name">email</span>=${<span class="org-variable-name">emailfileprefix</span>}${<span class="org-variable-name">filename</span>}.txt
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-11" class="outline-4">
+<h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> Make patch file</h4>
+<div class="outline-text-4" id="text-2-1-11">
+
+
+
+
+
+<pre class="src src-sh">makediff $<span class="org-variable-name">@</span> &gt; $<span class="org-variable-name">patch</span>
+</pre>
+
+
+<p>
+<code>excludefileregexp</code> allows one to exclude useless or unreadable diffs from the
+email contents. That does not have any impact on the commit process itself&hellip;
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-keyword">if</span> [[ -n <span class="org-string">"$excludefileregexp"</span> ]]; <span class="org-keyword">then</span>
+    cat $<span class="org-variable-name">patch</span> |<span class="org-sh-escaped-newline">\</span>
+    awk -v <span class="org-variable-name">pattern</span>=<span class="org-string">"^Index: .*$excludefileregexp"</span> <span class="org-sh-escaped-newline">\</span>
+        <span class="org-string">'BEGIN {deleteline = 0;}</span>
+<span class="org-string">         $0 ~ pattern {deleteline = 1; next;}</span>
+<span class="org-string">         // &amp;&amp; deleteline == 0 {print $0;}</span>
+<span class="org-string">         /^Index: / &amp;&amp; deleteline == 1 {print $0; deleteline = 0;}'</span> <span class="org-sh-escaped-newline">\</span>
+    &gt; $<span class="org-variable-name">patch</span>.excluded 2&gt; /dev/null
+<span class="org-keyword">else</span>
+    cp $<span class="org-variable-name">patch</span> $<span class="org-variable-name">patch</span>.excluded
+<span class="org-keyword">fi</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-12" class="outline-4">
+<h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span> Edit log message</h4>
+<div class="outline-text-4" id="text-2-1-12">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">ask for commit message</span>
+cat &lt;&lt;EOF &gt; $<span class="org-variable-name">email</span>
+<span class="org-sh-heredoc"># Hey, Emacs! This is a -*- Diff -*- file</span>
+<span class="org-sh-heredoc"># Please enter the commit message for your changes. Lines starting</span>
+<span class="org-sh-heredoc"># with '#' will be ignored...</span>
+<span class="org-sh-heredoc"># The FIRST LINE of the commit message should be a short description</span>
+<span class="org-sh-heredoc"># and should skip the full stop. It will become the subject of the email.</span>
+<span class="org-sh-heredoc">EOF</span>
+{ <span class="org-builtin">echo</span> <span class="org-string">"$subject"</span>; makelog -f $<span class="org-variable-name">patch</span> | sort | uniq; <span class="org-builtin">echo</span> -e <span class="org-string">"\n---"</span>; <span class="org-builtin">echo</span> -e <span class="org-string">"$url\n"</span>; <span class="org-sh-escaped-newline">\</span>
+  cat $<span class="org-variable-name">patch</span>.excluded; } &gt;&gt; $<span class="org-variable-name">email</span>
+mv $<span class="org-variable-name">patch</span>.excluded $<span class="org-variable-name">patch</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"\nEdit commit log message and email to send..."</span>
+<span class="org-string">"$EDITOR"</span> $<span class="org-variable-name">email</span>
+<span class="org-builtin">test</span> $<span class="org-variable-name">?</span> -eq 0 || die <span class="org-string">"edit </span><span class="org-string"><span class="org-myXkeywords-error">failed</span></span><span class="org-string">"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">remove comments from editable part</span>
+sed <span class="org-string">'0,/^---$/{/^#.*$/d;}'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">email</span>.nocomment; mv $<span class="org-variable-name">email</span>.nocomment $<span class="org-variable-name">email</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-13" class="outline-4">
+<h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span> Convert email contents into UTF-8</h4>
+<div class="outline-text-4" id="text-2-1-13">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">convert email into UTF-8</span>
+<span class="org-keyword">case</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $email 2&gt; /dev/null | sed 's/unified diff output, //')"</span><span class="org-keyword"> in</span>
+    UTF-8*)
+        ;;
+    ASCII*)
+        ;;
+    ISO-8859*)
+        <span class="org-builtin">echo</span> <span class="org-string">"Character encoding of diff output: ISO-8859... Converting it to UTF-8..."</span>
+        cat $<span class="org-variable-name">email</span> | iconv -c -f ISO-8859-1 -t UTF-8 &gt; $<span class="org-variable-name">tmpfile</span>
+        mv $<span class="org-variable-name">tmpfile</span> $<span class="org-variable-name">email</span>
+        ;;
+    *)
+        <span class="org-builtin">echo</span> <span class="org-string">"Potential problems found in email file $email: $(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $email)"</span>
+        <span class="org-builtin">read</span> -p <span class="org-string">"Continue? (y/n): "</span> answer
+        <span class="org-keyword">case</span> $<span class="org-variable-name">answer</span><span class="org-keyword"> in</span>
+            y | yes)
+                ;;
+            *)
+                die <span class="org-string">"exiting..."</span>
+                ;;
+        <span class="org-keyword">esac</span>
+        ;;
+<span class="org-keyword">esac</span>
+<span class="org-builtin">echo</span> -e <span class="org-string">"Email:         $email"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-14" class="outline-4">
+<h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span> Deduce log message for commit</h4>
+<div class="outline-text-4" id="text-2-1-14">
+
+
+
+
+
+<pre class="src src-sh">sed <span class="org-string">'/^---$/,$d'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">commitmsg</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-15" class="outline-4">
+<h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span> Deduce subject line for email</h4>
+<div class="outline-text-4" id="text-2-1-15">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment"># for debugging purpose</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">echo -e "\n-- First 3 lines of email --"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">head -3 $email</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">echo "----------------------------"</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">get new subject for email (first line of log message)</span>
+head -n 1 $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">tmpfile</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">replace accented letters by their unaccented equivalent</span>
+<span class="org-keyword">case</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $tmpfile 2&gt; /dev/null)"</span><span class="org-keyword"> in</span>
+    UTF-8*)
+        <span class="org-variable-name">subject</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">cat</span><span class="org-string"> $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"</span>
+        ;;
+    ISO-8859*|ASCII*)
+        <span class="org-variable-name">subject</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">cat</span><span class="org-string"> $tmpfile | unaccent)"</span>
+        ;;
+    *)
+        die <span class="org-string">"unknown character encoding: $(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $tmpfile). Did you put the subject as first line?"</span>
+        ;;
+<span class="org-keyword">esac</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment"># for debugging purpose</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">echo -e "\n-- Subject (unaccented) ----"</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">echo $subject</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">echo "----------------------------"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-16" class="outline-4">
+<h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span> Auto-commit changes</h4>
+<div class="outline-text-4" id="text-2-1-16">
+
+
+
+
+<div class="inlinetask "><p><b><span class="todo TODO">TODO</span> Check what's going on when committing</b><br/></p>
+
+<p>
+When there are multiple workspaces on your machine, are we sure that TF only
+checks in files which are in the current subtree?
+</p>
+
+
+</div>
+
+
+
+
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">""</span>
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autocommit"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">read</span> -p <span class="org-string">"Commit? (y/n): "</span> answer
+    <span class="org-keyword">case</span> $<span class="org-variable-name">answer</span><span class="org-keyword"> in</span>
+        y | yes)
+            <span class="org-variable-name">askcommit</span>=<span class="org-string">"yes"</span>
+            ;;
+        *)
+            <span class="org-variable-name">askcommit</span>=<span class="org-string">"no"</span>
+            ;;
+    <span class="org-keyword">esac</span>
+<span class="org-keyword">fi</span>
+
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autocommit"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$askcommit"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Committing..."</span>
+    <span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+        svn)
+            svn commit --file $<span class="org-variable-name">commitmsg</span> $<span class="org-variable-name">@</span>
+            ;;
+        tfs)
+            tf checkin /comment:@$<span class="org-variable-name">commitmsg</span> /noprompt $<span class="org-variable-name">@</span>
+            ;;
+    <span class="org-keyword">esac</span>
+    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
+<span class="org-keyword">else</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Nothing gets committed..."</span>
+    <span class="org-variable-name">rc</span>=0
+<span class="org-keyword">fi</span>
+<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"commit </span><span class="org-string"><span class="org-myXkeywords-error">failed</span></span><span class="org-string">"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-17" class="outline-4">
+<h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span> Auto-send email</h4>
+<div class="outline-text-4" id="text-2-1-17">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">""</span>
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autosendemail"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Environment for sending email:"</span>
+    <span class="org-comment-delimiter"># </span><span class="org-comment">print the email command</span>
+    <span class="org-builtin">eval</span> echo $<span class="org-variable-name">emailcommand</span>
+    [[ -f $<span class="org-variable-name">userconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">userconfig</span>
+    [[ -f $<span class="org-variable-name">projectconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">projectconfig</span>
+    [[ -f $<span class="org-variable-name">userprojectconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">userprojectconfig</span>
+    <span class="org-builtin">read</span> -p <span class="org-string">"Send email? (y/n): "</span> answer
+    <span class="org-keyword">case</span> $<span class="org-variable-name">answer</span><span class="org-keyword"> in</span>
+        y | yes)
+            <span class="org-variable-name">asksendemail</span>=<span class="org-string">"yes"</span>
+            ;;
+        *)
+            <span class="org-variable-name">asksendemail</span>=<span class="org-string">"no"</span>
+            ;;
+    <span class="org-keyword">esac</span>
+<span class="org-keyword">fi</span>
+
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autosendemail"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$asksendemail"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Sending email..."</span>
+    <span class="org-builtin">eval</span> <span class="org-string">"$emailcommand"</span>
+    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
+<span class="org-keyword">else</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Nothing gets sent..."</span>
+    <span class="org-variable-name">rc</span>=0
+<span class="org-keyword">fi</span>
+<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"send email </span><span class="org-string"><span class="org-myXkeywords-error">failed</span></span><span class="org-string">"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-1-18" class="outline-4">
+<h4 id="sec-2-1-18"><span class="section-number-4">2.1.18</span> Auto-delete temporary files</h4>
+<div class="outline-text-4" id="text-2-1-18">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">""</span>
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autodeletetmpfiles"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">read</span> -p <span class="org-string">"Delete temp files? (y/n): "</span> answer
+    <span class="org-keyword">case</span> $<span class="org-variable-name">answer</span><span class="org-keyword"> in</span>
+        y | yes)
+            <span class="org-variable-name">askdeletetmpfiles</span>=<span class="org-string">"yes"</span>
+            ;;
+        *)
+            <span class="org-variable-name">askdeletetmpfiles</span>=<span class="org-string">"no"</span>
+            ;;
+    <span class="org-keyword">esac</span>
+<span class="org-keyword">fi</span>
+
+<span class="org-keyword">if</span> [[ <span class="org-string">"$autodeletetmpfiles"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$askdeletetmpfiles"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Deleting temp files..."</span>
+    rm $<span class="org-variable-name">patch</span> $<span class="org-variable-name">commitmsg</span> $<span class="org-variable-name">email</span>
+    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
+<span class="org-keyword">else</span>
+    <span class="org-builtin">echo</span> <span class="org-string">"Nothing gets deleted..."</span>
+    <span class="org-variable-name">rc</span>=0
+<span class="org-keyword">fi</span>
+<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"delete temp files </span><span class="org-string"><span class="org-myXkeywords-error">failed</span></span><span class="org-string">"</span>
+</pre>
+
+
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Display list of files</h3>
+<div class="outline-text-3" id="text-2-2">
+
+
+<p>
+Display a list of files to be committed, for the commit log message.
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: makelog [-f diff-file] [svn diff options]</span>
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Make a log message for a change, including the header, and the relative</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">pathnames of the changed files. Output goes to stdout.</span>
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">If a you have a pre-existing diff file, use `-f diff-file' to use this file.</span>
+
+<span class="org-builtin">echo</span> <span class="org-string">""</span>
+
+{ <span class="org-keyword">if</span> [ <span class="org-string">"$1"</span> = <span class="org-string">"-f"</span> ]
+<span class="org-keyword">then</span>
+    cat $<span class="org-variable-name">2</span>
+<span class="org-keyword">else</span>
+    svn diff $<span class="org-variable-name">*</span> 2&gt;&amp;1
+<span class="org-keyword">fi</span>; } | sed <span class="org-string">'/^Index:/!d'</span> | sed <span class="org-string">'s/^Index: /  * /'</span> | sed <span class="org-string">'s/$/:/'</span>
+</pre>
+
+
+<p>
+Using =sed '<i><sup>Index</sup>:</i>!d'= (instead of =egrep "<sup>Index</sup>:"=) allows to filter the
+lines we're interested in, even if the file contains binary characters (such
+as non-breakable spaces). On the other hand, <code>grep</code> would simply declare that
+"Binary file matches".
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Display changes</h3>
+<div class="outline-text-3" id="text-2-3">
+
+
+<p>
+Display the changes made to all target files, and display deleted and new
+files as well.
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: makediff [svn diff options]</span>
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Make a diff file, ready for review. It contains the diffs of all files,</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">followed by the text of new files. Output goes to stdout.</span>
+
+<span class="org-variable-name">tmpfile</span>=<span class="org-string">"/tmp/$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0).$$"</span>
+<span class="org-keyword">trap</span> <span class="org-string">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
+
+<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+    svn)
+        svn diff $<span class="org-variable-name">*</span> &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
+        ;;
+    tfs)
+        tf diff $<span class="org-variable-name">*</span> /format:Unified &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
+        cat $<span class="org-variable-name">tmpfile</span> <span class="org-sh-escaped-newline">\</span>
+            | grep -E -i -v <span class="org-string">"^(edit|modifier|add|ajouter|renommer): "</span> <span class="org-sh-escaped-newline">\</span>
+            | sed -r <span class="org-string">"s/^(File:|Fichier\o240:)/Index:/"</span> &gt; $<span class="org-variable-name">tmpfile</span>.out
+        mv $<span class="org-variable-name">tmpfile</span>.out $<span class="org-variable-name">tmpfile</span>
+        ;;
+<span class="org-keyword">esac</span>
+cat $<span class="org-variable-name">tmpfile</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Ignore elements</h3>
+<div class="outline-text-3" id="text-2-4">
+
+
+<p>
+Ignore multiple elements in one command.
+</p>
+
+
+
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: svnignore . \*.o \*.exe \*.tmp</span>
+
+<span class="org-variable-name">target</span>=<span class="org-string">"$1"</span>; <span class="org-builtin">shift</span>
+svn propset svn:ignore <span class="org-string">"$(</span><span class="org-sh-quoted-exec">echo</span><span class="org-string"> $* | tr ' ' '\n')"</span> <span class="org-string">"$target"</span>
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Unaccent</h3>
+<div class="outline-text-3" id="text-2-5">
+
+
+<p>
+Remove accents, replacing accented letters by their unaccented equivalent.
+</p>
+
+
+
+<pre class="src src-sh">s/\o240/ /g
+s/\o300/A/g
+s/\o301/A/g
+s/\o302/A/g
+s/\o304/A/g
+s/\o310/E/g
+s/\o311/E/g
+s/\o312/E/g
+s/\o313/E/g
+s/\o315/I/g
+s/\o316/I/g
+s/\o323/O/g
+s/\o324/O/g
+s/\o325/O/g
+s/\o326/O/g
+s/\o331/U/g
+s/\o332/U/g
+s/\o333/U/g
+s/\o334/U/g
+s/\o340/a/g
+s/\o341/a/g
+s/\o342/a/g
+s/\o344/a/g
+s/\o347/c/g
+s/\o350/e/g
+s/\o351/e/g
+s/\o352/e/g
+s/\o353/e/g
+s/\o355/i/g
+s/\o356/i/g
+s/\o357/i/g
+s/\o363/o/g
+s/\o364/o/g
+s/\o365/o/g
+s/\o366/o/g
+s/\o371/u/g
+s/\o372/u/g
+s/\o373/u/g
+s/\o374/u/g
+</pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Install environment</h3>
+<div class="outline-text-3" id="text-2-6">
+
+
+<p>
+Symlink the files.
+</p>
+
+
+
+<pre class="src src-sh">ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/sendpatch ~/bin/sendpatch
+ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/makelog ~/bin/makelog
+ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/makediff ~/bin/makediff
+ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/svnignore ~/bin/svnignore
+ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
+</pre>
+
+</div>
+</div>
+</div>
+</div>
+
+<div id="postamble">
+  <div id="copyright">
+    &copy; 2012-04-18T16:44+0200 Fabrice Niessen
+  </div>
+</div>
+</body>
+</html>
