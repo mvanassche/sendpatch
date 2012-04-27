@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-04-18 Wed 16:44 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-04-27 Fri 15:43 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -223,7 +223,7 @@ case $vcs in
     tfs)
         # get collection and project
         tf workfold > $tmpfile
-        url=$(cat $tmpfile | tail -n 2 | sed "2{s/:.*//}")
+        url=$(cat $tmpfile | grep -E "^(Collection| \\$/)" | sed "/^ \\$/{s/:.*//}")
         ;;
 esac
 #+end_src
@@ -274,13 +274,12 @@ esac
 *** Display ignored files
 
 #+begin_src sh
-cecho "\nFiles to be ignored:"
 case $vcs in
     svn)
+        cecho "\nFiles to be ignored:"
         ${VCS_STATUS} $@ | grep -E "^\? " | grep -v " 0.*-"
         ;;
     tfs)
-        echo "XXX HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"
         ;;
 esac
 #+end_src

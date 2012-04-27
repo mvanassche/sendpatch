@@ -90,7 +90,7 @@ case $vcs in
     tfs)
         # get collection and project
         tf workfold > $tmpfile
-        url=$(cat $tmpfile | tail -n 2 | sed "2{s/:.*//}")
+        url=$(cat $tmpfile | grep -E "^(Collection| \\$/)" | sed "/^ \\$/{s/:.*//}")
         ;;
 esac
 
@@ -120,13 +120,12 @@ case $vcs in
         ;;
 esac
 
-cecho "\nFiles to be ignored:"
 case $vcs in
     svn)
+        cecho "\nFiles to be ignored:"
         ${VCS_STATUS} $@ | grep -E "^\? " | grep -v " 0.*-"
         ;;
     tfs)
-        echo "XXX HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"
         ;;
 esac
 
