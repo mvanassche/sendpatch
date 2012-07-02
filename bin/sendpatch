@@ -65,7 +65,7 @@ case $vcs in
         VCS_STATUS="svn status --ignore-externals"
         ;;
     tfs)
-        VCS_STATUS="tf status"ok
+        VCS_STATUS="tf status"
         ;;
     *)
         die "VCS backend is not supported"

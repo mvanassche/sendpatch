@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-07-02 Mon 13:50 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-07-02 Mon 13:55 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -187,7 +187,7 @@ case $vcs in
         VCS_STATUS="svn status --ignore-externals"
         ;;
     tfs)
-        VCS_STATUS="tf status"ok
+        VCS_STATUS="tf status"
         ;;
     *)
         die "VCS backend is not supported"
