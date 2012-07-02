@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-07-02T13:51+0200"/>
+<meta name="generated" content="2012-07-02T14:00+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -108,8 +108,22 @@ that particular commit!
 </div>
 
 <div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Example</h3>
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Release notes</h3>
 <div class="outline-text-3" id="text-1-3">
+
+
+<p>
+We have introduced the possibility to insert release notes in log messages. In
+order to make them stand out, all such notes must be enclosed in a
+<code>#+begin_releasenotes</code> .. <code>#end_releasenotes</code> block.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Example</h3>
+<div class="outline-text-3" id="text-1-4">
 
 
 
@@ -345,7 +359,7 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
         <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"svn status --ignore-externals"</span>
         ;;
     tfs)
-        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>ok
+        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>
         ;;
     *)
         die <span class="org-string">"VCS backend is not supported"</span>
@@ -1042,7 +1056,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-07-02T13:51+0200 Fabrice Niessen
+    &copy; 2012-07-02T14:00+0200 Fabrice Niessen
   </div>
 </div>
 </body>

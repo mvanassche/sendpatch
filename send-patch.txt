@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-07-02 Mon 13:55 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-07-02 Mon 13:59 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -43,6 +43,12 @@ This list hopes to help all of us to improve our commits.
 Keep in mind that commit messages are often read *without* seeing the diffs, and
 without the possibility to see which other files you committed just before
 that particular commit!
+
+** Release notes
+
+We have introduced the possibility to insert release notes in log messages. In
+order to make them stand out, all such notes must be enclosed in a
+=#+begin_releasenotes= .. =#end_releasenotes= block.
 
 ** Example
 
