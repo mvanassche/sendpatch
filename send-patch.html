@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-07-02T14:00+0200"/>
+<meta name="generated" content="2012-07-02T14:10+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -34,8 +34,72 @@
 
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Commit guidelines</h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Tasks</h2>
 <div class="outline-text-2" id="text-1">
+
+
+
+</div>
+
+<div id="outline-container-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class="todo TODO">TODO</span> [#A] Add a command-line option to recover last log message</h3>
+<div class="outline-text-3" id="text-1-1">
+
+
+<p>
+In case the commit failed, to avoid having to retype it all or find and insert
+the right message.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class="todo TODO">TODO</span> Stop with an error if the email command is not defined</h3>
+<div class="outline-text-3" id="text-1-2">
+
+
+<p>
+To avoid mails sent under the name of John Doe.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> <span class="todo TODO">TODO</span> Check answers to questions</h3>
+<div class="outline-text-3" id="text-1-3">
+
+
+<p>
+The only permitted answers (to binary questions) are "y" or "n". All other
+letters should be discarded, and the question should be asked again.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> <span class="done DONE">DONE</span> Check what's going on when committing on TFS</h3>
+<div class="outline-text-3" id="text-1-4">
+
+
+<p>
+When there are multiple workspaces on your machine, are we sure that TF only
+checks in files which are in the current subtree?
+</p>
+<p>
+Yes, that does work (FPZ has 3 workspaces on his machine, and when committing
+from a subtree, only files from that subtree are committed).
+</p>
+</div>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Commit guidelines</h2>
+<div class="outline-text-2" id="text-2">
 
 
 <p>
@@ -44,9 +108,9 @@ This list hopes to help all of us to improve our commits.
 
 </div>
 
-<div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Changes</h3>
-<div class="outline-text-3" id="text-1-1">
+<div id="outline-container-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Changes</h3>
+<div class="outline-text-3" id="text-2-1">
 
 
 <ul>
@@ -74,9 +138,9 @@ This list hopes to help all of us to improve our commits.
 
 </div>
 
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Commit messages</h3>
-<div class="outline-text-3" id="text-1-2">
+<div id="outline-container-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Commit messages</h3>
+<div class="outline-text-3" id="text-2-2">
 
 
 <ul>
@@ -107,9 +171,9 @@ that particular commit!
 
 </div>
 
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Release notes</h3>
-<div class="outline-text-3" id="text-1-3">
+<div id="outline-container-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Release notes</h3>
+<div class="outline-text-3" id="text-2-3">
 
 
 <p>
@@ -121,9 +185,9 @@ order to make them stand out, all such notes must be enclosed in a
 
 </div>
 
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Example</h3>
-<div class="outline-text-3" id="text-1-4">
+<div id="outline-container-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Example</h3>
+<div class="outline-text-3" id="text-2-4">
 
 
 
@@ -153,17 +217,17 @@ Further paragraphs come after blank lines.
 
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Code</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Code</h2>
+<div class="outline-text-2" id="text-3">
 
 
 
 </div>
 
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Send patch</h3>
-<div class="outline-text-3" id="text-2-1">
+<div id="outline-container-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Send patch</h3>
+<div class="outline-text-3" id="text-3-1">
 
 
 <p>
@@ -180,17 +244,17 @@ This script sends patches:
 
 </div>
 
-<div id="outline-container-2-1-1" class="outline-4">
-<h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span> Configuration options</h4>
-<div class="outline-text-4" id="text-2-1-1">
+<div id="outline-container-3-1-1" class="outline-4">
+<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Configuration options</h4>
+<div class="outline-text-4" id="text-3-1-1">
 
 
 
 </div>
 
-<div id="outline-container-2-1-1-1" class="outline-5">
-<h5 id="sec-2-1-1-1"><span class="section-number-5"></span> Per project options</h5>
-<div class="outline-text-5" id="text-2-1-1-1">
+<div id="outline-container-3-1-1-1" class="outline-5">
+<h5 id="sec-3-1-1-1"><span class="section-number-5"></span> Per project options</h5>
+<div class="outline-text-5" id="text-3-1-1-1">
 
 
 
@@ -206,9 +270,9 @@ This script sends patches:
 
 </div>
 
-<div id="outline-container-2-1-1-2" class="outline-5">
-<h5 id="sec-2-1-1-2"><span class="section-number-5"></span> Per user options</h5>
-<div class="outline-text-5" id="text-2-1-1-2">
+<div id="outline-container-3-1-1-2" class="outline-5">
+<h5 id="sec-3-1-1-2"><span class="section-number-5"></span> Per user options</h5>
+<div class="outline-text-5" id="text-3-1-1-2">
 
 
 
@@ -229,9 +293,9 @@ This script sends patches:
 
 </div>
 
-<div id="outline-container-2-1-1-3" class="outline-5">
-<h5 id="sec-2-1-1-3"><span class="section-number-5"></span> Usage</h5>
-<div class="outline-text-5" id="text-2-1-1-3">
+<div id="outline-container-3-1-1-3" class="outline-5">
+<h5 id="sec-3-1-1-3"><span class="section-number-5"></span> Usage</h5>
+<div class="outline-text-5" id="text-3-1-1-3">
 
 
 <p>
@@ -268,9 +332,9 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
 
 </div>
 
-<div id="outline-container-2-1-2" class="outline-4">
-<h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Helper functions</h4>
-<div class="outline-text-4" id="text-2-1-2">
+<div id="outline-container-3-1-2" class="outline-4">
+<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Helper functions</h4>
+<div class="outline-text-4" id="text-3-1-2">
 
 
 
@@ -306,9 +370,9 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
 
 </div>
 
-<div id="outline-container-2-1-2-1" class="outline-5">
-<h5 id="sec-2-1-2-1"><span class="section-number-5"></span> VCS in use</h5>
-<div class="outline-text-5" id="text-2-1-2-1">
+<div id="outline-container-3-1-2-1" class="outline-5">
+<h5 id="sec-3-1-2-1"><span class="section-number-5"></span> VCS in use</h5>
+<div class="outline-text-5" id="text-3-1-2-1">
 
 
 
@@ -336,9 +400,9 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
 
 </div>
 
-<div id="outline-container-2-1-3" class="outline-4">
-<h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span> Init</h4>
-<div class="outline-text-4" id="text-2-1-3">
+<div id="outline-container-3-1-3" class="outline-4">
+<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Init</h4>
+<div class="outline-text-4" id="text-3-1-3">
 
 
 
@@ -372,9 +436,9 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
 
 </div>
 
-<div id="outline-container-2-1-4" class="outline-4">
-<h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Check current directory</h4>
-<div class="outline-text-4" id="text-2-1-4">
+<div id="outline-container-3-1-4" class="outline-4">
+<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Check current directory</h4>
+<div class="outline-text-4" id="text-3-1-4">
 
 
 <p>
@@ -401,9 +465,9 @@ conclude that we're at the root directory of a working copy, or not.
 
 </div>
 
-<div id="outline-container-2-1-5" class="outline-4">
-<h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> Get URL of project</h4>
-<div class="outline-text-4" id="text-2-1-5">
+<div id="outline-container-3-1-5" class="outline-4">
+<h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> Get URL of project</h4>
+<div class="outline-text-4" id="text-3-1-5">
 
 
 
@@ -426,9 +490,9 @@ conclude that we're at the root directory of a working copy, or not.
 
 </div>
 
-<div id="outline-container-2-1-6" class="outline-4">
-<h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span> Override settings</h4>
-<div class="outline-text-4" id="text-2-1-6">
+<div id="outline-container-3-1-6" class="outline-4">
+<h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> Override settings</h4>
+<div class="outline-text-4" id="text-3-1-6">
 
 
 
@@ -455,9 +519,9 @@ which <span class="org-string">"$EDITOR"</span> &gt; /dev/null 2&gt;&amp;1 || di
 
 </div>
 
-<div id="outline-container-2-1-7" class="outline-4">
-<h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span> Display changed files</h4>
-<div class="outline-text-4" id="text-2-1-7">
+<div id="outline-container-3-1-7" class="outline-4">
+<h4 id="sec-3-1-7"><span class="section-number-4">3.1.7</span> Display changed files</h4>
+<div class="outline-text-4" id="text-3-1-7">
 
 
 <p>
@@ -494,9 +558,9 @@ access the repository for this check.
 
 </div>
 
-<div id="outline-container-2-1-8" class="outline-4">
-<h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span> Display ignored files</h4>
-<div class="outline-text-4" id="text-2-1-8">
+<div id="outline-container-3-1-8" class="outline-4">
+<h4 id="sec-3-1-8"><span class="section-number-4">3.1.8</span> Display ignored files</h4>
+<div class="outline-text-4" id="text-3-1-8">
 
 
 
@@ -530,9 +594,9 @@ after having sent some information to the user&hellip;
 
 </div>
 
-<div id="outline-container-2-1-9" class="outline-4">
-<h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span> Ask for short log message</h4>
-<div class="outline-text-4" id="text-2-1-9">
+<div id="outline-container-3-1-9" class="outline-4">
+<h4 id="sec-3-1-9"><span class="section-number-4">3.1.9</span> Ask for short log message</h4>
+<div class="outline-text-4" id="text-3-1-9">
 
 
 
@@ -549,9 +613,9 @@ after having sent some information to the user&hellip;
 
 </div>
 
-<div id="outline-container-2-1-10" class="outline-4">
-<h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span> Generate name for patch files</h4>
-<div class="outline-text-4" id="text-2-1-10">
+<div id="outline-container-3-1-10" class="outline-4">
+<h4 id="sec-3-1-10"><span class="section-number-4">3.1.10</span> Generate name for patch files</h4>
+<div class="outline-text-4" id="text-3-1-10">
 
 
 
@@ -572,9 +636,9 @@ after having sent some information to the user&hellip;
 
 </div>
 
-<div id="outline-container-2-1-11" class="outline-4">
-<h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> Make patch file</h4>
-<div class="outline-text-4" id="text-2-1-11">
+<div id="outline-container-3-1-11" class="outline-4">
+<h4 id="sec-3-1-11"><span class="section-number-4">3.1.11</span> Make patch file</h4>
+<div class="outline-text-4" id="text-3-1-11">
 
 
 
@@ -609,9 +673,9 @@ email contents. That does not have any impact on the commit process itself&helli
 
 </div>
 
-<div id="outline-container-2-1-12" class="outline-4">
-<h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span> Edit log message</h4>
-<div class="outline-text-4" id="text-2-1-12">
+<div id="outline-container-3-1-12" class="outline-4">
+<h4 id="sec-3-1-12"><span class="section-number-4">3.1.12</span> Edit log message</h4>
+<div class="outline-text-4" id="text-3-1-12">
 
 
 
@@ -641,9 +705,9 @@ sed <span class="org-string">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span class
 
 </div>
 
-<div id="outline-container-2-1-13" class="outline-4">
-<h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span> Convert email contents into UTF-8</h4>
-<div class="outline-text-4" id="text-2-1-13">
+<div id="outline-container-3-1-13" class="outline-4">
+<h4 id="sec-3-1-13"><span class="section-number-4">3.1.13</span> Convert email contents into UTF-8</h4>
+<div class="outline-text-4" id="text-3-1-13">
 
 
 
@@ -680,9 +744,9 @@ sed <span class="org-string">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span class
 
 </div>
 
-<div id="outline-container-2-1-14" class="outline-4">
-<h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span> Deduce log message for commit</h4>
-<div class="outline-text-4" id="text-2-1-14">
+<div id="outline-container-3-1-14" class="outline-4">
+<h4 id="sec-3-1-14"><span class="section-number-4">3.1.14</span> Deduce log message for commit</h4>
+<div class="outline-text-4" id="text-3-1-14">
 
 
 
@@ -696,9 +760,9 @@ sed <span class="org-string">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span class
 
 </div>
 
-<div id="outline-container-2-1-15" class="outline-4">
-<h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span> Deduce subject line for email</h4>
-<div class="outline-text-4" id="text-2-1-15">
+<div id="outline-container-3-1-15" class="outline-4">
+<h4 id="sec-3-1-15"><span class="section-number-4">3.1.15</span> Deduce subject line for email</h4>
+<div class="outline-text-4" id="text-3-1-15">
 
 
 
@@ -736,22 +800,10 @@ head -n 1 $<span class="org-variable-name">email</span> &gt; $<span class="org-v
 
 </div>
 
-<div id="outline-container-2-1-16" class="outline-4">
-<h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span> Auto-commit changes</h4>
-<div class="outline-text-4" id="text-2-1-16">
+<div id="outline-container-3-1-16" class="outline-4">
+<h4 id="sec-3-1-16"><span class="section-number-4">3.1.16</span> Auto-commit changes</h4>
+<div class="outline-text-4" id="text-3-1-16">
 
-
-
-
-<div class="inlinetask "><p><b><span class="todo TODO">TODO</span> Check what's going on when committing</b><br/></p>
-
-<p>
-When there are multiple workspaces on your machine, are we sure that TF only
-checks in files which are in the current subtree?
-</p>
-
-
-</div>
 
 
 
@@ -792,9 +844,9 @@ checks in files which are in the current subtree?
 
 </div>
 
-<div id="outline-container-2-1-17" class="outline-4">
-<h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span> Auto-send email</h4>
-<div class="outline-text-4" id="text-2-1-17">
+<div id="outline-container-3-1-17" class="outline-4">
+<h4 id="sec-3-1-17"><span class="section-number-4">3.1.17</span> Auto-send email</h4>
+<div class="outline-text-4" id="text-3-1-17">
 
 
 
@@ -835,9 +887,9 @@ checks in files which are in the current subtree?
 
 </div>
 
-<div id="outline-container-2-1-18" class="outline-4">
-<h4 id="sec-2-1-18"><span class="section-number-4">2.1.18</span> Auto-delete temporary files</h4>
-<div class="outline-text-4" id="text-2-1-18">
+<div id="outline-container-3-1-18" class="outline-4">
+<h4 id="sec-3-1-18"><span class="section-number-4">3.1.18</span> Auto-delete temporary files</h4>
+<div class="outline-text-4" id="text-3-1-18">
 
 
 
@@ -873,9 +925,9 @@ checks in files which are in the current subtree?
 
 </div>
 
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Display list of files</h3>
-<div class="outline-text-3" id="text-2-2">
+<div id="outline-container-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Display list of files</h3>
+<div class="outline-text-3" id="text-3-2">
 
 
 <p>
@@ -912,9 +964,9 @@ as non-breakable spaces). On the other hand, <code>grep</code> would simply decl
 
 </div>
 
-<div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Display changes</h3>
-<div class="outline-text-3" id="text-2-3">
+<div id="outline-container-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Display changes</h3>
+<div class="outline-text-3" id="text-3-3">
 
 
 <p>
@@ -952,9 +1004,9 @@ cat $<span class="org-variable-name">tmpfile</span>
 
 </div>
 
-<div id="outline-container-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Ignore elements</h3>
-<div class="outline-text-3" id="text-2-4">
+<div id="outline-container-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Ignore elements</h3>
+<div class="outline-text-3" id="text-3-4">
 
 
 <p>
@@ -974,9 +1026,9 @@ svn propset svn:ignore <span class="org-string">"$(</span><span class="org-sh-qu
 
 </div>
 
-<div id="outline-container-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Unaccent</h3>
-<div class="outline-text-3" id="text-2-5">
+<div id="outline-container-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Unaccent</h3>
+<div class="outline-text-3" id="text-3-5">
 
 
 <p>
@@ -1031,9 +1083,9 @@ s/\o374/u/g
 
 </div>
 
-<div id="outline-container-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Install environment</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Install environment</h3>
+<div class="outline-text-3" id="text-3-6">
 
 
 <p>
@@ -1056,7 +1108,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-07-02T14:00+0200 Fabrice Niessen
+    &copy; 2012-07-02T14:10+0200 Fabrice Niessen
   </div>
 </div>
 </body>

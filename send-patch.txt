@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-07-02 Mon 13:59 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-07-02 Mon 14:10 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -9,6 +9,33 @@
 
 #+SETUPFILE: bigblow.setup
 #+PROPERTY:  shebang #!/bin/bash
+
+* Tasks
+
+** TODO [#A] Add a command-line option to recover last log message
+
+In case the commit failed, to avoid having to retype it all or find and insert
+the right message.
+
+** TODO Stop with an error if the email command is not defined
+
+To avoid mails sent under the name of John Doe.
+
+** TODO Check answers to questions
+
+The only permitted answers (to binary questions) are "y" or "n". All other
+letters should be discarded, and the question should be asked again.
+
+** DONE Check what's going on when committing on TFS
+   :LOGBOOK:
+   - State "TODO"        ->  "DONE"       [2012-07-02 Mon 14:10]
+   :END:
+
+When there are multiple workspaces on your machine, are we sure that TF only
+checks in files which are in the current subtree?
+
+Yes, that does work (FPZ has 3 workspaces on his machine, and when committing
+from a subtree, only files from that subtree are committed).
 
 * Commit guidelines
 
@@ -432,11 +459,6 @@ esac
 #+end_src
 
 *** Auto-commit changes
-
-*************** TODO Check what's going on when committing
-When there are multiple workspaces on your machine, are we sure that TF only
-checks in files which are in the current subtree?
-*************** END
 
 #+begin_src sh
 echo ""
