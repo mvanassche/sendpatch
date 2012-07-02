@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-04-27 Fri 15:43 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-07-02 Mon 13:50 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -187,7 +187,7 @@ case $vcs in
         VCS_STATUS="svn status --ignore-externals"
         ;;
     tfs)
-        VCS_STATUS="tf status"
+        VCS_STATUS="tf status"ok
         ;;
     *)
         die "VCS backend is not supported"
@@ -357,7 +357,7 @@ echo -e "\nEdit commit log message and email to send..."
 test $? -eq 0 || die "edit failed"
 
 # remove comments from editable part
-sed '0,/^---$/{/^#.*$/d;}' < $email > $email.nocomment; mv $email.nocomment $email
+sed '0,/^---$/{/^#[^+].*$/d;}' < $email > $email.nocomment; mv $email.nocomment $email
 #+end_src
 
 *** Convert email contents into UTF-8

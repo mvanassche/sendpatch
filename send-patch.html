@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-04-18T16:44+0200"/>
+<meta name="generated" content="2012-07-02T13:51+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -345,7 +345,7 @@ Remember that those files must be with <span class="alert">Unix line endings</sp
         <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"svn status --ignore-externals"</span>
         ;;
     tfs)
-        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>
+        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>ok
         ;;
     *)
         die <span class="org-string">"VCS backend is not supported"</span>
@@ -402,7 +402,7 @@ conclude that we're at the root directory of a working copy, or not.
     tfs)
         <span class="org-comment-delimiter"># </span><span class="org-comment">get collection and project</span>
         tf workfold &gt; $<span class="org-variable-name">tmpfile</span>
-        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | tail -n 2 | sed <span class="org-string">"2{s/:.*//}"</span>)
+        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | grep -E <span class="org-string">"^(Collection| \\$/)"</span> | sed <span class="org-string">"/^ \\$/{s/:.*//}"</span>)
         ;;
 <span class="org-keyword">esac</span>
 </pre>
@@ -488,13 +488,12 @@ access the repository for this check.
 
 
 
-<pre class="src src-sh">cecho <span class="org-string">"\nFiles to be ignored:"</span>
-<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
     svn)
+        cecho <span class="org-string">"\nFiles to be ignored:"</span>
         ${<span class="org-variable-name">VCS_STATUS</span>} $<span class="org-variable-name">@</span> | grep -E <span class="org-string">"^\? "</span> | grep -v <span class="org-string">" 0.*-"</span>
         ;;
     tfs)
-        <span class="org-builtin">echo</span> <span class="org-string">"</span><span class="org-string"><span class="org-myXkeywords-error">XXX</span></span><span class="org-string"> HOW TO LIST FILES WHICH AREN'T NEITHER IN TFS NOR IGNORED?"</span>
         ;;
 <span class="org-keyword">esac</span>
 </pre>
@@ -620,7 +619,7 @@ mv $<span class="org-variable-name">patch</span>.excluded $<span class="org-vari
 <span class="org-builtin">test</span> $<span class="org-variable-name">?</span> -eq 0 || die <span class="org-string">"edit </span><span class="org-string"><span class="org-myXkeywords-error">failed</span></span><span class="org-string">"</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">remove comments from editable part</span>
-sed <span class="org-string">'0,/^---$/{/^#.*$/d;}'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">email</span>.nocomment; mv $<span class="org-variable-name">email</span>.nocomment $<span class="org-variable-name">email</span>
+sed <span class="org-string">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">email</span>.nocomment; mv $<span class="org-variable-name">email</span>.nocomment $<span class="org-variable-name">email</span>
 </pre>
 
 
@@ -1043,7 +1042,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-04-18T16:44+0200 Fabrice Niessen
+    &copy; 2012-07-02T13:51+0200 Fabrice Niessen
   </div>
 </div>
 </body>
