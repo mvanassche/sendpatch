@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-07-02 Mon 14:10 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-07-20 Fri 15:16 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -25,6 +25,8 @@ To avoid mails sent under the name of John Doe.
 
 The only permitted answers (to binary questions) are "y" or "n". All other
 letters should be discarded, and the question should be asked again.
+
+** TODO Add ability to add private notes which won't be committed
 
 ** DONE Check what's going on when committing on TFS
    :LOGBOOK:
