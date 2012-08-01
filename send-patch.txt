@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-07-20 Fri 15:16 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-08-01 Wed 09:55 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -155,7 +155,7 @@ Such default settings can be overridden in:
 
 in that order.
 
-Remember that those files must be with @Unix line endings@!
+Remember that those configuration files must be encoded with @Unix line endings@!
 
 *** Helper functions
 
