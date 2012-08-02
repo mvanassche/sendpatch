@@ -51,7 +51,7 @@ function vcs_info () {
 }
 
 function fixtfsbinaryfiles () {
-    sed -r "s/^(.*): files differ$/Index: \1\n===================================================================Cannot display: file marked as a binary type.\n===================================================================/"
+    sed -r "s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"
 }
 
 tmpfile="/tmp/$(basename $0).$$"

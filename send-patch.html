@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-08-02T14:52+0200"/>
+<meta name="generated" content="2012-08-02T14:58+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -417,7 +417,7 @@ Remember that those configuration files must be encoded with <span class="alert"
 
 
 <pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">fixtfsbinaryfiles</span> () {
-    sed -r <span class="org-string">"s/^(.*): files differ$/Index: \1\n===================================================================Cannot display: file marked as a binary type.\n===================================================================/"</span>
+    sed -r <span class="org-string">"s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"</span>
 }
 </pre>
 
@@ -1140,7 +1140,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-08-02T14:52+0200 Fabrice Niessen
+    &copy; 2012-08-02T14:58+0200 Fabrice Niessen
   </div>
 </div>
 </body>
