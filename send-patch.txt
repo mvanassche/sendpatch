@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-08-02 Thu 14:35 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-08-02 Thu 14:50 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -208,7 +208,7 @@ function vcs_info () {
 
 #+begin_src sh
 function fixtfsbinaryfiles () {
-    sed -r "s/^(.*): files differ$/Index: \1/"
+    sed -r "s/^(.*): files differ$/Index: \1\n===================================================================Cannot display: file marked as a binary type.\n===================================================================/"
 }
 #+end_src
 
