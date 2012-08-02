@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-08-01 Wed 09:55 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-08-02 Thu 14:35 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -204,6 +204,14 @@ function vcs_info () {
 }
 #+end_src
 
+**** TFS
+
+#+begin_src sh
+function fixtfsbinaryfiles () {
+    sed -r "s/^(.*): files differ$/Index: \1/"
+}
+#+end_src
+
 *** Init
 
 #+begin_src sh
@@ -352,8 +360,12 @@ email=${emailfileprefix}${filename}.txt
 
 *** Make patch file
 
+The patch file generated only reports =file.bin: files differ=. The fix for
+getting such names included in the log (list of modified files) is to replace
+that one-sentence with a traditional =Index:= marker.
+
 #+begin_src sh
-makediff $@ > $patch
+makediff $@ | fixtfsbinaryfiles > $patch
 #+end_src
 
 =excludefileregexp= allows one to exclude useless or unreadable diffs from the

@@ -50,6 +50,10 @@ function vcs_info () {
     fi
 }
 
+function fixtfsbinaryfiles () {
+    sed -r "s/^(.*): files differ$/Index: \1/"
+}
+
 tmpfile="/tmp/$(basename $0).$$"
 trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
@@ -146,7 +150,7 @@ patch=${patchfileprefix}${filename}.patch
 commitmsg=${commitmsgfileprefix}${filename}.log
 email=${emailfileprefix}${filename}.txt
 
-makediff $@ > $patch
+makediff $@ | fixtfsbinaryfiles > $patch
 
 if [[ -n "$excludefileregexp" ]]; then
     cat $patch |\

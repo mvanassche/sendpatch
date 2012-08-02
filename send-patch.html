@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-08-01T09:55+0200"/>
+<meta name="generated" content="2012-08-02T14:35+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -405,6 +405,24 @@ Remember that those configuration files must be encoded with <span class="alert"
 
 
 </div>
+
+</div>
+
+<div id="outline-container-3-1-2-2" class="outline-5">
+<h5 id="sec-3-1-2-2"><span class="section-number-5"></span> TFS</h5>
+<div class="outline-text-5" id="text-3-1-2-2">
+
+
+
+
+
+<pre class="src src-sh"><span class="org-keyword">function</span> <span class="org-function-name">fixtfsbinaryfiles</span> () {
+    sed -r <span class="org-string">"s/^(.*): files differ$/Index: \1/"</span>
+}
+</pre>
+
+
+</div>
 </div>
 
 </div>
@@ -650,10 +668,15 @@ after having sent some information to the user&hellip;
 <div class="outline-text-4" id="text-3-1-11">
 
 
+<p>
+The patch file generated only reports <code>file.bin: files differ</code>. The fix for
+getting such names included in the log (list of modified files) is to replace
+that one-sentence with a traditional <code>Index:</code> marker.
+</p>
 
 
 
-<pre class="src src-sh">makediff $<span class="org-variable-name">@</span> &gt; $<span class="org-variable-name">patch</span>
+<pre class="src src-sh">makediff $<span class="org-variable-name">@</span> | fixtfsbinaryfiles &gt; $<span class="org-variable-name">patch</span>
 </pre>
 
 
@@ -1117,7 +1140,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-08-01T09:55+0200 Fabrice Niessen
+    &copy; 2012-08-02T14:35+0200 Fabrice Niessen
   </div>
 </div>
 </body>
