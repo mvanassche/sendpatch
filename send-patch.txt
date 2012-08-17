@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-08-02 Thu 14:57 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-08-17 Fri 09:00 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -17,14 +17,14 @@
 In case the commit failed, to avoid having to retype it all or find and insert
 the right message.
 
-** TODO Stop with an error if the email command is not defined
-
-To avoid mails sent under the name of John Doe.
-
-** TODO Check answers to questions
+** TODO [#A] Check answers to questions
 
 The only permitted answers (to binary questions) are "y" or "n". All other
 letters should be discarded, and the question should be asked again.
+
+** TODO Stop with an error if the email command is not defined
+
+To avoid mails sent under the name of John Doe.
 
 ** TODO Add ability to add private notes which won't be committed
 
