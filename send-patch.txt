@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-08-17 Fri 09:00 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-08-17 Fri 15:26 Fabrice on MEDIACENTER>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -21,6 +21,12 @@ the right message.
 
 The only permitted answers (to binary questions) are "y" or "n". All other
 letters should be discarded, and the question should be asked again.
+
+** TODO [#A] Check that the configuration files are in Unix format
+
+Check it, or convert them if needed.
+
+This is a common source of problems...
 
 ** TODO Stop with an error if the email command is not defined
 
