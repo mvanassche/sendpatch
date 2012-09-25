@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-08-17 Fri 15:26 Fabrice on MEDIACENTER>
+#+Time-stamp: <2012-09-25 Tue 14:44 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -647,6 +647,11 @@ Ignore multiple elements in one command.
 target="$1"; shift
 svn propset svn:ignore "$(echo $* | tr ' ' '\n')" "$target"
 #+end_src
+
+*************** Note
+Use =cd admin; svnignore . file=
+instead of =svnignore . admin/file=.
+*************** END
 
 ** Unaccent
    :PROPERTIES:
