@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-09-25T14:44+0200"/>
+<meta name="generated" content="2012-09-25T16:34+0200"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -328,10 +328,13 @@ A commonly configured option could be:
 
 
 
-<pre class="src src-sh"><span class="org-variable-name">excludefileregexp</span>=<span class="org-string">"(\.html|\.xml)"</span>
+<pre class="src src-sh"><span class="org-variable-name">excludefileregexp</span>=<span class="org-string">"(\\\.html|\\\.xml)"</span>
 </pre>
 
 
+<p>
+Note the use of <b>3 backslashes</b>!
+</p>
 <p>
 Such default settings can be overridden in:
 </p>
@@ -664,7 +667,7 @@ after having sent some information to the user&hellip;
 
 
 <pre class="src src-sh"><span class="org-variable-name">oldcounter</span>=$(<span class="org-sh-quoted-exec">ls</span> ${<span class="org-variable-name">patchfileprefix</span>}0???-*.patch 2&gt; /dev/null | sort --reverse <span class="org-sh-escaped-newline">\</span>
-    | head -n 1 | cut -d <span class="org-string">"-"</span> -f 1 | sed <span class="org-string">"s/^${patchfileprefix}00*//"</span>)
+    | head -n 1 | sed <span class="org-string">"s/^${patchfileprefix}00*//"</span> | cut -d <span class="org-string">"-"</span> -f 1)
 <span class="org-variable-name">newcounterpadded</span>=$(<span class="org-sh-quoted-exec">printf</span> <span class="org-string">"%04d"</span> <span class="org-string">"$(( oldcounter + 1 ))"</span>)
 <span class="org-variable-name">filename</span>=<span class="org-string">"$newcounterpadded-$(</span><span class="org-sh-quoted-exec">echo</span><span class="org-string"> "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"</span>
 
@@ -1167,7 +1170,7 @@ ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-09-25T14:44+0200 Fabrice Niessen
+    &copy; 2012-09-25T16:34+0200 Fabrice Niessen
   </div>
 </div>
 </body>

@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-09-25 Tue 14:44 Fabrice>
+#+Time-stamp: <2012-09-25 Tue 16:34 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -150,8 +150,10 @@ emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "m
 A commonly configured option could be:
 
 #+begin_src sh :tangle no
-excludefileregexp="(\.html|\.xml)"
+excludefileregexp="(\\\.html|\\\.xml)"
 #+end_src
+
+Note the use of *3 backslashes*!
 
 Such default settings can be overridden in:
 
@@ -355,7 +357,7 @@ fi
 
 #+begin_src sh
 oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
-    | head -n 1 | cut -d "-" -f 1 | sed "s/^${patchfileprefix}00*//")
+    | head -n 1 | sed "s/^${patchfileprefix}00*//" | cut -d "-" -f 1)
 newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
 filename="$newcounterpadded-$(echo "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
 

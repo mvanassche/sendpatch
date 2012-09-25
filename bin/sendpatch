@@ -142,7 +142,7 @@ if [[ "$asksubject" != "no" ]]; then
 fi
 
 oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
-    | head -n 1 | cut -d "-" -f 1 | sed "s/^${patchfileprefix}00*//")
+    | head -n 1 | sed "s/^${patchfileprefix}00*//" | cut -d "-" -f 1)
 newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
 filename="$newcounterpadded-$(echo "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
 
