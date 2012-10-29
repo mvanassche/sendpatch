@@ -54,6 +54,36 @@ function fixtfsbinaryfiles () {
     sed -r "s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"
 }
 
+function ask () {
+    while true; do
+        if [ "${2:-}" = "Y" ]; then
+            prompt="Y/n"
+            default=Y
+        elif [ "${2:-}" = "N" ]; then
+            prompt="y/N"
+            default=N
+        else
+            prompt="y/n"
+            default=
+        fi
+
+        # ask the question
+        printf "$1 ($prompt): "
+        read REPLY
+
+        # default?
+        if [ -z "$REPLY" ]; then
+            REPLY=$default
+        fi
+
+        # check if the reply is valid
+        case "$REPLY" in
+            y*|Y*) return 0 ;;
+            n*|N*) return 1 ;;
+        esac
+    done
+}
+
 tmpfile="/tmp/$(basename $0).$$"
 trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
@@ -196,15 +226,7 @@ case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
         ;;
     *)
         echo "Potential problems found in email file $email: $(file --brief $email)"
-        printf "Continue? (y/n): "
-        read REPLY
-        case $REPLY in
-            y | yes)
-                ;;
-            *)
-                die "exiting..."
-                ;;
-        esac
+        ask "Continue?" || die "exiting..."
         ;;
 esac
 echo -e "Email:         $email"
@@ -239,16 +261,7 @@ esac
 
 echo ""
 if [[ "$autocommit" = "ask" ]]; then
-    printf "Commit? (y/n): "
-    read REPLY
-    case $REPLY in
-        y | yes)
-            askcommit="yes"
-            ;;
-        *)
-            askcommit="no"
-            ;;
-    esac
+    ask "Commit?" && askcommit="yes" || askcommit="no"
 fi
 
 if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
@@ -276,16 +289,7 @@ if [[ "$autosendemail" = "ask" ]]; then
     [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
     [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
     [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
-    printf "Send email? (y/n): "
-    read REPLY
-    case $REPLY in
-        y | yes)
-            asksendemail="yes"
-            ;;
-        *)
-            asksendemail="no"
-            ;;
-    esac
+    ask "Send email?" && asksendemail="yes" || asksendemail="no"
 fi
 
 if [[ "$autosendemail" = "yes" || "$asksendemail" = "yes" ]]; then
@@ -300,16 +304,7 @@ test $rc -eq 0 || die "send email failed"
 
 echo ""
 if [[ "$autodeletetmpfiles" = "ask" ]]; then
-    printf "Delete temp files? (y/n): "
-    read REPLY
-    case $REPLY in
-        y | yes)
-            askdeletetmpfiles="yes"
-            ;;
-        *)
-            askdeletetmpfiles="no"
-            ;;
-    esac
+    ask "Delete temp files?" && askdeletetmpfiles="yes" || askdeletetmpfiles="no"
 fi
 
 if [[ "$autodeletetmpfiles" = "yes" || "$askdeletetmpfiles" = "yes" ]]; then
