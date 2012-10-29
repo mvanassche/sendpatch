@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-09-25 Tue 16:34 Fabrice>
+#+Time-stamp: <2012-10-29 Mon 14:36 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -327,7 +327,7 @@ esac
 #+begin_src sh
 case $vcs in
     svn)
-        cecho "\nFiles to be ignored:"
+        cecho "\nUntracked files:"
         ${VCS_STATUS} $@ | grep -E "^\? " | grep -v " 0.*-"
         ;;
     tfs)
@@ -349,7 +349,8 @@ after having sent some information to the user...
 #+begin_src sh
 if [[ "$asksubject" != "no" ]]; then
     echo ""
-    read -p "Subject (short log): " subject
+    printf "Subject (short log): "
+    read subject
 fi
 #+end_src
 
@@ -429,13 +430,14 @@ case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
         cat $email | iconv -c -f ISO-8859-1 -t UTF-8 > $tmpfile
         mv $tmpfile $email
         ;;
-    *)
+    ,*)
         echo "Potential problems found in email file $email: $(file --brief $email)"
-        read -p "Continue? (y/n): " answer
-        case $answer in
+        printf "Continue? (y/n): "
+        read REPLY
+        case $REPLY in
             y | yes)
                 ;;
-            *)
+            ,*)
                 die "exiting..."
                 ;;
         esac
@@ -485,12 +487,13 @@ esac
 #+begin_src sh
 echo ""
 if [[ "$autocommit" = "ask" ]]; then
-    read -p "Commit? (y/n): " answer
-    case $answer in
+    printf "Commit? (y/n): "
+    read REPLY
+    case $REPLY in
         y | yes)
             askcommit="yes"
             ;;
-        *)
+        ,*)
             askcommit="no"
             ;;
     esac
@@ -525,12 +528,13 @@ if [[ "$autosendemail" = "ask" ]]; then
     [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
     [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
     [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
-    read -p "Send email? (y/n): " answer
-    case $answer in
+    printf "Send email? (y/n): "
+    read REPLY
+    case $REPLY in
         y | yes)
             asksendemail="yes"
             ;;
-        *)
+        ,*)
             asksendemail="no"
             ;;
     esac
@@ -552,12 +556,13 @@ test $rc -eq 0 || die "send email failed"
 #+begin_src sh
 echo ""
 if [[ "$autodeletetmpfiles" = "ask" ]]; then
-    read -p "Delete temp files? (y/n): " answer
-    case $answer in
+    printf "Delete temp files? (y/n): "
+    read REPLY
+    case $REPLY in
         y | yes)
             askdeletetmpfiles="yes"
             ;;
-        *)
+        ,*)
             askdeletetmpfiles="no"
             ;;
     esac
