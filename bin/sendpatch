@@ -176,7 +176,7 @@ EOF
 { echo "$subject"; makelog -f $patch | sort | uniq; echo -e "\n---"; echo -e "$url\n"; \
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
-echo -e "\nEdit commit log message and email to send..."
+echo -e "\nEdit commit log message and email to send to $mailto..."
 "$EDITOR" $email
 test $? -eq 0 || die "edit failed"
 
