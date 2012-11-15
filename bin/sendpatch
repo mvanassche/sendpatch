@@ -65,9 +65,10 @@ ask () {
             default=
         fi
 
-        # ask the question
+        # ask the question (without the need to press RET)
         printf "$1 ($prompt): "
-        read REPLY
+        read -n 1 -r REPLY
+        printf "\n" # just a final linefeed
 
         # default?
         if [ -z "$REPLY" ]; then
