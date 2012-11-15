@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-11-15 Thu 11:59 Fabrice>
+#+Time-stamp: <2012-11-15 Thu 12:04 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -390,8 +390,7 @@ after having sent some information to the user...
 
 #+begin_src sh
 if [[ "$asksubject" != "no" ]]; then
-    printf "\n"
-    printf "Subject (short log): "
+    printf "\nSubject (short log): "
     read subject
 fi
 #+end_src

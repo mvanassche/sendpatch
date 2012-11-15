@@ -166,8 +166,7 @@ esac
     || die "no changes to send to the repository"
 
 if [[ "$asksubject" != "no" ]]; then
-    printf "\n"
-    printf "Subject (short log): "
+    printf "\nSubject (short log): "
     read subject
 fi
 
