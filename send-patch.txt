@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-11-15 Thu 13:39 Fabrice>
+#+Time-stamp: <2012-11-15 Thu 14:11 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -449,7 +449,7 @@ EOF
 { printf "$subject\n"; makelog -f $patch | sort | uniq; printf "\n---\n"; printf "$url\n\n"; \
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
-printf "\nEdit commit log message and email to send to $mailto...\n"
+printf "\nEdit commit log message and email to send to '$mailto'...\n"
 "$EDITOR" $email
 test $? -eq 0 || die "edit failed"
 
