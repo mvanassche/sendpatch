@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-10-29 Mon 16:56 Fabrice>
+#+Time-stamp: <2012-11-15 Thu 11:42 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -171,14 +171,14 @@ Remember that those configuration files must be encoded with @Unix line endings@
 *** Helper functions
 
 #+begin_src sh
-function die () {
-    echo "$(basename $0): $@" > /dev/stderr
+die () {
+    printf "$(basename $0): $@\n" > /dev/stderr
     exit 1
 }
 #+end_src
 
 #+begin_src sh
-function cecho () {
+cecho () {
     black="\e[30m"
     red="\e[31m"
     green="\e[32m"
@@ -190,16 +190,14 @@ function cecho () {
     reset="\e[0m"
 
     color=${green}
-    echo -e -n "$color"
-    echo -e -n "$1"
-    echo -e "$reset"
+    printf "$color$1$reset\n"
 }
 #+end_src
 
 **** VCS in use
 
 #+begin_src sh
-function vcs_info () {
+vcs_info () {
     local default="tfs"
 
     # recursively search for `.svn' directory
@@ -208,9 +206,9 @@ function vcs_info () {
     done
 
     if [[ -d .svn ]]; then
-        echo "svn"
+        printf "svn\n"
     else # not found
-        echo "$default"
+        printf "$default\n"
     fi
 }
 #+end_src
@@ -218,7 +216,7 @@ function vcs_info () {
 **** TFS
 
 #+begin_src sh
-function fixtfsbinaryfiles () {
+fixtfsbinaryfiles () {
     sed -r "s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"
 }
 #+end_src
@@ -226,7 +224,7 @@ function fixtfsbinaryfiles () {
 **** Yes/No prompt function
 
 #+begin_src sh
-function ask () {
+ask () {
     while true; do
         if [ "${2:-}" = "Y" ]; then
             prompt="Y/n"
@@ -260,6 +258,10 @@ function ask () {
 See [[https://gist.github.com/1965569][usage samples]] for defaults (when the user presses RET without giving an
 answer).
 
+*************** TODO Read only one char
+See http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script
+*************** END
+
 *** Init
 
 #+begin_src sh
@@ -271,7 +273,7 @@ projectconfig=sendpatch.common
 userprojectconfig=sendpatch.params
 
 export vcs=$(vcs_info)
-echo "VC backend: $vcs"
+printf "VC backend: $vcs\n"
 
 case $vcs in
     svn)
@@ -352,7 +354,7 @@ case $vcs in
         ;;
     tfs)
         export rootdirwin=$(cygpath -w -l "$(pwd)")
-        # echo "Root directory (in Windows format) : $rootdirwin"
+        # printf "Root directory (in Windows format) : $rootdirwin\n"
         ${VCS_STATUS} $@ > $tmpfile
         # No idea why, but we can't directly pipe the output of `tf status'
         # command
@@ -388,7 +390,7 @@ after having sent some information to the user...
 
 #+begin_src sh
 if [[ "$asksubject" != "no" ]]; then
-    echo ""
+    printf "\n"
     printf "Subject (short log): "
     read subject
 fi
@@ -400,7 +402,7 @@ fi
 oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
     | head -n 1 | sed "s/^${patchfileprefix}00*//" | cut -d "-" -f 1)
 newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
-filename="$newcounterpadded-$(echo "$subject" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
+filename="$newcounterpadded-$(printf "$subject\n" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"
 
 patch=${patchfileprefix}${filename}.patch
 commitmsg=${commitmsgfileprefix}${filename}.log
@@ -445,10 +447,10 @@ cat <<EOF > $email
 # The FIRST LINE of the commit message should be a short description
 # and should skip the full stop. It will become the subject of the email.
 EOF
-{ echo "$subject"; makelog -f $patch | sort | uniq; echo -e "\n---"; echo -e "$url\n"; \
+{ printf "$subject\n"; makelog -f $patch | sort | uniq; printf "\n---\n"; printf "$url\n\n"; \
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
-echo -e "\nEdit commit log message and email to send to $mailto..."
+printf "\nEdit commit log message and email to send to $mailto...\n"
 "$EDITOR" $email
 test $? -eq 0 || die "edit failed"
 
@@ -466,16 +468,16 @@ case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
     ASCII*)
         ;;
     ISO-8859*)
-        echo "Character encoding of diff output: ISO-8859... Converting it to UTF-8..."
+        printf "Character encoding of diff output: ISO-8859... Converting it to UTF-8...\n"
         cat $email | iconv -c -f ISO-8859-1 -t UTF-8 > $tmpfile
         mv $tmpfile $email
         ;;
     ,*)
-        echo "Potential problems found in email file $email: $(file --brief $email)"
+        printf "Potential problems found in email file $email: $(file --brief $email)\n"
         ask "Continue?" || die "exiting..."
         ;;
 esac
-echo -e "Email:         $email"
+printf "Email:         $email\n"
 #+end_src
 
 *** Deduce log message for commit
@@ -487,11 +489,6 @@ sed '/^---$/,$d' < $email > $commitmsg
 *** Deduce subject line for email
 
 #+begin_src sh
-# # for debugging purpose
-# echo -e "\n-- First 3 lines of email --"
-# head -3 $email
-# echo "----------------------------"
-
 # get new subject for email (first line of log message)
 head -n 1 $email > $tmpfile
 
@@ -507,23 +504,18 @@ case "$(file --brief $tmpfile 2> /dev/null)" in
         die "unknown character encoding: $(file --brief $tmpfile). Did you put the subject as first line?"
         ;;
 esac
-
-# # for debugging purpose
-# echo -e "\n-- Subject (unaccented) ----"
-# echo $subject
-# echo "----------------------------"
 #+end_src
 
 *** Auto-commit changes
 
 #+begin_src sh
-echo ""
+printf "\n"
 if [[ "$autocommit" = "ask" ]]; then
     ask "Commit?" && askcommit="yes" || askcommit="no"
 fi
 
 if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
-    echo "Committing..."
+    printf "Committing...\n"
     case $vcs in
         svn)
             svn commit --file $commitmsg $@
@@ -534,7 +526,7 @@ if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
     esac
     rc=$?
 else
-    echo "Nothing gets committed..."
+    printf "Nothing gets committed...\n"
     rc=0
 fi
 test $rc -eq 0 || die "commit failed"
@@ -543,11 +535,11 @@ test $rc -eq 0 || die "commit failed"
 *** Auto-send email
 
 #+begin_src sh
-echo ""
+printf "\n"
 if [[ "$autosendemail" = "ask" ]]; then
-    echo "Environment for sending email:"
+    printf "Environment for sending email:\n"
     # print the email command
-    eval echo $emailcommand
+    eval printf "$emailcommand\n"
     [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
     [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
     [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
@@ -555,11 +547,11 @@ if [[ "$autosendemail" = "ask" ]]; then
 fi
 
 if [[ "$autosendemail" = "yes" || "$asksendemail" = "yes" ]]; then
-    echo "Sending email..."
+    printf "Sending email...\n"
     eval "$emailcommand"
     rc=$?
 else
-    echo "Nothing gets sent..."
+    printf "Nothing gets sent...\n"
     rc=0
 fi
 test $rc -eq 0 || die "send email failed"
@@ -568,17 +560,17 @@ test $rc -eq 0 || die "send email failed"
 *** Auto-delete temporary files
 
 #+begin_src sh
-echo ""
+printf "\n"
 if [[ "$autodeletetmpfiles" = "ask" ]]; then
     ask "Delete temp files?" && askdeletetmpfiles="yes" || askdeletetmpfiles="no"
 fi
 
 if [[ "$autodeletetmpfiles" = "yes" || "$askdeletetmpfiles" = "yes" ]]; then
-    echo "Deleting temp files..."
+    printf "Deleting temp files...\n"
     rm $patch $commitmsg $email
     rc=$?
 else
-    echo "Nothing gets deleted..."
+    printf "Nothing gets deleted...\n"
     rc=0
 fi
 test $rc -eq 0 || die "delete temp files failed"
@@ -599,13 +591,13 @@ Display a list of files to be committed, for the commit log message.
 #
 # If a you have a pre-existing diff file, use `-f diff-file' to use this file.
 
-echo ""
+printf "\n"
 
 { if [ "$1" = "-f" ]
 then
     cat $2
 else
-    svn diff $* 2>&1
+    svn diff -x -b $* 2>&1
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
 #+end_src
 
@@ -622,6 +614,9 @@ as non-breakable spaces). On the other hand, =grep= would simply declare that
 Display the changes made to all target files, and display deleted and new
 files as well.
 
+With the option =-x -b=, =svn diff= *show only non-whitespace line changes* between
+two revisions.
+
 #+begin_src sh
 # Usage: makediff [svn diff options]
 #
@@ -633,7 +628,7 @@ trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
 case $vcs in
     svn)
-        svn diff $* > $tmpfile 2>&1
+        svn diff -x -b $* > $tmpfile 2>&1
         ;;
     tfs)
         tf diff $* /format:Unified > $tmpfile 2>&1

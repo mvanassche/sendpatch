@@ -7,11 +7,11 @@
 #
 # If a you have a pre-existing diff file, use `-f diff-file' to use this file.
 
-echo ""
+printf "\n"
 
 { if [ "$1" = "-f" ]
 then
     cat $2
 else
-    svn diff $* 2>&1
+    svn diff -x -b $* 2>&1
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
