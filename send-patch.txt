@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-11-15 Thu 12:04 Fabrice>
+#+Time-stamp: <2012-11-15 Thu 13:39 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -596,7 +596,7 @@ printf "\n"
 then
     cat $2
 else
-    svn diff -x -b $* 2>&1
+    svn diff -x -w $* 2>&1
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
 #+end_src
 
@@ -613,7 +613,7 @@ as non-breakable spaces). On the other hand, =grep= would simply declare that
 Display the changes made to all target files, and display deleted and new
 files as well.
 
-With the option =-x -b=, =svn diff= *shows only non-whitespace line changes* between
+With the option =-x -w=, =svn diff= *shows only non-whitespace line changes* between
 two revisions.
 
 #+begin_src sh
@@ -627,7 +627,7 @@ trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
 case $vcs in
     svn)
-        svn diff -x -b $* > $tmpfile 2>&1
+        svn diff -x -w $* > $tmpfile 2>&1
         ;;
     tfs)
         tf diff $* /format:Unified > $tmpfile 2>&1

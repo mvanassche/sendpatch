@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-11-15T12:09+0100"/>
+<meta name="generated" content="2012-11-15T13:40+0100"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -1009,7 +1009,7 @@ printf <span class="org-string">"\n"</span>
 <span class="org-keyword">then</span>
     cat $<span class="org-variable-name">2</span>
 <span class="org-keyword">else</span>
-    svn diff -x -b $<span class="org-variable-name">*</span> 2&gt;&amp;1
+    svn diff -x -w $<span class="org-variable-name">*</span> 2&gt;&amp;1
 <span class="org-keyword">fi</span>; } | sed <span class="org-string">'/^Index:/!d'</span> | sed <span class="org-string">'s/^Index: /  * /'</span> | sed <span class="org-string">'s/$/:/'</span>
 </pre>
 
@@ -1034,7 +1034,7 @@ Display the changes made to all target files, and display deleted and new
 files as well.
 </p>
 <p>
-With the option <code>-x -b</code>, <code>svn diff</code> <b>shows only non-whitespace line changes</b> between
+With the option <code>-x -w</code>, <code>svn diff</code> <b>shows only non-whitespace line changes</b> between
 two revisions.
 </p>
 
@@ -1050,7 +1050,7 @@ two revisions.
 
 <span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
     svn)
-        svn diff -x -b $<span class="org-variable-name">*</span> &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
+        svn diff -x -w $<span class="org-variable-name">*</span> &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
         ;;
     tfs)
         tf diff $<span class="org-variable-name">*</span> /format:Unified &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
@@ -1184,7 +1184,7 @@ ln -f -s $(<span class="org-builtin">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-11-15T12:09+0100 Fabrice Niessen
+    &copy; 2012-11-15T13:40+0100 Fabrice Niessen
   </div>
 </div>
 </body>
