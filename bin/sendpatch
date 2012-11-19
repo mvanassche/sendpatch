@@ -134,7 +134,7 @@ esac
 : ${EDITOR:="emacsclient"}
 which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
 
-cecho "\nChanges to be committed:"
+cecho "\nChanged files (to be committed):"
 case $vcs in
     svn)
         ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile

@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-11-15 Thu 14:11 Fabrice>
+#+Time-stamp: <2012-11-19 Mon 13:07 Fabrice>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -344,7 +344,7 @@ conflict with your modifications. The =-u= option is what forces the command to
 access the repository for this check.
 
 #+begin_src sh
-cecho "\nChanges to be committed:"
+cecho "\nChanged files (to be committed):"
 case $vcs in
     svn)
         ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile

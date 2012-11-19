@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="title" content="Submit patches"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2012-11-15T14:11+0100"/>
+<meta name="generated" content="2012-11-19T13:07+0100"/>
 <meta name="author" content="Fabrice Niessen"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -629,7 +629,7 @@ access the repository for this check.
 
 
 
-<pre class="src src-sh">cecho <span class="org-string">"\nChanges to be committed:"</span>
+<pre class="src src-sh">cecho <span class="org-string">"\nChanged files (to be committed):"</span>
 <span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
     svn)
         ${<span class="org-variable-name">VCS_STATUS</span>} -u $<span class="org-variable-name">@</span> | grep -E -v <span class="org-string">"^\? "</span> | tee $<span class="org-variable-name">tmpfile</span>
@@ -1184,7 +1184,7 @@ ln -f -s $(<span class="org-builtin">pwd</span>)/unaccent ~/bin/unaccent
 
 <div id="postamble">
   <div id="copyright">
-    &copy; 2012-11-15T14:11+0100 Fabrice Niessen
+    &copy; 2012-11-19T13:07+0100 Fabrice Niessen
   </div>
 </div>
 </body>
