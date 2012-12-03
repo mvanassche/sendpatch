@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-11-19 Mon 13:07 Fabrice>
+#+Time-stamp: <2012-12-03 Mon 12:43>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -710,7 +710,7 @@ s/\o374/u/g
 
 ** Install environment
    :PROPERTIES:
-   :tangle:   bin/install-files
+   :tangle:   bin/install-sendpatch-files
    :END:
 
 Symlink the files.
