@@ -10,7 +10,7 @@ trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
 case $vcs in
     svn)
-        svn diff -x -w $* > $tmpfile 2>&1
+        svn diff -x -w --no-diff-deleted $* > $tmpfile 2>&1
         ;;
     tfs)
         tf diff $* /format:Unified > $tmpfile 2>&1

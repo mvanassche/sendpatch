@@ -15,7 +15,7 @@ emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "m
 
 die () {
     printf "$(basename $0): $@\n" > /dev/stderr
-    exit 1
+    exit 2 # an error occurred
 }
 
 cecho () {
@@ -127,9 +127,12 @@ case $vcs in
         ;;
 esac
 
-[[ -f $userconfig ]] && source $userconfig
-[[ -f $projectconfig ]] && source $projectconfig
-[[ -f $userprojectconfig ]] && source $userprojectconfig
+[[ -f $userconfig ]] && . $userconfig
+[[ -f $projectconfig ]] && . $projectconfig
+[[ -f $userprojectconfig ]] && . $userprojectconfig
+
+printf "$emailcommand" | grep "John Doe" \
+    && die "Please fix the sender address in the email command"
 
 : ${EDITOR:="emacsclient"}
 which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
@@ -273,7 +276,7 @@ printf "\n"
 if [[ "$autosendemail" = "ask" ]]; then
     printf "Environment for sending email:\n"
     # print the email command
-    eval printf "$emailcommand\n"
+    printf "$emailcommand\n"
     [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
     [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
     [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig

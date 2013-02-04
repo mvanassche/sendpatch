@@ -1,11 +1,11 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2012-12-03 Mon 12:43>
+#+Time-stamp: <2013-02-04 Mon 17:10>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS:   H:3 num:t toc:t \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+OPTIONS:   H:3 num:t toc:t ^:{}
 
 #+SETUPFILE: bigblow.setup
 #+PROPERTY:  shebang #!/bin/bash
@@ -31,7 +31,10 @@ Check it, or convert them if needed.
 
 This is a common source of problems...
 
-** TODO Stop with an error if the email command is not defined
+** DONE Stop with an error if the email command is not defined
+   :LOGBOOK:
+   - State "TODO"        ->  "DONE"       [2013-02-04 Mon 17:10]
+   :END:
 
 To avoid mails sent under the name of John Doe.
 
@@ -47,6 +50,18 @@ checks in files which are in the current subtree?
 
 Yes, that does work (FPZ has 3 workspaces on his machine, and when committing
 from a subtree, only files from that subtree are committed).
+
+** TODO Add the ability to make a review
+
+That is, the title should be "review" instead of "patch" (or "diff"), and no
+commit should be done.
+
+** TODO Check that related programs are accessible
+
+=makelog=, =makediff=, ... are needed, so we better check that they're in the
+PATH.
+
+** TODO For Unix systems, use the default =mail= command
 
 * Commit guidelines
 
@@ -158,7 +173,7 @@ excludefileregexp="(\\\.html|\\\.xml)"
 
 Note the use of *3 backslashes*!
 
-Such default settings can be overridden in:
+All the /default/ settings can be overridden in:
 
 1. =~/.sendpatchrc=
 2. =sendpatch.common= in the root directory of a working copy
@@ -166,14 +181,18 @@ Such default settings can be overridden in:
 
 in that order.
 
-Remember that those configuration files must be encoded with @Unix line endings@!
+Remember that those configuration files must be encoded with *Unix line
+endings*!
 
 *** Helper functions
+
+The exit status follows the conventions for programs such as =grep=, =cmp=, and
+=diff=:
 
 #+begin_src sh
 die () {
     printf "$(basename $0): $@\n" > /dev/stderr
-    exit 1
+    exit 2 # an error occurred
 }
 #+end_src
 
@@ -324,12 +343,20 @@ esac
 *** Override settings
 
 #+begin_src sh
-[[ -f $userconfig ]] && source $userconfig
-[[ -f $projectconfig ]] && source $projectconfig
-[[ -f $userprojectconfig ]] && source $userprojectconfig
+[[ -f $userconfig ]] && . $userconfig
+[[ -f $projectconfig ]] && . $projectconfig
+[[ -f $userprojectconfig ]] && . $userprojectconfig
 #+end_src
 
-Default editor is =$EDITOR=. If not found, set Emacs.
+Default sender of the email is John Doe. If not configured otherwise, bail
+out:
+
+#+begin_src sh
+printf "$emailcommand" | grep "John Doe" \
+    && die "Please fix the sender address in the email command"
+#+end_src
+
+Default editor is =$EDITOR=. If not found, set Emacs:
 
 #+begin_src sh
 : ${EDITOR:="emacsclient"}
@@ -538,7 +565,7 @@ printf "\n"
 if [[ "$autosendemail" = "ask" ]]; then
     printf "Environment for sending email:\n"
     # print the email command
-    eval printf "$emailcommand\n"
+    printf "$emailcommand\n"
     [[ -f $userconfig ]] && grep "excludefileregexp" $userconfig
     [[ -f $projectconfig ]] && grep "excludefileregexp" $projectconfig
     [[ -f $userprojectconfig ]] && grep "excludefileregexp" $userprojectconfig
@@ -596,9 +623,11 @@ printf "\n"
 then
     cat $2
 else
-    svn diff -x -w $* 2>&1
+    svn diff --show-copies-as-adds $* 2>&1
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
 #+end_src
+
+With the option =--show-copies-as-adds=, copied (and moved) files are listed.
 
 Using =sed '/^Index:/!d'= (instead of =egrep "^Index:"=) allows to filter the
 lines we're interested in, even if the file contains binary characters (such
@@ -616,6 +645,9 @@ files as well.
 With the option =-x -w=, =svn diff= *shows only non-whitespace line changes* between
 two revisions.
 
+With the option =--no-diff-deleted=, differences for deleted files are not
+printed.
+
 #+begin_src sh
 # Usage: makediff [svn diff options]
 #
@@ -627,7 +659,7 @@ trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
 case $vcs in
     svn)
-        svn diff -x -w $* > $tmpfile 2>&1
+        svn diff -x -w --no-diff-deleted $* > $tmpfile 2>&1
         ;;
     tfs)
         tf diff $* /format:Unified > $tmpfile 2>&1

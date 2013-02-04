@@ -13,5 +13,5 @@ printf "\n"
 then
     cat $2
 else
-    svn diff -x -w $* 2>&1
+    svn diff --show-copies-as-adds $* 2>&1
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
