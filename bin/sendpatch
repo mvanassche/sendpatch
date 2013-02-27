@@ -204,7 +204,15 @@ cat <<EOF > $email
 # The FIRST LINE of the commit message should be a short description
 # and should skip the full stop. It will become the subject of the email.
 EOF
-{ printf "$subject\n"; makelog -f $patch | sort | uniq; printf "\n---\n"; printf "$url\n\n"; \
+case $vcs in
+    svn)
+        makelogparams=""
+        ;;
+    tfs)
+        makelogparams="-f $patch"
+        ;;
+esac
+{ printf "$subject\n"; makelog $makelogparams | sort | uniq; printf "\n---\n"; printf "$url\n\n"; \
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
 printf "\nEdit commit log message and email to send to '$mailto'...\n"
