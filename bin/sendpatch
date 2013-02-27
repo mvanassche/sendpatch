@@ -206,7 +206,7 @@ cat <<EOF > $email
 EOF
 case $vcs in
     svn)
-        makelogparams=""
+        makelogparams="$*"
         ;;
     tfs)
         makelogparams="-f $patch"

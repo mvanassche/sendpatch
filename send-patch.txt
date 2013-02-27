@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-02-27 Wed 17:02>
+#+Time-stamp: <2013-02-27 Wed 21:32>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -475,7 +475,7 @@ cat <<EOF > $email
 EOF
 case $vcs in
     svn)
-        makelogparams=""
+        makelogparams="$*"
         ;;
     tfs)
         makelogparams="-f $patch"
