@@ -1,14 +1,14 @@
 
 # -*- mode: org; -*-
 
-#+STYLE: <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+#+HTML_STYLE: <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
-#+STYLE: <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/bigblow.css"/>
-#+STYLE: <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/htmlize.css"/>
-#+STYLE: <script type="text/javascript" src="http://svn/mc/xxx/org-style/trunk/bigblow/js/bigblow.js"></script>
+#+HTML_STYLE: <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/bigblow.css"/>
+#+HTML_STYLE: <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/bigblow/css/htmlize.css"/>
+#+HTML_STYLE: <script type="text/javascript" src="http://svn/mc/xxx/org-style/trunk/bigblow/js/bigblow.js"></script>
 
-#+STYLE: <link rel="stylesheet" type="text/css" href="css/bigblow.css"/>
-#+STYLE: <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
-#+STYLE: <script type="text/javascript" src="js/bigblow.js"></script>
+#+HTML_STYLE: <link rel="stylesheet" type="text/css" href="css/bigblow.css"/>
+#+HTML_STYLE: <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
+#+HTML_STYLE: <script type="text/javascript" src="js/bigblow.js"></script>
 
 #+OPTIONS: H:4 toc:nil num:3

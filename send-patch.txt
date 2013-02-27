@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-02-04 Mon 17:10>
+#+Time-stamp: <2013-02-27 Wed 12:48>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -672,24 +672,26 @@ esac
 cat $tmpfile
 #+end_src
 
-** Ignore elements
+** Ignore files from the command line
    :PROPERTIES:
    :tangle:   bin/svnignore
    :END:
 
-Ignore multiple elements in one command.
+Add a file (or a file glob pattern) to ignore without deleting the previous
+value of the =svn:ignore= property... from the command line.
 
 #+begin_src sh
-# Usage: svnignore . \*.o \*.exe \*.tmp
+# Usage: svnignore admin/notes/\*.tex
 
-target="$1"; shift
-svn propset svn:ignore "$(echo $* | tr ' ' '\n')" "$target"
+target="$1"
+targetdirectory=$(dirname $target)
+targetfilepattern=$(basename $target)
+
+svnignores=$(svn propget svn:ignore "$targetdirectory")
+svnignores="$svnignores"$'\n'"$targetfilepattern"
+printf "Ignore '$targetfilepattern'\n"
+svn propset svn:ignore "$svnignores" "$targetdirectory"
 #+end_src
-
-*************** Note
-Use =cd admin; svnignore . file=
-instead of =svnignore . admin/file=.
-*************** END
 
 ** Unaccent
    :PROPERTIES:

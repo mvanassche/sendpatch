@@ -1,4 +1,3 @@
-<!-- <xml version="1.0" encoding="utf-8"> -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
@@ -21,238 +20,181 @@
 <script type="text/javascript" src="js/bigblow.js"></script>
 
 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
 </head>
+
 <body>
-
-<div id="preamble">
-
-</div>
-
-<div id="content">
-<h1 class="title">Submit patches</h1>
-
-
-
-<div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Tasks</h2>
-<div class="outline-text-2" id="text-1">
-
-
-
-</div>
-
-<div id="outline-container-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class="todo TODO">TODO</span> [#A] Add a command-line option to recover last log message</h3>
-<div class="outline-text-3" id="text-1-1">
-
-
-<p>
-In case the commit failed, to avoid having to retype it all or find and insert
-the right message.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class="done DONE">DONE</span> [#A] Check answers to questions</h3>
-<div class="outline-text-3" id="text-1-2">
-
-
-<p>
-The only permitted answers (to binary questions) are "y" or "n". All other
-letters should be discarded, and the question should be asked again.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> <span class="todo TODO">TODO</span> [#A] Check that the configuration files are in Unix format</h3>
-<div class="outline-text-3" id="text-1-3">
-
-
-<p>
-Check it, or convert them if needed.
-</p>
-<p>
-This is a common source of problems&hellip;
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-4" class="outline-3">
-<h3 id="sec-1-4"><span class="section-number-3">1.4</span> <span class="done DONE">DONE</span> Stop with an error if the email command is not defined</h3>
-<div class="outline-text-3" id="text-1-4">
-
-
-<p>
-To avoid mails sent under the name of John Doe.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-5" class="outline-3">
-<h3 id="sec-1-5"><span class="section-number-3">1.5</span> <span class="todo TODO">TODO</span> Add ability to add private notes which won't be committed</h3>
-<div class="outline-text-3" id="text-1-5">
-
-
-</div>
-
-</div>
-
-<div id="outline-container-1-6" class="outline-3">
-<h3 id="sec-1-6"><span class="section-number-3">1.6</span> <span class="done DONE">DONE</span> Check what's going on when committing on TFS</h3>
-<div class="outline-text-3" id="text-1-6">
-
-
-<p>
-When there are multiple workspaces on your machine, are we sure that TF only
-checks in files which are in the current subtree?
-</p>
-<p>
-Yes, that does work (FPZ has 3 workspaces on his machine, and when committing
-from a subtree, only files from that subtree are committed).
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-7" class="outline-3">
-<h3 id="sec-1-7"><span class="section-number-3">1.7</span> <span class="todo TODO">TODO</span> Add the ability to make a review</h3>
-<div class="outline-text-3" id="text-1-7">
-
-
-<p>
-That is, the title should be "review" instead of "patch" (or "diff"), and no
-commit should be done.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-8" class="outline-3">
-<h3 id="sec-1-8"><span class="section-number-3">1.8</span> <span class="todo TODO">TODO</span> Check that related programs are accessible</h3>
-<div class="outline-text-3" id="text-1-8">
-
-
-<p>
-<code>makelog</code>, <code>makediff</code>, &hellip; are needed, so we better check that they're in the
-PATH.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-1-9" class="outline-3">
-<h3 id="sec-1-9"><span class="section-number-3">1.9</span> <span class="todo TODO">TODO</span> For Unix systems, use the default <code>mail</code> command</h3>
-<div class="outline-text-3" id="text-1-9">
-
-
-</div>
-</div>
-
-</div>
-
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> Commit guidelines</h2>
-<div class="outline-text-2" id="text-2">
-
-
-<p>
-This list hopes to help all of us to improve our commits.
-</p>
-
-</div>
-
-<div id="outline-container-2-1" class="outline-3">
-<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Changes</h3>
-<div class="outline-text-3" id="text-2-1">
-
-
-<ul class="org-ul">
-<li>Make commits of logical units.
-
-</li>
-<li>Check for unnecessary whitespace before committing.
-
-</li>
-<li>Do not check in commented out code or unneeded files.
-
-</li>
-<li>Make sure that you have tests for the bug you are fixing.
-
-</li>
-<li>Make sure that the test suite passes after your commit.
-
-</li>
-<li>Do not attach your patch, but submit it "inline" in the mail body, <i>unless   you cannot teach your mailer to leave the formatting of the patch alone</i>.
-</li>
-</ul>
-
-
-</div>
-
-</div>
-
-<div id="outline-container-2-2" class="outline-3">
-<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Commit messages</h3>
-<div class="outline-text-3" id="text-2-2">
-
-
-<ul class="org-ul">
-<li>The first line of the commit message should be a short description
-  (50 characters is the <i>soft</i> limit), and should <b>skip the full stop</b>.
-
-</li>
-<li>The body should provide a meaningful commit message, which:
-<ul class="org-ul">
-<li>uses the <b>imperative present tense</b>: "fix bug", not "fixed bug" or "fixes
-    bug".
-</li>
-<li>includes motivation for the change, and contrasts its implementation with
-    previous behavior.
-</li>
-</ul>
-
-</li>
-</ul>
-
-
-<p>
-Keep in mind that commit messages are often read <b>without</b> seeing the diffs, and
-without the possibility to see which other files you committed just before
-that particular commit!
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-3" class="outline-3">
-<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Release notes</h3>
-<div class="outline-text-3" id="text-2-3">
-
-
-<p>
-We have introduced the possibility to insert release notes in log messages. In
-order to make them stand out, all such notes must be enclosed in a
-<code>#+begin_releasenotes</code> .. <code>#end_releasenotes</code> block.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Example</h3>
-<div class="outline-text-3" id="text-2-4">
-
-
-
-
-
-<pre class="src src-text">Short summary of changes
+  <div id="content">
+    <h1 class="title">Submit patches</h1>
+
+    <div id="outline-container-1" class="outline-2">
+      <h2 id="sec-1"><span class="section-number-2">1</span> Tasks</h2>
+
+      <div id="outline-container-1-1" class="outline-3">
+        <h3 id="sec-1-1"><span class="section-number-3">1.1</span> <span class=
+        "todo TODO">TODO</span> Add a command-line option to recover last log
+        message</h3>
+
+        <div class="outline-text-3" id="text-1-1">
+          <p>In case the commit failed, to avoid having to retype it all or find and
+          insert the right message.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-2" class="outline-3">
+        <h3 id="sec-1-2"><span class="section-number-3">1.2</span> <span class=
+        "done DONE">DONE</span> Check answers to questions</h3>
+
+        <div class="outline-text-3" id="text-1-2">
+          <p>The only permitted answers (to binary questions) are &ldquo;y&rdquo; or
+          &ldquo;n&rdquo;. All other letters should be discarded, and the question should
+          be asked again.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-3" class="outline-3">
+        <h3 id="sec-1-3"><span class="section-number-3">1.3</span> <span class=
+        "todo TODO">TODO</span> Check that the configuration files are in Unix
+        format</h3>
+
+        <div class="outline-text-3" id="text-1-3">
+          <p>Check it, or convert them if needed.</p>
+
+          <p>This is a common source of problems&hellip;</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-4" class="outline-3">
+        <h3 id="sec-1-4"><span class="section-number-3">1.4</span> <span class=
+        "done DONE">DONE</span> Stop with an error if the email command is not
+        defined</h3>
+
+        <div class="outline-text-3" id="text-1-4">
+          <p>To avoid mails sent under the name of John Doe.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-5" class="outline-3">
+        <h3 id="sec-1-5"><span class="section-number-3">1.5</span> <span class=
+        "todo TODO">TODO</span> Add ability to add private notes which won&rsquo;t be
+        committed</h3>
+      </div>
+
+      <div id="outline-container-1-6" class="outline-3">
+        <h3 id="sec-1-6"><span class="section-number-3">1.6</span> <span class=
+        "done DONE">DONE</span> Check what&rsquo;s going on when committing on TFS</h3>
+
+        <div class="outline-text-3" id="text-1-6">
+          <p>When there are multiple workspaces on your machine, are we sure that TF only
+          checks in files which are in the current subtree?</p>
+
+          <p>Yes, that does work (FPZ has 3 workspaces on his machine, and when
+          committing from a subtree, only files from that subtree are committed).</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-7" class="outline-3">
+        <h3 id="sec-1-7"><span class="section-number-3">1.7</span> <span class=
+        "todo TODO">TODO</span> Add the ability to make a review</h3>
+
+        <div class="outline-text-3" id="text-1-7">
+          <p>That is, the title should be &ldquo;review&rdquo; instead of
+          &ldquo;patch&rdquo; (or &ldquo;diff&rdquo;), and no commit should be done.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-8" class="outline-3">
+        <h3 id="sec-1-8"><span class="section-number-3">1.8</span> <span class=
+        "todo TODO">TODO</span> Check that related programs are accessible</h3>
+
+        <div class="outline-text-3" id="text-1-8">
+          <p><code>makelog</code>, <code>makediff</code>, &hellip; are needed, so we
+          better check that they&rsquo;re in the PATH.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-1-9" class="outline-3">
+        <h3 id="sec-1-9"><span class="section-number-3">1.9</span> <span class=
+        "todo TODO">TODO</span> For Unix systems, use the default <code>mail</code>
+        command</h3>
+      </div>
+    </div>
+
+    <div id="outline-container-2" class="outline-2">
+      <h2 id="sec-2"><span class="section-number-2">2</span> Commit guidelines</h2>
+
+      <div class="outline-text-2" id="text-2">
+        <p>This list hopes to help all of us to improve our commits.</p>
+      </div>
+
+      <div id="outline-container-2-1" class="outline-3">
+        <h3 id="sec-2-1"><span class="section-number-3">2.1</span> Changes</h3>
+
+        <div class="outline-text-3" id="text-2-1">
+          <ul class="org-ul">
+            <li>Make commits of logical units.</li>
+
+            <li>Check for unnecessary whitespace before committing.</li>
+
+            <li>Do not check in commented out code or unneeded files.</li>
+
+            <li>Make sure that you have tests for the bug you are fixing.</li>
+
+            <li>Make sure that the test suite passes after your commit.</li>
+
+            <li>Do not attach your patch, but submit it &ldquo;inline&rdquo; in the mail
+            body, <i>unless you cannot teach your mailer to leave the formatting of the
+            patch alone</i>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="outline-container-2-2" class="outline-3">
+        <h3 id="sec-2-2"><span class="section-number-3">2.2</span> Commit messages</h3>
+
+        <div class="outline-text-3" id="text-2-2">
+          <ul class="org-ul">
+            <li>The first line of the commit message should be a short description
+            (50&Acirc;&nbsp;characters is the <i>soft</i> limit), and should <b>skip the
+            full stop</b>.</li>
+
+            <li>The body should provide a meaningful commit message, which:
+
+              <ul class="org-ul">
+                <li>uses the <b>imperative present tense</b>: &ldquo;fix bug&rdquo;, not
+                &ldquo;fixed bug&rdquo; or &ldquo;fixes bug&rdquo;.</li>
+
+                <li>includes motivation for the change, and contrasts its implementation
+                with previous behavior.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <p>Keep in mind that commit messages are often read <b>without</b> seeing the
+          diffs, and without the possibility to see which other files you committed just
+          before that particular commit!</p>
+        </div>
+      </div>
+
+      <div id="outline-container-2-3" class="outline-3">
+        <h3 id="sec-2-3"><span class="section-number-3">2.3</span> Release notes</h3>
+
+        <div class="outline-text-3" id="text-2-3">
+          <p>We have introduced the possibility to insert release notes in log messages.
+          In order to make them stand out, all such notes must be enclosed in a
+          <code>#+begin_releasenotes</code> .. <code>#end_releasenotes</code> block.</p>
+        </div>
+      </div>
+
+      <div id="outline-container-2-4" class="outline-3">
+        <h3 id="sec-2-4"><span class="section-number-3">2.4</span> Example</h3>
+
+        <div class="outline-text-3" id="text-2-4">
+          <div class="org-src-container">
+            <pre class="src src-text">
+Short summary of changes
 
 More detailed explanatory text, if necessary. Wrap it to about 72 characters
 or so. In some contexts, the first line is treated as the subject of an email
@@ -269,909 +211,1064 @@ Further paragraphs come after blank lines.
 
 - Use a hanging indent
 </pre>
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div id="outline-container-3" class="outline-2">
+      <h2 id="sec-3"><span class="section-number-2">3</span> Code</h2>
 
-</div>
-</div>
+      <div id="outline-container-3-1" class="outline-3">
+        <h3 id="sec-3-1"><span class="section-number-3">3.1</span> Send patch</h3>
 
-</div>
+        <div class="outline-text-3" id="text-3-1">
+          <p>This script sends patches:</p>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> Code</h2>
-<div class="outline-text-2" id="text-3">
+          <ul class="org-ul">
+            <li>to the SVN repository (that is, <i>commits</i> them)</li>
 
+            <li>to mailing lists (that is, <i>emails</i> them)</li>
+          </ul>
+        </div>
 
+        <div id="outline-container-3-1-1" class="outline-4">
+          <h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Configuration
+          options</h4>
 
-</div>
+          <div id="outline-container-3-1-1-1" class="outline-5">
+            <h5 id="sec-3-1-1-1">Per project options</h5>
 
-<div id="outline-container-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Send patch</h3>
-<div class="outline-text-3" id="text-3-1">
-
-
-<p>
-This script sends patches:
-</p>
-<ul class="org-ul">
-<li>to the SVN repository (that is, <i>commits</i> them)
-</li>
-<li>to mailing lists (that is, <i>emails</i> them)
-</li>
-</ul>
-
-
-
-</div>
-
-<div id="outline-container-3-1-1" class="outline-4">
-<h4 id="sec-3-1-1"><span class="section-number-4">3.1.1</span> Configuration options</h4>
-<div class="outline-text-4" id="text-3-1-1">
-
-
-
-</div>
-
-<div id="outline-container-3-1-1-1" class="outline-5">
-<h5 id="sec-3-1-1-1"><span class="section-number-5"></span> Per project options</h5>
-<div class="outline-text-5" id="text-3-1-1-1">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-variable-name">mailto</span>=<span class="org-string">"mc-reviews@xxx.com"</span>
-<span class="org-variable-name">prefix</span>=<span class="org-string">"[PATCH]"</span>
-<span class="org-variable-name">excludefileregexp</span>=<span class="org-string">""</span>
+            <div class="outline-text-5" id="text-3-1-1-1">
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #2E91AF;">mailto</span>=<span style=
+"color: #008000;">"mc-reviews@xxx.com"</span>
+<span style="color: #2E91AF;">prefix</span>=<span style=
+"color: #008000;">"[PATCH]"</span>
+<span style="color: #2E91AF;">excludefileregexp</span>=<span style=
+"color: #008000;">""</span>
 </pre>
+              </div>
+            </div>
+          </div>
 
+          <div id="outline-container-3-1-1-2" class="outline-5">
+            <h5 id="sec-3-1-1-2">Per user options</h5>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-1-2" class="outline-5">
-<h5 id="sec-3-1-1-2"><span class="section-number-5"></span> Per user options</h5>
-<div class="outline-text-5" id="text-3-1-1-2">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-variable-name">patchfileprefix</span>=<span class="org-string">""</span>
-<span class="org-variable-name">commitmsgfileprefix</span>=<span class="org-string">""</span>
-<span class="org-variable-name">emailfileprefix</span>=<span class="org-string">""</span>
-<span class="org-variable-name">asksubject</span>=<span class="org-string">"yes"</span>
-<span class="org-variable-name">autocommit</span>=<span class="org-string">"ask"</span>
-<span class="org-variable-name">autosendemail</span>=<span class="org-string">"ask"</span>
-<span class="org-variable-name">autodeletetmpfiles</span>=<span class="org-string">"ask"</span>
-<span class="org-variable-name">emailcommand</span>=<span class="org-string">'blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <a href="mailto:johndoe%40example.com">&lt;johndoe@example.com&gt;</a>" -charset UTF-8'</span>
+            <div class="outline-text-5" id="text-3-1-1-2">
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #2E91AF;">patchfileprefix</span>=<span style=
+"color: #008000;">""</span>
+<span style="color: #2E91AF;">commitmsgfileprefix</span>=<span style=
+"color: #008000;">""</span>
+<span style="color: #2E91AF;">emailfileprefix</span>=<span style=
+"color: #008000;">""</span>
+<span style="color: #2E91AF;">asksubject</span>=<span style=
+"color: #008000;">"yes"</span>
+<span style="color: #2E91AF;">autocommit</span>=<span style=
+"color: #008000;">"ask"</span>
+<span style="color: #2E91AF;">autosendemail</span>=<span style=
+"color: #008000;">"ask"</span>
+<span style="color: #2E91AF;">autodeletetmpfiles</span>=<span style=
+"color: #008000;">"ask"</span>
+<span style="color: #2E91AF;">emailcommand</span>=<span style=
+"color: #008000;">'blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <a href="mailto:johndoe%40example.com">&lt;johndoe@example.com&gt;</a>" -charset UTF-8'</span>
 </pre>
+              </div>
+            </div>
+          </div>
 
+          <div id="outline-container-3-1-1-3" class="outline-5">
+            <h5 id="sec-3-1-1-3">Usage</h5>
 
-</div>
+            <div class="outline-text-5" id="text-3-1-1-3">
+              <p>A commonly configured option could be:</p>
 
-</div>
-
-<div id="outline-container-3-1-1-3" class="outline-5">
-<h5 id="sec-3-1-1-3"><span class="section-number-5"></span> Usage</h5>
-<div class="outline-text-5" id="text-3-1-1-3">
-
-
-<p>
-A commonly configured option could be:
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-variable-name">excludefileregexp</span>=<span class="org-string">"(\\\.html|\\\.xml)"</span>
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #2E91AF;">excludefileregexp</span>=<span style=
+"color: #008000;">"(\\\.html|\\\.xml)"</span>
 </pre>
+              </div>
 
+              <p>Note the use of <b>3 backslashes</b>!</p>
 
-<p>
-Note the use of <b>3 backslashes</b>!
-</p>
-<p>
-All the <i>default</i> settings can be overridden in:
-</p>
-<ol class="org-ol">
-<li><code>~/.sendpatchrc</code>
-</li>
-<li><code>sendpatch.common</code> in the root directory of a working copy
-</li>
-<li><code>sendpatch.params</code> in the root directory of a working copy
-</li>
-</ol>
+              <p>All the <i>default</i> settings can be overridden in:</p>
 
+              <ol class="org-ol">
+                <li><code>~/.sendpatchrc</code></li>
 
-<p>
-in that order.
-</p>
-<p>
-Remember that those configuration files must be encoded with <b>Unix line endings</b>!
-</p>
-</div>
-</div>
+                <li><code>sendpatch.common</code> in the root directory of a working
+                copy</li>
 
-</div>
+                <li><code>sendpatch.params</code> in the root directory of a working
+                copy</li>
+              </ol>
 
-<div id="outline-container-3-1-2" class="outline-4">
-<h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Helper functions</h4>
-<div class="outline-text-4" id="text-3-1-2">
+              <p>in that order.</p>
 
+              <p>Remember that those configuration files must be encoded with <b>Unix
+              line endings</b>!</p>
+            </div>
+          </div>
+        </div>
 
-<p>
-The exit status follows the conventions for programs such as <code>grep</code>, <code>cmp</code>, and
-<code>diff</code>:
-</p>
+        <div id="outline-container-3-1-2" class="outline-4">
+          <h4 id="sec-3-1-2"><span class="section-number-4">3.1.2</span> Helper
+          functions</h4>
 
+          <div class="outline-text-4" id="text-3-1-2">
+            <p>The exit status follows the conventions for programs such as
+            <code>grep</code>, <code>cmp</code>, and <code>diff</code>:</p>
 
-
-<pre class="src src-sh"><span class="org-function-name">die</span> () {
-    <span class="org-builtin">printf</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0): $@\n"</span> &gt; /dev/stderr
-    <span class="org-keyword">exit</span> 2 <span class="org-comment-delimiter"># </span><span class="org-comment">an </span><span class="org-lvnXhighlight"><span class="org-comment">error</span></span><span class="org-comment"> occurred</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #1A50B8;">die</span> () {
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">basename</span><span style=
+"color: #008000;"> $0): $@\n"</span> &gt; /dev/stderr
+    <span style="color: #A535AE; font-weight: bold;">exit</span> 2 <span style=
+"color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">an </span><span style=
+"color: #EE0000; background-color: #FFFF88; font-style: italic;">error</span><span style=
+"color: #EE0000; font-style: italic;"> occurred</span>
 }
 </pre>
+            </div>
 
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #1A50B8;">cecho</span> () {
+    <span style="color: #2E91AF;">black</span>=<span style=
+"color: #008000;">"\e[30m"</span>
+    <span style="color: #2E91AF;">red</span>=<span style=
+"color: #008000;">"\e[31m"</span>
+    <span style="color: #2E91AF;">green</span>=<span style=
+"color: #008000;">"\e[32m"</span>
+    <span style="color: #2E91AF;">yellow</span>=<span style=
+"color: #008000;">"\e[33m"</span>
+    <span style="color: #2E91AF;">blue</span>=<span style=
+"color: #008000;">"\e[34m"</span>
+    <span style="color: #2E91AF;">magenta</span>=<span style=
+"color: #008000;">"\e[35m"</span>
+    <span style="color: #2E91AF;">cyan</span>=<span style=
+"color: #008000;">"\e[36m"</span>
+    <span style="color: #2E91AF;">white</span>=<span style=
+"color: #008000;">"\e[37m"</span>
+    <span style="color: #2E91AF;">reset</span>=<span style=
+"color: #008000;">"\e[0m"</span>
 
-
-<pre class="src src-sh"><span class="org-function-name">cecho</span> () {
-    <span class="org-variable-name">black</span>=<span class="org-string">"\e[30m"</span>
-    <span class="org-variable-name">red</span>=<span class="org-string">"\e[31m"</span>
-    <span class="org-variable-name">green</span>=<span class="org-string">"\e[32m"</span>
-    <span class="org-variable-name">yellow</span>=<span class="org-string">"\e[33m"</span>
-    <span class="org-variable-name">blue</span>=<span class="org-string">"\e[34m"</span>
-    <span class="org-variable-name">magenta</span>=<span class="org-string">"\e[35m"</span>
-    <span class="org-variable-name">cyan</span>=<span class="org-string">"\e[36m"</span>
-    <span class="org-variable-name">white</span>=<span class="org-string">"\e[37m"</span>
-    <span class="org-variable-name">reset</span>=<span class="org-string">"\e[0m"</span>
-
-    <span class="org-variable-name">color</span>=${<span class="org-variable-name">green</span>}
-    <span class="org-builtin">printf</span> <span class="org-string">"$color$1$reset\n"</span>
+    <span style="color: #2E91AF;">color</span>=${<span style=
+"color: #2E91AF;">green</span>}
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$color$1$reset\n"</span>
 }
 </pre>
+            </div>
+          </div>
 
+          <div id="outline-container-3-1-2-1" class="outline-5">
+            <h5 id="sec-3-1-2-1">VCS in use</h5>
 
+            <div class="outline-text-5" id="text-3-1-2-1">
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #1A50B8;">vcs_info</span> () {
+    <span style="color: #FF5803;">local</span> <span style=
+"color: #2E91AF;">default</span>=<span style="color: #008000;">"tfs"</span>
 
-</div>
+    <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">recursively search for `.svn' directory</span>
+    <span style=
+"color: #A535AE; font-weight: bold;">while</span> [[ ! ( -d .svn ) &amp;&amp; ( <span style="color: #008000;">"$(</span><span style="color: #ff00ff;">pwd</span><span style="color: #008000;">)"</span> != <span style="color: #008000;">"/"</span> ) ]]; <span style="color: #A535AE; font-weight: bold;">do</span>
+        <span style="color: #FF5803;">cd</span> ..
+    <span style="color: #A535AE; font-weight: bold;">done</span>
 
-<div id="outline-container-3-1-2-1" class="outline-5">
-<h5 id="sec-3-1-2-1"><span class="section-number-5"></span> VCS in use</h5>
-<div class="outline-text-5" id="text-3-1-2-1">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-function-name">vcs_info</span> () {
-    <span class="org-builtin">local</span> <span class="org-variable-name">default</span>=<span class="org-string">"tfs"</span>
-
-    <span class="org-comment-delimiter"># </span><span class="org-comment">recursively search for `.svn' directory</span>
-    <span class="org-keyword">while</span> [[ <span class="org-negation-char">!</span> ( -d .svn ) &amp;&amp; ( <span class="org-string">"$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span> != <span class="org-string">"/"</span> ) ]]; <span class="org-keyword">do</span>
-        <span class="org-builtin">cd</span> ..
-    <span class="org-keyword">done</span>
-
-    <span class="org-keyword">if</span> [[ -d .svn ]]; <span class="org-keyword">then</span>
-        <span class="org-builtin">printf</span> <span class="org-string">"svn\n"</span>
-    <span class="org-keyword">else</span> <span class="org-comment-delimiter"># </span><span class="org-comment">not found</span>
-        <span class="org-builtin">printf</span> <span class="org-string">"$default\n"</span>
-    <span class="org-keyword">fi</span>
+    <span style=
+"color: #A535AE; font-weight: bold;">if</span> [[ -d .svn ]]; <span style="color: #A535AE; font-weight: bold;">then</span>
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"svn\n"</span>
+    <span style="color: #A535AE; font-weight: bold;">else</span> <span style=
+"color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">not found</span>
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$default\n"</span>
+    <span style="color: #A535AE; font-weight: bold;">fi</span>
 }
 </pre>
+              </div>
+            </div>
+          </div>
 
+          <div id="outline-container-3-1-2-2" class="outline-5">
+            <h5 id="sec-3-1-2-2">TFS</h5>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-2-2" class="outline-5">
-<h5 id="sec-3-1-2-2"><span class="section-number-5"></span> TFS</h5>
-<div class="outline-text-5" id="text-3-1-2-2">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-function-name">fixtfsbinaryfiles</span> () {
-    sed -r <span class="org-string">"s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"</span>
+            <div class="outline-text-5" id="text-3-1-2-2">
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #1A50B8;">fixtfsbinaryfiles</span> () {
+    sed -r <span style=
+"color: #008000;">"s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"</span>
 }
 </pre>
+              </div>
+            </div>
+          </div>
 
+          <div id="outline-container-3-1-2-3" class="outline-5">
+            <h5 id="sec-3-1-2-3">Yes/No prompt function</h5>
 
-</div>
+            <div class="outline-text-5" id="text-3-1-2-3">
+              <div class="org-src-container">
+                <pre class="src src-sh">
+<span style="color: #1A50B8;">ask</span> () {
+    <span style="color: #A535AE; font-weight: bold;">while</span> true; <span style=
+"color: #A535AE; font-weight: bold;">do</span>
+        <span style="color: #A535AE; font-weight: bold;">if</span> [ <span style=
+"color: #008000;">"${2:-}"</span> = <span style=
+"color: #008000;">"Y"</span> ]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+            <span style="color: #2E91AF;">prompt</span>=<span style=
+"color: #008000;">"Y/n"</span>
+            <span style="color: #2E91AF;">default</span>=Y
+        <span style="color: #A535AE; font-weight: bold;">elif</span> [ <span style=
+"color: #008000;">"${2:-}"</span> = <span style=
+"color: #008000;">"N"</span> ]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+            <span style="color: #2E91AF;">prompt</span>=<span style=
+"color: #008000;">"y/N"</span>
+            <span style="color: #2E91AF;">default</span>=N
+        <span style="color: #A535AE; font-weight: bold;">else</span>
+            <span style="color: #2E91AF;">prompt</span>=<span style=
+"color: #008000;">"y/n"</span>
+            <span style="color: #2E91AF;">default</span>=
+        <span style="color: #A535AE; font-weight: bold;">fi</span>
 
-</div>
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">ask the question (without the need to press RET)</span>
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$1 ($prompt): "</span>
+        <span style="color: #FF5803;">read</span> -n 1 -r REPLY
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"\n"</span> <span style=
+"color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">just a final linefeed</span>
 
-<div id="outline-container-3-1-2-3" class="outline-5">
-<h5 id="sec-3-1-2-3"><span class="section-number-5"></span> Yes/No prompt function</h5>
-<div class="outline-text-5" id="text-3-1-2-3">
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">default?</span>
+        <span style="color: #A535AE; font-weight: bold;">if</span> [ -z <span style=
+"color: #008000;">"$REPLY"</span> ]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+            <span style="color: #2E91AF;">REPLY</span>=$<span style=
+"color: #2E91AF;">default</span>
+        <span style="color: #A535AE; font-weight: bold;">fi</span>
 
-
-
-
-
-<pre class="src src-sh"><span class="org-function-name">ask</span> () {
-    <span class="org-keyword">while</span> true; <span class="org-keyword">do</span>
-        <span class="org-keyword">if</span> [ <span class="org-string">"${2:-}"</span> = <span class="org-string">"Y"</span> ]; <span class="org-keyword">then</span>
-            <span class="org-variable-name">prompt</span>=<span class="org-string">"Y/n"</span>
-            <span class="org-variable-name">default</span>=Y
-        <span class="org-keyword">elif</span> [ <span class="org-string">"${2:-}"</span> = <span class="org-string">"N"</span> ]; <span class="org-keyword">then</span>
-            <span class="org-variable-name">prompt</span>=<span class="org-string">"y/N"</span>
-            <span class="org-variable-name">default</span>=N
-        <span class="org-keyword">else</span>
-            <span class="org-variable-name">prompt</span>=<span class="org-string">"y/n"</span>
-            <span class="org-variable-name">default</span>=
-        <span class="org-keyword">fi</span>
-
-        <span class="org-comment-delimiter"># </span><span class="org-comment">ask the question (without the need to press RET)</span>
-        <span class="org-builtin">printf</span> <span class="org-string">"$1 ($prompt): "</span>
-        <span class="org-builtin">read</span> -n 1 -r REPLY
-        <span class="org-builtin">printf</span> <span class="org-string">"\n"</span> <span class="org-comment-delimiter"># </span><span class="org-comment">just a final linefeed</span>
-
-        <span class="org-comment-delimiter"># </span><span class="org-comment">default?</span>
-        <span class="org-keyword">if</span> [ -z <span class="org-string">"$REPLY"</span> ]; <span class="org-keyword">then</span>
-            <span class="org-variable-name">REPLY</span>=$<span class="org-variable-name">default</span>
-        <span class="org-keyword">fi</span>
-
-        <span class="org-comment-delimiter"># </span><span class="org-comment">check if the reply is valid</span>
-        <span class="org-keyword">case</span> <span class="org-string">"$REPLY"</span><span class="org-keyword"> in</span>
-            y*|Y*) <span class="org-keyword">return</span> 0 ;;
-            n*|N*) <span class="org-keyword">return</span> 1 ;;
-        <span class="org-keyword">esac</span>
-    <span class="org-keyword">done</span>
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">check if the reply is valid</span>
+        <span style="color: #A535AE; font-weight: bold;">case</span> <span style=
+"color: #008000;">"$REPLY"</span><span style=
+"color: #A535AE; font-weight: bold;"> in</span>
+            y*|Y*) <span style="color: #A535AE; font-weight: bold;">return</span> 0 ;;
+            n*|N*) <span style="color: #A535AE; font-weight: bold;">return</span> 1 ;;
+        <span style="color: #A535AE; font-weight: bold;">esac</span>
+    <span style="color: #A535AE; font-weight: bold;">done</span>
 }
 </pre>
+              </div>
 
+              <p>See <a href="https://gist.github.com/1965569">usage samples</a> for
+              defaults (when the user presses RET without giving an answer).</p>
 
-<p>
-See <a href="https://gist.github.com/1965569">usage samples</a> for defaults (when the user presses RET without giving an
-answer).
-</p>
-<p>
-See <a href="http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script">How do I prompt a user for confirmation in bash script?</a> for the regexp
-match operator =~.
-</p>
-</div>
-</div>
+              <p>See <a href=
+              "http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script">
+              How do I prompt a user for confirmation in bash script?</a> for the regexp
+              match operator =~.</p>
+            </div>
+          </div>
+        </div>
 
-</div>
+        <div id="outline-container-3-1-3" class="outline-4">
+          <h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Init</h4>
 
-<div id="outline-container-3-1-3" class="outline-4">
-<h4 id="sec-3-1-3"><span class="section-number-4">3.1.3</span> Init</h4>
-<div class="outline-text-4" id="text-3-1-3">
+          <div class="outline-text-4" id="text-3-1-3">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #2E91AF;">tmpfile</span>=<span style=
+"color: #008000;">"/tmp/$(</span><span style=
+"color: #ff00ff;">basename</span><span style="color: #008000;"> $0).$$"</span>
+<span style="color: #A535AE; font-weight: bold;">trap</span> <span style=
+"color: #008000;">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
+<span style="color: #2E91AF;">userconfig</span>=~/.sendpatchrc
+<span style="color: #2E91AF;">projectconfig</span>=sendpatch.common
+<span style="color: #2E91AF;">userprojectconfig</span>=sendpatch.params
 
+<span style="color: #FF5803;">export</span> <span style=
+"color: #2E91AF;">vcs</span>=$(<span style="color: #ff00ff;">vcs_info</span>)
+<span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"VC backend: $vcs\n"</span>
 
-
-
-<pre class="src src-sh"><span class="org-variable-name">tmpfile</span>=<span class="org-string">"/tmp/$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0).$$"</span>
-<span class="org-keyword">trap</span> <span class="org-string">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
-
-<span class="org-variable-name">userconfig</span>=~/.sendpatchrc
-<span class="org-variable-name">projectconfig</span>=sendpatch.common
-<span class="org-variable-name">userprojectconfig</span>=sendpatch.params
-
-<span class="org-builtin">export</span> <span class="org-variable-name">vcs</span>=$(<span class="org-sh-quoted-exec">vcs_info</span>)
-<span class="org-builtin">printf</span> <span class="org-string">"VC backend: $vcs\n"</span>
-
-<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"svn status --ignore-externals"</span>
+        <span style="color: #2E91AF;">VCS_STATUS</span>=<span style=
+"color: #008000;">"svn status --ignore-externals"</span>
         ;;
     tfs)
-        <span class="org-variable-name">VCS_STATUS</span>=<span class="org-string">"tf status"</span>
+        <span style="color: #2E91AF;">VCS_STATUS</span>=<span style=
+"color: #008000;">"tf status"</span>
         ;;
-)
-        die <span class="org-string">"VCS backend is not supported"</span>
+    *)
+        die <span style="color: #008000;">"VCS backend is not supported"</span>
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-4" class="outline-4">
+          <h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Check current
+          directory</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-4">
+            <p>Note that, for TFS, we impose to find a <code>sendpatch.common</code> file
+            in order to conclude that we&rsquo;re at the root directory of a working
+            copy, or not.</p>
 
-</div>
-
-<div id="outline-container-3-1-4" class="outline-4">
-<h4 id="sec-3-1-4"><span class="section-number-4">3.1.4</span> Check current directory</h4>
-<div class="outline-text-4" id="text-3-1-4">
-
-
-<p>
-Note that, for TFS, we impose to find a <code>sendpatch.common</code> file in order to
-conclude that we're at the root directory of a working copy, or not.
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        [[ -d .svn ]] <span class="org-sh-escaped-newline">\</span>
-            || die <span class="org-string">"\`$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)' is not the root directory of a working copy"</span>
+        [[ -d .svn ]] <span style="color: #008000;">\</span>
+            || die <span style="color: #008000;">"\`$(</span><span style=
+"color: #ff00ff;">pwd</span><span style=
+"color: #008000;">)' is not the root directory of a working copy"</span>
         ;;
     tfs)
-        [[ -f $<span class="org-variable-name">projectconfig</span> ]] <span class="org-sh-escaped-newline">\</span>
-            || die <span class="org-string">"\`$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)' is not the root directory of a working copy"</span>
+        [[ -f $<span style="color: #2E91AF;">projectconfig</span> ]] <span style=
+"color: #008000;">\</span>
+            || die <span style="color: #008000;">"\`$(</span><span style=
+"color: #ff00ff;">pwd</span><span style=
+"color: #008000;">)' is not the root directory of a working copy"</span>
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-5" class="outline-4">
+          <h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> Get URL of
+          project</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-5" class="outline-4">
-<h4 id="sec-3-1-5"><span class="section-number-4">3.1.5</span> Get URL of project</h4>
-<div class="outline-text-4" id="text-3-1-5">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+          <div class="outline-text-4" id="text-3-1-5">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">svn</span> info | grep -E <span class="org-string">"^URL"</span>)/
+        <span style="color: #2E91AF;">url</span>=$(<span style=
+"color: #ff00ff;">svn</span> info | grep -E <span style="color: #008000;">"^URL"</span>)/
         ;;
     tfs)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">get collection and project</span>
-        tf workfold &gt; $<span class="org-variable-name">tmpfile</span>
-        <span class="org-variable-name">url</span>=$(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | grep -E <span class="org-string">"^(Collection| \\$/)"</span> | sed <span class="org-string">"/^ \\$/{s/:.*//}"</span>)
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">get collection and project</span>
+        tf workfold &gt; $<span style="color: #2E91AF;">tmpfile</span>
+        <span style="color: #2E91AF;">url</span>=$(<span style=
+"color: #ff00ff;">cat</span> $<span style=
+"color: #2E91AF;">tmpfile</span> | grep -E <span style=
+"color: #008000;">"^(Collection| \\$/)"</span> | sed <span style=
+"color: #008000;">"/^ \\$/{s/:.*//}"</span>)
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-6" class="outline-4">
+          <h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> Override
+          settings</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-6" class="outline-4">
-<h4 id="sec-3-1-6"><span class="section-number-4">3.1.6</span> Override settings</h4>
-<div class="outline-text-4" id="text-3-1-6">
-
-
-
-
-
-<pre class="src src-sh">[[ -f $<span class="org-variable-name">userconfig</span> ]] &amp;&amp; <span class="org-builtin">.</span> $<span class="org-variable-name">userconfig</span>
-[[ -f $<span class="org-variable-name">projectconfig</span> ]] &amp;&amp; <span class="org-builtin">.</span> $<span class="org-variable-name">projectconfig</span>
-[[ -f $<span class="org-variable-name">userprojectconfig</span> ]] &amp;&amp; <span class="org-builtin">.</span> $<span class="org-variable-name">userprojectconfig</span>
+          <div class="outline-text-4" id="text-3-1-6">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+[[ -f $<span style="color: #2E91AF;">userconfig</span> ]] &amp;&amp; <span style=
+"color: #FF5803;">.</span> $<span style="color: #2E91AF;">userconfig</span>
+[[ -f $<span style="color: #2E91AF;">projectconfig</span> ]] &amp;&amp; <span style=
+"color: #FF5803;">.</span> $<span style="color: #2E91AF;">projectconfig</span>
+[[ -f $<span style="color: #2E91AF;">userprojectconfig</span> ]] &amp;&amp; <span style=
+"color: #FF5803;">.</span> $<span style="color: #2E91AF;">userprojectconfig</span>
 </pre>
+            </div>
 
+            <p>Default sender of the email is John Doe. If not configured otherwise, bail
+            out:</p>
 
-<p>
-Default sender of the email is John Doe. If not configured otherwise, bail
-out:
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-builtin">printf</span> <span class="org-string">"$emailcommand"</span> | grep <span class="org-string">"John Doe"</span> <span class="org-sh-escaped-newline">\</span>
-    &amp;&amp; die <span class="org-string">"Please fix the sender address in the email command"</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$emailcommand"</span> | grep <span style=
+"color: #008000;">"John Doe"</span> <span style="color: #008000;">\</span>
+    &amp;&amp; die <span style=
+"color: #008000;">"Please fix the sender address in the email command"</span>
 </pre>
+            </div>
 
+            <p>Default editor is <code>$EDITOR</code>. If not found, set Emacs:</p>
 
-<p>
-Default editor is <code>$EDITOR</code>. If not found, set Emacs:
-</p>
-
-
-
-<pre class="src src-sh">: ${<span class="org-variable-name">EDITOR</span>:=<span class="org-string">"emacsclient"</span>}
-which <span class="org-string">"$EDITOR"</span> &gt; /dev/null 2&gt;&amp;1 || die <span class="org-string">"editor not found"</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+: ${<span style="color: #2E91AF;">EDITOR</span>:=<span style=
+"color: #008000;">"emacsclient"</span>}
+which <span style=
+"color: #008000;">"$EDITOR"</span> &gt; /dev/null 2&gt;&amp;1 || die <span style=
+"color: #008000;">"editor not found"</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-7" class="outline-4">
+          <h4 id="sec-3-1-7"><span class="section-number-4">3.1.7</span> Display changed
+          files</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-7">
+            <p>Shows what files have been modified in your working copy, what files have
+            been changed in the repository since your last update, and which files, if
+            any, conflict with your modifications. The <code>-u</code> option is what
+            forces the command to access the repository for this check.</p>
 
-</div>
-
-<div id="outline-container-3-1-7" class="outline-4">
-<h4 id="sec-3-1-7"><span class="section-number-4">3.1.7</span> Display changed files</h4>
-<div class="outline-text-4" id="text-3-1-7">
-
-
-<p>
-Shows what files have been modified in your working copy, what files have been
-changed in the repository since your last update, and which files, if any,
-conflict with your modifications. The <code>-u</code> option is what forces the command to
-access the repository for this check.
-</p>
-
-
-
-<pre class="src src-sh">cecho <span class="org-string">"\nChanged files (to be committed):"</span>
-<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+cecho <span style="color: #008000;">"\nChanged files (to be committed):"</span>
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        ${<span class="org-variable-name">VCS_STATUS</span>} -u $<span class="org-variable-name">@</span> | grep -E -v <span class="org-string">"^\? "</span> | tee $<span class="org-variable-name">tmpfile</span>
-        cat $<span class="org-variable-name">tmpfile</span> | cut -c 1-9 | grep -E <span class="org-string">"^M       \*"</span> <span class="org-sh-escaped-newline">\</span>
-            &amp;&amp; die <span class="org-string">"a newer revision exists on the server"</span>
-        cat $<span class="org-variable-name">tmpfile</span> | cut -c 1-9 | grep -E <span class="org-string">"^C"</span> &amp;&amp; die <span class="org-string">"conflicted item modification"</span>
+        ${<span style="color: #2E91AF;">VCS_STATUS</span>} -u $<span style=
+"color: #2E91AF;">@</span> | grep -E -v <span style=
+"color: #008000;">"^\? "</span> | tee $<span style="color: #2E91AF;">tmpfile</span>
+        cat $<span style=
+"color: #2E91AF;">tmpfile</span> | cut -c 1-9 | grep -E <span style=
+"color: #008000;">"^M       \*"</span> <span style="color: #008000;">\</span>
+            &amp;&amp; die <span style=
+"color: #008000;">"a newer revision exists on the server"</span>
+        cat $<span style=
+"color: #2E91AF;">tmpfile</span> | cut -c 1-9 | grep -E <span style=
+"color: #008000;">"^C"</span> &amp;&amp; die <span style=
+"color: #008000;">"conflicted item modification"</span>
         ;;
     tfs)
-        <span class="org-builtin">export</span> <span class="org-variable-name">rootdirwin</span>=$(<span class="org-sh-quoted-exec">cygpath</span> -w -l <span class="org-string">"$(</span><span class="org-sh-quoted-exec">pwd</span><span class="org-string">)"</span>)
-        <span class="org-comment-delimiter"># </span><span class="org-comment">printf "Root directory (in Windows format) : $rootdirwin\n"</span>
-        ${<span class="org-variable-name">VCS_STATUS</span>} $<span class="org-variable-name">@</span> &gt; $<span class="org-variable-name">tmpfile</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">No idea why, but we can't directly pipe the output of `tf status'</span>
-        <span class="org-comment-delimiter"># </span><span class="org-comment">command</span>
-        cat $<span class="org-variable-name">tmpfile</span> | grep -F -i <span class="org-string">"$rootdirwin"</span> | tee $<span class="org-variable-name">tmpfile</span>.out
-        mv $<span class="org-variable-name">tmpfile</span>.out $<span class="org-variable-name">tmpfile</span>
+        <span style="color: #FF5803;">export</span> <span style=
+"color: #2E91AF;">rootdirwin</span>=$(<span style=
+"color: #ff00ff;">cygpath</span> -w -l <span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">pwd</span><span style=
+"color: #008000;">)"</span>)
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">printf "Root directory (in Windows format) : $rootdirwin\n"</span>
+        ${<span style="color: #2E91AF;">VCS_STATUS</span>} $<span style=
+"color: #2E91AF;">@</span> &gt; $<span style="color: #2E91AF;">tmpfile</span>
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">No idea why, but we can't directly pipe the output of `tf status'</span>
+        <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">command</span>
+        cat $<span style="color: #2E91AF;">tmpfile</span> | grep -F -i <span style=
+"color: #008000;">"$rootdirwin"</span> | tee $<span style=
+"color: #2E91AF;">tmpfile</span>.out
+        mv $<span style="color: #2E91AF;">tmpfile</span>.out $<span style=
+"color: #2E91AF;">tmpfile</span>
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-8" class="outline-4">
+          <h4 id="sec-3-1-8"><span class="section-number-4">3.1.8</span> Display ignored
+          files</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-8" class="outline-4">
-<h4 id="sec-3-1-8"><span class="section-number-4">3.1.8</span> Display ignored files</h4>
-<div class="outline-text-4" id="text-3-1-8">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+          <div class="outline-text-4" id="text-3-1-8">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        cecho <span class="org-string">"\nUntracked files:"</span>
-        ${<span class="org-variable-name">VCS_STATUS</span>} $<span class="org-variable-name">@</span> | grep -E <span class="org-string">"^\? "</span> | grep -v <span class="org-string">" 0.*-"</span>
+        cecho <span style="color: #008000;">"\nUntracked files:"</span>
+        ${<span style="color: #2E91AF;">VCS_STATUS</span>} $<span style=
+"color: #2E91AF;">@</span> | grep -E <span style=
+"color: #008000;">"^\? "</span> | grep -v <span style="color: #008000;">" 0.*-"</span>
         ;;
     tfs)
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
 
+            <p>Stop if no changes are to be committed. Though, that may mean that you
+            should <code>add</code> some of the files currently ignored; hence,
+            it&rsquo;s good to make this check after having sent some information to the
+            user&hellip;</p>
 
-<p>
-Stop if no changes are to be committed. Though, that may mean that you should
-<code>add</code> some of the files currently ignored; hence, it's good to make this check
-after having sent some information to the user&hellip;
-</p>
-
-
-
-<pre class="src src-sh">[[ $(<span class="org-sh-quoted-exec">cat</span> $<span class="org-variable-name">tmpfile</span> | wc -l) -gt 0 ]] <span class="org-sh-escaped-newline">\</span>
-    || die <span class="org-string">"no changes to send to the repository"</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+[[ $(<span style="color: #ff00ff;">cat</span> $<span style=
+"color: #2E91AF;">tmpfile</span> | wc -l) -gt 0 ]] <span style="color: #008000;">\</span>
+    || die <span style="color: #008000;">"no changes to send to the repository"</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-9" class="outline-4">
+          <h4 id="sec-3-1-9"><span class="section-number-4">3.1.9</span> Ask for short
+          log message</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-9" class="outline-4">
-<h4 id="sec-3-1-9"><span class="section-number-4">3.1.9</span> Ask for short log message</h4>
-<div class="outline-text-4" id="text-3-1-9">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-keyword">if</span> [[ <span class="org-string">"$asksubject"</span> != <span class="org-string">"no"</span> ]]; <span class="org-keyword">then</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"\nSubject (short log): "</span>
-    <span class="org-builtin">read</span> subject
-<span class="org-keyword">fi</span>
+          <div class="outline-text-4" id="text-3-1-9">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$asksubject"</span> != <span style=
+"color: #008000;">"no"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"\nSubject (short log): "</span>
+    <span style="color: #FF5803;">read</span> subject
+<span style="color: #A535AE; font-weight: bold;">fi</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-10" class="outline-4">
+          <h4 id="sec-3-1-10"><span class="section-number-4">3.1.10</span> Generate name
+          for patch files</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-10">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #2E91AF;">oldcounter</span>=$(<span style=
+"color: #ff00ff;">ls</span> ${<span style=
+"color: #2E91AF;">patchfileprefix</span>}0???-*.patch 2&gt; /dev/null | sort --reverse <span style="color: #008000;">\</span>
+    | head -n 1 | sed <span style=
+"color: #008000;">"s/^${patchfileprefix}00*//"</span> | cut -d <span style=
+"color: #008000;">"-"</span> -f 1)
+<span style="color: #2E91AF;">newcounterpadded</span>=$(<span style=
+"color: #ff00ff;">printf</span> <span style="color: #008000;">"%04d"</span> <span style=
+"color: #008000;">"$(( oldcounter + 1 ))"</span>)
+<span style="color: #2E91AF;">filename</span>=<span style=
+"color: #008000;">"$newcounterpadded-$(</span><span style=
+"color: #ff00ff;">printf</span><span style=
+"color: #008000;"> "$subject\n" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"</span>
 
-</div>
-
-<div id="outline-container-3-1-10" class="outline-4">
-<h4 id="sec-3-1-10"><span class="section-number-4">3.1.10</span> Generate name for patch files</h4>
-<div class="outline-text-4" id="text-3-1-10">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-variable-name">oldcounter</span>=$(<span class="org-sh-quoted-exec">ls</span> ${<span class="org-variable-name">patchfileprefix</span>}0???-*.patch 2&gt; /dev/null | sort --reverse <span class="org-sh-escaped-newline">\</span>
-    | head -n 1 | sed <span class="org-string">"s/^${patchfileprefix}00*//"</span> | cut -d <span class="org-string">"-"</span> -f 1)
-<span class="org-variable-name">newcounterpadded</span>=$(<span class="org-sh-quoted-exec">printf</span> <span class="org-string">"%04d"</span> <span class="org-string">"$(( oldcounter + 1 ))"</span>)
-<span class="org-variable-name">filename</span>=<span class="org-string">"$newcounterpadded-$(</span><span class="org-sh-quoted-exec">printf</span><span class="org-string"> "$subject\n" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g')"</span>
-
-<span class="org-variable-name">patch</span>=${<span class="org-variable-name">patchfileprefix</span>}${<span class="org-variable-name">filename</span>}.patch
-<span class="org-variable-name">commitmsg</span>=${<span class="org-variable-name">commitmsgfileprefix</span>}${<span class="org-variable-name">filename</span>}.log
-<span class="org-variable-name">email</span>=${<span class="org-variable-name">emailfileprefix</span>}${<span class="org-variable-name">filename</span>}.txt
+<span style="color: #2E91AF;">patch</span>=${<span style=
+"color: #2E91AF;">patchfileprefix</span>}${<span style=
+"color: #2E91AF;">filename</span>}.patch
+<span style="color: #2E91AF;">commitmsg</span>=${<span style=
+"color: #2E91AF;">commitmsgfileprefix</span>}${<span style=
+"color: #2E91AF;">filename</span>}.log
+<span style="color: #2E91AF;">email</span>=${<span style=
+"color: #2E91AF;">emailfileprefix</span>}${<span style=
+"color: #2E91AF;">filename</span>}.txt
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-11" class="outline-4">
+          <h4 id="sec-3-1-11"><span class="section-number-4">3.1.11</span> Make patch
+          file</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-11">
+            <p>The patch file generated only reports <code>file.bin: files differ</code>.
+            The fix for getting such names included in the log (list of modified files)
+            is to replace that one-sentence with a traditional <code>Index:</code>
+            marker.</p>
 
-</div>
-
-<div id="outline-container-3-1-11" class="outline-4">
-<h4 id="sec-3-1-11"><span class="section-number-4">3.1.11</span> Make patch file</h4>
-<div class="outline-text-4" id="text-3-1-11">
-
-
-<p>
-The patch file generated only reports <code>file.bin: files differ</code>. The fix for
-getting such names included in the log (list of modified files) is to replace
-that one-sentence with a traditional <code>Index:</code> marker.
-</p>
-
-
-
-<pre class="src src-sh">makediff $<span class="org-variable-name">@</span> | fixtfsbinaryfiles &gt; $<span class="org-variable-name">patch</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+makediff $<span style="color: #2E91AF;">@</span> | fixtfsbinaryfiles &gt; $<span style=
+"color: #2E91AF;">patch</span>
 </pre>
+            </div>
 
+            <p><code>excludefileregexp</code> allows one to exclude useless or unreadable
+            diffs from the email contents. That does not have any impact on the commit
+            process itself&hellip;</p>
 
-<p>
-<code>excludefileregexp</code> allows one to exclude useless or unreadable diffs from the
-email contents. That does not have any impact on the commit process itself&hellip;
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-keyword">if</span> [[ -n <span class="org-string">"$excludefileregexp"</span> ]]; <span class="org-keyword">then</span>
-    cat $<span class="org-variable-name">patch</span> |<span class="org-sh-escaped-newline">\</span>
-    awk -v <span class="org-variable-name">pattern</span>=<span class="org-string">"^Index: .*$excludefileregexp"</span> <span class="org-sh-escaped-newline">\</span>
-        <span class="org-string">'BEGIN {deleteline = 0;}</span>
-<span class="org-string">         $0 ~ pattern {deleteline = 1; next;}</span>
-<span class="org-string">         // &amp;&amp; deleteline == 0 {print $0;}</span>
-<span class="org-string">         /^Index: / &amp;&amp; deleteline == 1 {print $0; deleteline = 0;}'</span> <span class="org-sh-escaped-newline">\</span>
-    &gt; $<span class="org-variable-name">patch</span>.excluded 2&gt; /dev/null
-<span class="org-keyword">else</span>
-    cp $<span class="org-variable-name">patch</span> $<span class="org-variable-name">patch</span>.excluded
-<span class="org-keyword">fi</span>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ -n <span style=
+"color: #008000;">"$excludefileregexp"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    cat $<span style="color: #2E91AF;">patch</span> |<span style=
+"color: #008000;">\</span>
+    awk -v <span style="color: #2E91AF;">pattern</span>=<span style=
+"color: #008000;">"^Index: .*$excludefileregexp"</span> <span style=
+"color: #008000;">\</span>
+        <span style="color: #008000;">'BEGIN {deleteline = 0;}</span>
+<span style="color: #008000;">         $0 ~ pattern {deleteline = 1; next;}</span>
+<span style="color: #008000;">         // &amp;&amp; deleteline == 0 {print $0;}</span>
+<span style=
+"color: #008000;">         /^Index: / &amp;&amp; deleteline == 1 {print $0; deleteline = 0;}'</span> <span style="color: #008000;">\</span>
+    &gt; $<span style="color: #2E91AF;">patch</span>.excluded 2&gt; /dev/null
+<span style="color: #A535AE; font-weight: bold;">else</span>
+    cp $<span style="color: #2E91AF;">patch</span> $<span style=
+"color: #2E91AF;">patch</span>.excluded
+<span style="color: #A535AE; font-weight: bold;">fi</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-12" class="outline-4">
+          <h4 id="sec-3-1-12"><span class="section-number-4">3.1.12</span> Edit log
+          message</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-12">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">ask for commit message</span>
+cat &lt;&lt;EOF &gt; $<span style="color: #2E91AF;">email</span>
+<span style=
+"color: #0000ff; background-color: #FBF9EA;"># Hey, Emacs! This is a -*- Diff -*- file</span>
+<span style=
+"color: #0000ff; background-color: #FBF9EA;"># Please enter the commit message for your changes. Lines starting</span>
+<span style=
+"color: #0000ff; background-color: #FBF9EA;"># with '#' will be ignored...</span>
+<span style=
+"color: #0000ff; background-color: #FBF9EA;"># The FIRST LINE of the commit message should be a short description</span>
+<span style=
+"color: #0000ff; background-color: #FBF9EA;"># and should skip the full stop. It will become the subject of the email.</span>
+<span style="color: #0000ff; background-color: #FBF9EA;">EOF</span>
+{ <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$subject\n"</span>; makelog -f $<span style=
+"color: #2E91AF;">patch</span> | sort | uniq; <span style=
+"color: #FF5803;">printf</span> <span style=
+"color: #008000;">"\n---\n"</span>; <span style=
+"color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$url\n\n"</span>; <span style="color: #008000;">\</span>
+  cat $<span style="color: #2E91AF;">patch</span>.excluded; } &gt;&gt; $<span style=
+"color: #2E91AF;">email</span>
+mv $<span style="color: #2E91AF;">patch</span>.excluded $<span style=
+"color: #2E91AF;">patch</span>
+<span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"\nEdit commit log message and email to send to '$mailto'...\n"</span>
+<span style="color: #008000;">"$EDITOR"</span> $<span style=
+"color: #2E91AF;">email</span>
+<span style="color: #FF5803;">test</span> $<span style=
+"color: #2E91AF;">?</span> -eq 0 || die <span style=
+"color: #008000;">"edit failed"</span>
 
-</div>
-
-<div id="outline-container-3-1-12" class="outline-4">
-<h4 id="sec-3-1-12"><span class="section-number-4">3.1.12</span> Edit log message</h4>
-<div class="outline-text-4" id="text-3-1-12">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">ask for commit message</span>
-cat &lt;&lt;EOF &gt; $<span class="org-variable-name">email</span>
-<span class="org-sh-heredoc"># Hey, Emacs! This is a -*- Diff -*- file</span>
-<span class="org-sh-heredoc"># Please enter the commit message for your changes. Lines starting</span>
-<span class="org-sh-heredoc"># with '#' will be ignored...</span>
-<span class="org-sh-heredoc"># The FIRST LINE of the commit message should be a short description</span>
-<span class="org-sh-heredoc"># and should skip the full stop. It will become the subject of the email.</span>
-<span class="org-sh-heredoc">EOF</span>
-{ <span class="org-builtin">printf</span> <span class="org-string">"$subject\n"</span>; makelog -f $<span class="org-variable-name">patch</span> | sort | uniq; <span class="org-builtin">printf</span> <span class="org-string">"\n---\n"</span>; <span class="org-builtin">printf</span> <span class="org-string">"$url\n\n"</span>; <span class="org-sh-escaped-newline">\</span>
-  cat $<span class="org-variable-name">patch</span>.excluded; } &gt;&gt; $<span class="org-variable-name">email</span>
-mv $<span class="org-variable-name">patch</span>.excluded $<span class="org-variable-name">patch</span>
-<span class="org-builtin">printf</span> <span class="org-string">"\nEdit commit log message and email to send to '$mailto'...\n"</span>
-<span class="org-string">"$EDITOR"</span> $<span class="org-variable-name">email</span>
-<span class="org-builtin">test</span> $<span class="org-variable-name">?</span> -eq 0 || die <span class="org-string">"edit failed"</span>
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">remove comments from editable part</span>
-sed <span class="org-string">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">email</span>.nocomment; mv $<span class="org-variable-name">email</span>.nocomment $<span class="org-variable-name">email</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">remove comments from editable part</span>
+sed <span style="color: #008000;">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span style=
+"color: #2E91AF;">email</span> &gt; $<span style=
+"color: #2E91AF;">email</span>.nocomment; mv $<span style=
+"color: #2E91AF;">email</span>.nocomment $<span style="color: #2E91AF;">email</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-13" class="outline-4">
+          <h4 id="sec-3-1-13"><span class="section-number-4">3.1.13</span> Convert email
+          contents into UTF-8</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-13" class="outline-4">
-<h4 id="sec-3-1-13"><span class="section-number-4">3.1.13</span> Convert email contents into UTF-8</h4>
-<div class="outline-text-4" id="text-3-1-13">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">convert email into UTF-8</span>
-<span class="org-keyword">case</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $email 2&gt; /dev/null | sed 's/unified diff output, //')"</span><span class="org-keyword"> in</span>
+          <div class="outline-text-4" id="text-3-1-13">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">convert email into UTF-8</span>
+<span style="color: #A535AE; font-weight: bold;">case</span> <span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">file</span><span style=
+"color: #008000;"> --brief $email 2&gt; /dev/null | sed 's/unified diff output, //')"</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     UTF-8*)
         ;;
     ASCII*)
         ;;
     ISO-8859*)
-        <span class="org-builtin">printf</span> <span class="org-string">"Character encoding of diff output: ISO-8859... Converting it to UTF-8...\n"</span>
-        cat $<span class="org-variable-name">email</span> | iconv -c -f ISO-8859-1 -t UTF-8 &gt; $<span class="org-variable-name">tmpfile</span>
-        mv $<span class="org-variable-name">tmpfile</span> $<span class="org-variable-name">email</span>
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Character encoding of diff output: ISO-8859... Converting it to UTF-8...\n"</span>
+        cat $<span style=
+"color: #2E91AF;">email</span> | iconv -c -f ISO-8859-1 -t UTF-8 &gt; $<span style=
+"color: #2E91AF;">tmpfile</span>
+        mv $<span style="color: #2E91AF;">tmpfile</span> $<span style=
+"color: #2E91AF;">email</span>
         ;;
-)
-        <span class="org-builtin">printf</span> <span class="org-string">"Potential problems found in email file $email: $(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $email)\n"</span>
-        ask <span class="org-string">"Continue?"</span> || die <span class="org-string">"exiting..."</span>
+    *)
+        <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Potential problems found in email file $email: $(</span><span style=
+"color: #ff00ff;">file</span><span style="color: #008000;"> --brief $email)\n"</span>
+        ask <span style="color: #008000;">"Continue?"</span> || die <span style=
+"color: #008000;">"exiting..."</span>
         ;;
-<span class="org-keyword">esac</span>
-<span class="org-builtin">printf</span> <span class="org-string">"Email:         $email\n"</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
+<span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Email:         $email\n"</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-14" class="outline-4">
+          <h4 id="sec-3-1-14"><span class="section-number-4">3.1.14</span> Deduce log
+          message for commit</h4>
 
-</div>
-
-</div>
-
-<div id="outline-container-3-1-14" class="outline-4">
-<h4 id="sec-3-1-14"><span class="section-number-4">3.1.14</span> Deduce log message for commit</h4>
-<div class="outline-text-4" id="text-3-1-14">
-
-
-
-
-
-<pre class="src src-sh">sed <span class="org-string">'/^---$/,$d'</span> &lt; $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">commitmsg</span>
+          <div class="outline-text-4" id="text-3-1-14">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+sed <span style="color: #008000;">'/^---$/,$d'</span> &lt; $<span style=
+"color: #2E91AF;">email</span> &gt; $<span style="color: #2E91AF;">commitmsg</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-15" class="outline-4">
+          <h4 id="sec-3-1-15"><span class="section-number-4">3.1.15</span> Deduce subject
+          line for email</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-15">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">get new subject for email (first line of log message)</span>
+head -n 1 $<span style="color: #2E91AF;">email</span> &gt; $<span style=
+"color: #2E91AF;">tmpfile</span>
 
-</div>
-
-<div id="outline-container-3-1-15" class="outline-4">
-<h4 id="sec-3-1-15"><span class="section-number-4">3.1.15</span> Deduce subject line for email</h4>
-<div class="outline-text-4" id="text-3-1-15">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">get new subject for email (first line of log message)</span>
-head -n 1 $<span class="org-variable-name">email</span> &gt; $<span class="org-variable-name">tmpfile</span>
-
-<span class="org-comment-delimiter"># </span><span class="org-comment">replace accented letters by their unaccented equivalent</span>
-<span class="org-keyword">case</span> <span class="org-string">"$(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $tmpfile 2&gt; /dev/null)"</span><span class="org-keyword"> in</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">replace accented letters by their unaccented equivalent</span>
+<span style="color: #A535AE; font-weight: bold;">case</span> <span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">file</span><span style=
+"color: #008000;"> --brief $tmpfile 2&gt; /dev/null)"</span><span style=
+"color: #A535AE; font-weight: bold;"> in</span>
     UTF-8*)
-        <span class="org-variable-name">subject</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">cat</span><span class="org-string"> $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"</span>
+        <span style="color: #2E91AF;">subject</span>=<span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">cat</span><span style=
+"color: #008000;"> $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"</span>
         ;;
     ISO-8859*|ASCII*)
-        <span class="org-variable-name">subject</span>=<span class="org-string">"$(</span><span class="org-sh-quoted-exec">cat</span><span class="org-string"> $tmpfile | unaccent)"</span>
+        <span style="color: #2E91AF;">subject</span>=<span style=
+"color: #008000;">"$(</span><span style="color: #ff00ff;">cat</span><span style=
+"color: #008000;"> $tmpfile | unaccent)"</span>
         ;;
-)
-        die <span class="org-string">"unknown character encoding: $(</span><span class="org-sh-quoted-exec">file</span><span class="org-string"> --brief $tmpfile). Did you put the subject as first line?"</span>
+    *)
+        die <span style=
+"color: #008000;">"unknown character encoding: $(</span><span style=
+"color: #ff00ff;">file</span><span style=
+"color: #008000;"> --brief $tmpfile). Did you put the subject as first line?"</span>
         ;;
-<span class="org-keyword">esac</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-16" class="outline-4">
+          <h4 id="sec-3-1-16"><span class="section-number-4">3.1.16</span> Auto-commit
+          changes</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-16">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #FF5803;">printf</span> <span style="color: #008000;">"\n"</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autocommit"</span> = <span style=
+"color: #008000;">"ask"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    ask <span style="color: #008000;">"Commit?"</span> &amp;&amp; <span style=
+"color: #2E91AF;">askcommit</span>=<span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #2E91AF;">askcommit</span>=<span style="color: #008000;">"no"</span>
+<span style="color: #A535AE; font-weight: bold;">fi</span>
 
-</div>
-
-<div id="outline-container-3-1-16" class="outline-4">
-<h4 id="sec-3-1-16"><span class="section-number-4">3.1.16</span> Auto-commit changes</h4>
-<div class="outline-text-4" id="text-3-1-16">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-builtin">printf</span> <span class="org-string">"\n"</span>
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autocommit"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
-    ask <span class="org-string">"Commit?"</span> &amp;&amp; <span class="org-variable-name">askcommit</span>=<span class="org-string">"yes"</span> || <span class="org-variable-name">askcommit</span>=<span class="org-string">"no"</span>
-<span class="org-keyword">fi</span>
-
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autocommit"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$askcommit"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Committing...\n"</span>
-    <span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autocommit"</span> = <span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #008000;">"$askcommit"</span> = <span style=
+"color: #008000;">"yes"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Committing...\n"</span>
+    <span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
         svn)
-            svn commit --file $<span class="org-variable-name">commitmsg</span> $<span class="org-variable-name">@</span>
+            svn commit --file $<span style=
+"color: #2E91AF;">commitmsg</span> $<span style="color: #2E91AF;">@</span>
             ;;
         tfs)
-            tf checkin /comment:@$<span class="org-variable-name">commitmsg</span> /noprompt $<span class="org-variable-name">@</span>
+            tf checkin /comment:@$<span style=
+"color: #2E91AF;">commitmsg</span> /noprompt $<span style="color: #2E91AF;">@</span>
             ;;
-    <span class="org-keyword">esac</span>
-    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
-<span class="org-keyword">else</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Nothing gets committed...\n"</span>
-    <span class="org-variable-name">rc</span>=0
-<span class="org-keyword">fi</span>
-<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"commit failed"</span>
+    <span style="color: #A535AE; font-weight: bold;">esac</span>
+    <span style="color: #2E91AF;">rc</span>=$<span style="color: #2E91AF;">?</span>
+<span style="color: #A535AE; font-weight: bold;">else</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Nothing gets committed...\n"</span>
+    <span style="color: #2E91AF;">rc</span>=0
+<span style="color: #A535AE; font-weight: bold;">fi</span>
+<span style="color: #FF5803;">test</span> $<span style=
+"color: #2E91AF;">rc</span> -eq 0 || die <span style=
+"color: #008000;">"commit failed"</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-17" class="outline-4">
+          <h4 id="sec-3-1-17"><span class="section-number-4">3.1.17</span> Auto-send
+          email</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-17">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #FF5803;">printf</span> <span style="color: #008000;">"\n"</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autosendemail"</span> = <span style=
+"color: #008000;">"ask"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Environment for sending email:\n"</span>
+    <span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">print the email command</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"$emailcommand\n"</span>
+    [[ -f $<span style=
+"color: #2E91AF;">userconfig</span> ]] &amp;&amp; grep <span style="color: #008000;">"excludefileregexp"</span> $<span style="color: #2E91AF;">userconfig</span>
+    [[ -f $<span style=
+"color: #2E91AF;">projectconfig</span> ]] &amp;&amp; grep <span style=
+"color: #008000;">"excludefileregexp"</span> $<span style=
+"color: #2E91AF;">projectconfig</span>
+    [[ -f $<span style=
+"color: #2E91AF;">userprojectconfig</span> ]] &amp;&amp; grep <span style=
+"color: #008000;">"excludefileregexp"</span> $<span style=
+"color: #2E91AF;">userprojectconfig</span>
+    ask <span style="color: #008000;">"Send email?"</span> &amp;&amp; <span style=
+"color: #2E91AF;">asksendemail</span>=<span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #2E91AF;">asksendemail</span>=<span style="color: #008000;">"no"</span>
+<span style="color: #A535AE; font-weight: bold;">fi</span>
 
-</div>
-
-<div id="outline-container-3-1-17" class="outline-4">
-<h4 id="sec-3-1-17"><span class="section-number-4">3.1.17</span> Auto-send email</h4>
-<div class="outline-text-4" id="text-3-1-17">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-builtin">printf</span> <span class="org-string">"\n"</span>
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autosendemail"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Environment for sending email:\n"</span>
-    <span class="org-comment-delimiter"># </span><span class="org-comment">print the email command</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"$emailcommand\n"</span>
-    [[ -f $<span class="org-variable-name">userconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">userconfig</span>
-    [[ -f $<span class="org-variable-name">projectconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">projectconfig</span>
-    [[ -f $<span class="org-variable-name">userprojectconfig</span> ]] &amp;&amp; grep <span class="org-string">"excludefileregexp"</span> $<span class="org-variable-name">userprojectconfig</span>
-    ask <span class="org-string">"Send email?"</span> &amp;&amp; <span class="org-variable-name">asksendemail</span>=<span class="org-string">"yes"</span> || <span class="org-variable-name">asksendemail</span>=<span class="org-string">"no"</span>
-<span class="org-keyword">fi</span>
-
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autosendemail"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$asksendemail"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Sending email...\n"</span>
-    <span class="org-builtin">eval</span> <span class="org-string">"$emailcommand"</span>
-    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
-<span class="org-keyword">else</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Nothing gets sent...\n"</span>
-    <span class="org-variable-name">rc</span>=0
-<span class="org-keyword">fi</span>
-<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"send email failed"</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autosendemail"</span> = <span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #008000;">"$asksendemail"</span> = <span style=
+"color: #008000;">"yes"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Sending email...\n"</span>
+    <span style="color: #FF5803;">eval</span> <span style=
+"color: #008000;">"$emailcommand"</span>
+    <span style="color: #2E91AF;">rc</span>=$<span style="color: #2E91AF;">?</span>
+<span style="color: #A535AE; font-weight: bold;">else</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Nothing gets sent...\n"</span>
+    <span style="color: #2E91AF;">rc</span>=0
+<span style="color: #A535AE; font-weight: bold;">fi</span>
+<span style="color: #FF5803;">test</span> $<span style=
+"color: #2E91AF;">rc</span> -eq 0 || die <span style=
+"color: #008000;">"send email failed"</span>
 </pre>
+            </div>
+          </div>
+        </div>
 
+        <div id="outline-container-3-1-18" class="outline-4">
+          <h4 id="sec-3-1-18"><span class="section-number-4">3.1.18</span> Auto-delete
+          temporary files</h4>
 
-</div>
+          <div class="outline-text-4" id="text-3-1-18">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #FF5803;">printf</span> <span style="color: #008000;">"\n"</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autodeletetmpfiles"</span> = <span style=
+"color: #008000;">"ask"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    ask <span style="color: #008000;">"Delete temp files?"</span> &amp;&amp; <span style=
+"color: #2E91AF;">askdeletetmpfiles</span>=<span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #2E91AF;">askdeletetmpfiles</span>=<span style="color: #008000;">"no"</span>
+<span style="color: #A535AE; font-weight: bold;">fi</span>
 
-</div>
-
-<div id="outline-container-3-1-18" class="outline-4">
-<h4 id="sec-3-1-18"><span class="section-number-4">3.1.18</span> Auto-delete temporary files</h4>
-<div class="outline-text-4" id="text-3-1-18">
-
-
-
-
-
-<pre class="src src-sh"><span class="org-builtin">printf</span> <span class="org-string">"\n"</span>
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autodeletetmpfiles"</span> = <span class="org-string">"ask"</span> ]]; <span class="org-keyword">then</span>
-    ask <span class="org-string">"Delete temp files?"</span> &amp;&amp; <span class="org-variable-name">askdeletetmpfiles</span>=<span class="org-string">"yes"</span> || <span class="org-variable-name">askdeletetmpfiles</span>=<span class="org-string">"no"</span>
-<span class="org-keyword">fi</span>
-
-<span class="org-keyword">if</span> [[ <span class="org-string">"$autodeletetmpfiles"</span> = <span class="org-string">"yes"</span> || <span class="org-string">"$askdeletetmpfiles"</span> = <span class="org-string">"yes"</span> ]]; <span class="org-keyword">then</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Deleting temp files...\n"</span>
-    rm $<span class="org-variable-name">patch</span> $<span class="org-variable-name">commitmsg</span> $<span class="org-variable-name">email</span>
-    <span class="org-variable-name">rc</span>=$<span class="org-variable-name">?</span>
-<span class="org-keyword">else</span>
-    <span class="org-builtin">printf</span> <span class="org-string">"Nothing gets deleted...\n"</span>
-    <span class="org-variable-name">rc</span>=0
-<span class="org-keyword">fi</span>
-<span class="org-builtin">test</span> $<span class="org-variable-name">rc</span> -eq 0 || die <span class="org-string">"delete temp files failed"</span>
+<span style="color: #A535AE; font-weight: bold;">if</span> [[ <span style=
+"color: #008000;">"$autodeletetmpfiles"</span> = <span style=
+"color: #008000;">"yes"</span> || <span style=
+"color: #008000;">"$askdeletetmpfiles"</span> = <span style=
+"color: #008000;">"yes"</span> ]]; <span style=
+"color: #A535AE; font-weight: bold;">then</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Deleting temp files...\n"</span>
+    rm $<span style="color: #2E91AF;">patch</span> $<span style=
+"color: #2E91AF;">commitmsg</span> $<span style="color: #2E91AF;">email</span>
+    <span style="color: #2E91AF;">rc</span>=$<span style="color: #2E91AF;">?</span>
+<span style="color: #A535AE; font-weight: bold;">else</span>
+    <span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Nothing gets deleted...\n"</span>
+    <span style="color: #2E91AF;">rc</span>=0
+<span style="color: #A535AE; font-weight: bold;">fi</span>
+<span style="color: #FF5803;">test</span> $<span style=
+"color: #2E91AF;">rc</span> -eq 0 || die <span style=
+"color: #008000;">"delete temp files failed"</span>
 </pre>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div id="outline-container-3-2" class="outline-3">
+        <h3 id="sec-3-2"><span class="section-number-3">3.2</span> Display list of
+        files</h3>
 
-</div>
-</div>
+        <div class="outline-text-3" id="text-3-2">
+          <p>Display a list of files to be committed, for the commit log message.</p>
 
-</div>
+          <div class="org-src-container">
+            <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">Usage: makelog [-f diff-file] [svn diff options]</span>
+<span style="color: #EE0000; font-style: italic;">#</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">Make a log message for a change, including the header, and the relative</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">pathnames of the changed files. Output goes to stdout.</span>
+<span style="color: #EE0000; font-style: italic;">#</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">If a you have a pre-existing diff file, use `-f diff-file' to use this file.</span>
 
-<div id="outline-container-3-2" class="outline-3">
-<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Display list of files</h3>
-<div class="outline-text-3" id="text-3-2">
+<span style="color: #FF5803;">printf</span> <span style="color: #008000;">"\n"</span>
 
-
-<p>
-Display a list of files to be committed, for the commit log message.
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: makelog [-f diff-file] [svn diff options]</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Make a log message for a change, including the header, and the relative</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">pathnames of the changed files. Output goes to stdout.</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">If a you have a pre-existing diff file, use `-f diff-file' to use this file.</span>
-
-<span class="org-builtin">printf</span> <span class="org-string">"\n"</span>
-
-{ <span class="org-keyword">if</span> [ <span class="org-string">"$1"</span> = <span class="org-string">"-f"</span> ]
-<span class="org-keyword">then</span>
-    cat $<span class="org-variable-name">2</span>
-<span class="org-keyword">else</span>
-    svn diff --show-copies-as-adds $<span class="org-variable-name">*</span> 2&gt;&amp;1
-<span class="org-keyword">fi</span>; } | sed <span class="org-string">'/^Index:/!d'</span> | sed <span class="org-string">'s/^Index: /  * /'</span> | sed <span class="org-string">'s/$/:/'</span>
+{ <span style="color: #A535AE; font-weight: bold;">if</span> [ <span style=
+"color: #008000;">"$1"</span> = <span style="color: #008000;">"-f"</span> ]
+<span style="color: #A535AE; font-weight: bold;">then</span>
+    cat $<span style="color: #2E91AF;">2</span>
+<span style="color: #A535AE; font-weight: bold;">else</span>
+    svn diff --show-copies-as-adds $<span style="color: #2E91AF;">*</span> 2&gt;&amp;1
+<span style="color: #A535AE; font-weight: bold;">fi</span>; } | sed <span style=
+"color: #008000;">'/^Index:/!d'</span> | sed <span style=
+"color: #008000;">'s/^Index: /  * /'</span> | sed <span style=
+"color: #008000;">'s/$/:/'</span>
 </pre>
+          </div>
 
+          <p>With the option <code>--show-copies-as-adds</code>, copied (and moved) files
+          are listed.</p>
 
-<p>
-With the option <code>--show-copies-as-adds</code>, copied (and moved) files are listed.
-</p>
-<p>
-Using =sed '<i>^Index:</i>!d'= (instead of =egrep "^Index:"=) allows to filter the
-lines we're interested in, even if the file contains binary characters (such
-as non-breakable spaces). On the other hand, <code>grep</code> would simply declare that
-"Binary file matches".
-</p>
-</div>
+          <p>Using =sed &lsquo;<i>^Index:</i>!d&rsquo;= (instead of =egrep
+          &ldquo;^Index:"=) allows to filter the lines we&rsquo;re interested in, even if
+          the file contains binary characters (such as non-breakable spaces). On the
+          other hand, <code>grep</code> would simply declare that &ldquo;Binary file
+          matches&rdquo;.</p>
+        </div>
+      </div>
 
-</div>
+      <div id="outline-container-3-3" class="outline-3">
+        <h3 id="sec-3-3"><span class="section-number-3">3.3</span> Display changes</h3>
 
-<div id="outline-container-3-3" class="outline-3">
-<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Display changes</h3>
-<div class="outline-text-3" id="text-3-3">
+        <div class="outline-text-3" id="text-3-3">
+          <p>Display the changes made to all target files, and display deleted and new
+          files as well.</p>
 
+          <p>With the option <code>-x -w</code>, <code>svn diff</code> <b>shows only
+          non-whitespace line changes</b> between two revisions.</p>
 
-<p>
-Display the changes made to all target files, and display deleted and new
-files as well.
-</p>
-<p>
-With the option <code>-x -w</code>, <code>svn diff</code> <b>shows only non-whitespace line changes</b> between
-two revisions.
-</p>
-<p>
-With the option <code>--no-diff-deleted</code>, differences for deleted files are not
-printed.
-</p>
+          <p>With the option <code>--no-diff-deleted</code>, differences for deleted
+          files are not printed.</p>
 
+          <div class="org-src-container">
+            <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">Usage: makediff [svn diff options]</span>
+<span style="color: #EE0000; font-style: italic;">#</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">Make a diff file, ready for review. It contains the diffs of all files,</span>
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">followed by the text of new files. Output goes to stdout.</span>
 
+<span style="color: #2E91AF;">tmpfile</span>=<span style=
+"color: #008000;">"/tmp/$(</span><span style=
+"color: #ff00ff;">basename</span><span style="color: #008000;"> $0).$$"</span>
+<span style="color: #A535AE; font-weight: bold;">trap</span> <span style=
+"color: #008000;">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: makediff [svn diff options]</span>
-<span class="org-comment-delimiter">#</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">Make a diff file, ready for review. It contains the diffs of all files,</span>
-<span class="org-comment-delimiter"># </span><span class="org-comment">followed by the text of new files. Output goes to stdout.</span>
-
-<span class="org-variable-name">tmpfile</span>=<span class="org-string">"/tmp/$(</span><span class="org-sh-quoted-exec">basename</span><span class="org-string"> $0).$$"</span>
-<span class="org-keyword">trap</span> <span class="org-string">"rm -f $tmpfile"</span> EXIT SIGHUP SIGINT SIGQUIT SIGTERM
-
-<span class="org-keyword">case</span> $<span class="org-variable-name">vcs</span><span class="org-keyword"> in</span>
+<span style="color: #A535AE; font-weight: bold;">case</span> $<span style=
+"color: #2E91AF;">vcs</span><span style="color: #A535AE; font-weight: bold;"> in</span>
     svn)
-        svn diff -x -w --no-diff-deleted $<span class="org-variable-name">*</span> &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
+        svn diff -x -w --no-diff-deleted $<span style=
+"color: #2E91AF;">*</span> &gt; $<span style="color: #2E91AF;">tmpfile</span> 2&gt;&amp;1
         ;;
     tfs)
-        tf diff $<span class="org-variable-name">*</span> /format:Unified &gt; $<span class="org-variable-name">tmpfile</span> 2&gt;&amp;1
-        cat $<span class="org-variable-name">tmpfile</span> <span class="org-sh-escaped-newline">\</span>
-            | grep -E -i -v <span class="org-string">"^(edit|modifier|add|ajouter|renommer): "</span> <span class="org-sh-escaped-newline">\</span>
-            | sed -r <span class="org-string">"s/^(File:|Fichier\o240:)/Index:/"</span> &gt; $<span class="org-variable-name">tmpfile</span>.out
-        mv $<span class="org-variable-name">tmpfile</span>.out $<span class="org-variable-name">tmpfile</span>
+        tf diff $<span style=
+"color: #2E91AF;">*</span> /format:Unified &gt; $<span style="color: #2E91AF;">tmpfile</span> 2&gt;&amp;1
+        cat $<span style="color: #2E91AF;">tmpfile</span> <span style=
+"color: #008000;">\</span>
+            | grep -E -i -v <span style=
+"color: #008000;">"^(edit|modifier|add|ajouter|renommer): "</span> <span style=
+"color: #008000;">\</span>
+            | sed -r <span style=
+"color: #008000;">"s/^(File:|Fichier\o240:)/Index:/"</span> &gt; $<span style=
+"color: #2E91AF;">tmpfile</span>.out
+        mv $<span style="color: #2E91AF;">tmpfile</span>.out $<span style=
+"color: #2E91AF;">tmpfile</span>
         ;;
-<span class="org-keyword">esac</span>
-cat $<span class="org-variable-name">tmpfile</span>
+<span style="color: #A535AE; font-weight: bold;">esac</span>
+cat $<span style="color: #2E91AF;">tmpfile</span>
 </pre>
+          </div>
+        </div>
+      </div>
 
+      <div id="outline-container-3-4" class="outline-3">
+        <h3 id="sec-3-4"><span class="section-number-3">3.4</span> Ignore files from the
+        command line</h3>
 
-</div>
+        <div class="outline-text-3" id="text-3-4">
+          <p>Add a file (or a file glob pattern) to ignore without deleting the previous
+          value of the <code>svn:ignore</code> property&hellip; from the command
+          line.</p>
 
-</div>
+          <div class="org-src-container">
+            <pre class="src src-sh">
+<span style="color: #EE0000; font-style: italic;"># </span><span style=
+"color: #EE0000; font-style: italic;">Usage: svnignore admin/notes/\*.tex</span>
 
-<div id="outline-container-3-4" class="outline-3">
-<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Ignore elements</h3>
-<div class="outline-text-3" id="text-3-4">
+<span style="color: #2E91AF;">target</span>=<span style="color: #008000;">"$1"</span>
+<span style="color: #2E91AF;">targetdirectory</span>=$(<span style=
+"color: #ff00ff;">dirname</span> $<span style="color: #2E91AF;">target</span>)
+<span style="color: #2E91AF;">targetfilepattern</span>=$(<span style=
+"color: #ff00ff;">basename</span> $<span style="color: #2E91AF;">target</span>)
 
-
-<p>
-Ignore multiple elements in one command.
-</p>
-
-
-
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Usage: svnignore . \*.o \*.exe \*.tmp</span>
-
-<span class="org-variable-name">target</span>=<span class="org-string">"$1"</span>; <span class="org-builtin">shift</span>
-svn propset svn:ignore <span class="org-string">"$(</span><span class="org-sh-quoted-exec">echo</span><span class="org-string"> $* | tr ' ' '\n')"</span> <span class="org-string">"$target"</span>
+<span style="color: #2E91AF;">svnignores</span>=$(<span style=
+"color: #ff00ff;">svn</span> propget svn:ignore <span style=
+"color: #008000;">"$targetdirectory"</span>)
+<span style="color: #2E91AF;">svnignores</span>=<span style=
+"color: #008000;">"$svnignores"</span>$<span style=
+"color: #008000;">'\n'"$targetfilepattern"</span>
+<span style="color: #FF5803;">printf</span> <span style=
+"color: #008000;">"Ignore '$targetfilepattern'\n"</span>
+svn propset svn:ignore <span style="color: #008000;">"$svnignores"</span> <span style=
+"color: #008000;">"$targetdirectory"</span>
 </pre>
+          </div>
+        </div>
+      </div>
 
+      <div id="outline-container-3-5" class="outline-3">
+        <h3 id="sec-3-5"><span class="section-number-3">3.5</span> Unaccent</h3>
 
+        <div class="outline-text-3" id="text-3-5">
+          <p>Remove accents, replacing accented letters by their unaccented
+          equivalent.</p>
 
-
-<div class="inlinetask "><p><b>Note</b><br/></p>
-
-<p>
-Use <code>cd admin; svnignore . file</code>
-instead of <code>svnignore . admin/file</code>.
-</p>
-
-
-</div>
-
-</div>
-
-</div>
-
-<div id="outline-container-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Unaccent</h3>
-<div class="outline-text-3" id="text-3-5">
-
-
-<p>
-Remove accents, replacing accented letters by their unaccented equivalent.
-</p>
-
-
-
-<pre class="src src-sh">s/\o240/ /g
+          <div class="org-src-container">
+            <pre class="src src-sh">
+s/\o240/ /g
 s/\o300/A/g
 s/\o301/A/g
 s/\o302/A/g
@@ -1211,39 +1308,29 @@ s/\o372/u/g
 s/\o373/u/g
 s/\o374/u/g
 </pre>
+          </div>
+        </div>
+      </div>
 
+      <div id="outline-container-3-6" class="outline-3">
+        <h3 id="sec-3-6"><span class="section-number-3">3.6</span> Install
+        environment</h3>
 
-</div>
+        <div class="outline-text-3" id="text-3-6">
+          <p>Symlink the files.</p>
 
-</div>
-
-<div id="outline-container-3-6" class="outline-3">
-<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Install environment</h3>
-<div class="outline-text-3" id="text-3-6">
-
-
-<p>
-Symlink the files.
-</p>
-
-
-
-<pre class="src src-sh">ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/sendpatch ~/bin/sendpatch
-ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/makelog ~/bin/makelog
-ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/makediff ~/bin/makediff
-ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/svnignore ~/bin/svnignore
-ln -f -s $(<span class="org-sh-quoted-exec">pwd</span>)/unaccent ~/bin/unaccent
+          <div class="org-src-container">
+            <pre class="src src-sh">
+ln -f -s $(<span style="color: #ff00ff;">pwd</span>)/sendpatch ~/bin/sendpatch
+ln -f -s $(<span style="color: #ff00ff;">pwd</span>)/makelog ~/bin/makelog
+ln -f -s $(<span style="color: #ff00ff;">pwd</span>)/makediff ~/bin/makediff
+ln -f -s $(<span style="color: #ff00ff;">pwd</span>)/svnignore ~/bin/svnignore
+ln -f -s $(<span style="color: #ff00ff;">pwd</span>)/unaccent ~/bin/unaccent
 </pre>
-
-</div>
-</div>
-</div>
-</div>
-
-<div id="postamble">
-  <div id="copyright">
-    &copy; 2013-02-04T17:10+0100 Fabrice Niessen
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 </body>
 </html>
