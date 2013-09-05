@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-02-27 Wed 21:32>
+#+Time-stamp: <2013-09-05 Thu 11:32>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -206,9 +206,19 @@ cecho () {
     magenta="\e[35m"
     cyan="\e[36m"
     white="\e[37m"
+
+    BLACK="\e[1;30m"
+    RED="\e[1;31m"
+    GREEN="\e[1;32m"
+    YELLOW="\e[1;33m"
+    BLUE="\e[1;34m"
+    MAGENTA="\e[1;35m"
+    CYAN="\e[1;36m"
+    WHITE="\e[1;37m"
+
     reset="\e[0m"
 
-    color=${green}
+    color=${YELLOW}
     printf "$color$1$reset\n"
 }
 #+end_src
