@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-09-16 Mon 22:21>
+#+Time-stamp: <2013-10-04 Fri 15:16>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -71,7 +71,7 @@ Further paragraphs come after blank lines.
 - Use a hanging indent
 #+end_src
 
-** Real-life example                                                :noexport:
+** Real-life example                                                 :noexport:
 
 With a cover letter: http://patchwork.madduck.net/patch/1141/
 
