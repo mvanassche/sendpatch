@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-04 Fri 15:16>
+#+Time-stamp: <2013-10-04 Fri 15:23>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -232,7 +232,7 @@ ask () {
 }
 #+end_src
 
-See [[https://gist.github.com/1965569][usage samples]] for defaults (when the user presses RET without giving an
+See [[https://gist.github.com/1965569][usage samples]] for defaults (when the user presses =RET= without giving an
 answer).
 
 See [[http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script][How do I prompt a user for confirmation in bash script?]] for the regexp
@@ -721,3 +721,5 @@ ln -f -s $(pwd)/makediff ~/bin/makediff
 ln -f -s $(pwd)/svnignore ~/bin/svnignore
 ln -f -s $(pwd)/unaccent ~/bin/unaccent
 #+end_src
+
+#  LocalWords:  Fabrice Niessen inline SVN VCS TFS UTF Unaccent Symlink
