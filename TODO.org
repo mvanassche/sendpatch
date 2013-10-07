@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-09-16 Mon 22:21>
+#+Time-stamp: <2013-10-07 Mon 11:16>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -11,6 +11,13 @@
 #+PROPERTY:  shebang #!/bin/bash
 
 * Tasks
+
+** TODO Check errors from svn diff
+
+If =svn diff= stops with an error, print it out (by re-running =svn diff=, sending
+stdout to =/dev/null=?), and do try to make up the commit message.
+
+Steps to reproduce: delete a file which was in SVN, such as a useless =.tex= file.
 
 ** TODO [#A] Add a command-line option to recover last log message
 
