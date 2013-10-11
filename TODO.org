@@ -1,14 +1,13 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-07 Mon 11:16>
+#+Time-stamp: <2013-10-11 Fri 10:27>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t ^:{}
 
 #+SETUPFILE: bigblow.setup
-#+PROPERTY:  shebang #!/bin/bash
 
 * Tasks
 
