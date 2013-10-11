@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Submit patches</title>
+  <title>Submit patches</title><!-- 2013-10-11 Fri 10:25 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -150,14 +150,80 @@ Further paragraphs come after blank lines.
 
         <div id="outline-container-sec-2-1-1" class="outline-4">
           <h4 id="sec-2-1-1"><span class="section-number-4">2.1.1</span>
-          Configuration options</h4>
+          Version number</h4>
 
-          <div class="outline-text-4" id="text-2-1-1"></div>
+          <div class="outline-text-4" id="text-2-1-1">
+            <div class="org-src-container">
+              <pre class="src src-sh" id="time-stamp">
+<span style="color: #006FE0;">echo</span> <span style=
+"color: #FF4700;">"$(date '+%Y%m%d.%H%M')"</span>
+</pre>
+            </div>
 
-          <div id="outline-container-sec-2-1-1-1" class="outline-5">
-            <h5 id="sec-2-1-1-1">Per project options</h5>
+            <div class="org-src-container">
+              <pre class="src src-sh">
+    cat &lt;&lt; EOF
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131011.1025.</span>
 
-            <div class="outline-text-5" id="text-2-1-1-1">
+<span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
+</pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="outline-container-sec-2-1-2" class="outline-4">
+          <h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span>
+          Usage</h4>
+
+          <div class="outline-text-4" id="text-2-1-2">
+            <div class="org-src-container">
+              <pre class="src src-sh">
+<span style="color: #006699;">Usage</span> ()
+{
+    cat &lt;&lt; EOF 1&gt;&amp;2
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">Usage: $(basename $0) [OPTION]... [FILE]...</span>
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">Submit patches per email.</span>
+
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">  -h, --help                display this help and exit</span>
+
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">Report $(basename $0) bugs to fni@xxx.com</span>
+<span style=
+"color: #0000ff; background-color: #EEF5FE;">Commit guidelines: <a href=
+"http://svn/mc/xxx/sendpatch/trunk/send-patch.html">&lt;http://svn/mc/xxx/sendpatch/trunk/send-patch.html&gt;</a></span>
+<span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
+    <span style="color: #0000FF;">exit</span> 1
+}
+
+<span style="color: #0000FF;">while </span><span style=
+"color: #006FE0;">true</span>; <span style="color: #0000FF;">do</span>
+    <span style="color: #0000FF;">case</span> <span style=
+"color: #FF4700;">"$1"</span><span style="color: #0000FF;"> in</span>
+        -h | --help) Usage; <span style="color: #006FE0;">shift</span> ;;
+        * ) <span style="color: #0000FF;">break</span> ;;
+    <span style="color: #0000FF;">esac</span>
+<span style="color: #0000FF;">done</span>
+<span style="color: #008200;"># </span><span style=
+"color: #008200; font-style: italic;">now do something with $@</span>
+</pre>
+            </div>
+          </div>
+        </div>
+
+        <div id="outline-container-sec-2-1-3" class="outline-4">
+          <h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span>
+          Configuration</h4>
+
+          <div class="outline-text-4" id="text-2-1-3"></div>
+
+          <div id="outline-container-sec-2-1-3-1" class="outline-5">
+            <h5 id="sec-2-1-3-1">Per project options</h5>
+
+            <div class="outline-text-5" id="text-2-1-3-1">
               <div class="org-src-container">
                 <pre class="src src-sh">
 <span style="color: #BA36A5;">mailto</span>=<span style=
@@ -171,10 +237,10 @@ Further paragraphs come after blank lines.
             </div>
           </div>
 
-          <div id="outline-container-sec-2-1-1-2" class="outline-5">
-            <h5 id="sec-2-1-1-2">Per user options</h5>
+          <div id="outline-container-sec-2-1-3-2" class="outline-5">
+            <h5 id="sec-2-1-3-2">Per user options</h5>
 
-            <div class="outline-text-5" id="text-2-1-1-2">
+            <div class="outline-text-5" id="text-2-1-3-2">
               <div class="org-src-container">
                 <pre class="src src-sh">
 <span style="color: #BA36A5;">patchfileprefix</span>=<span style=
@@ -198,10 +264,10 @@ Further paragraphs come after blank lines.
             </div>
           </div>
 
-          <div id="outline-container-sec-2-1-1-3" class="outline-5">
-            <h5 id="sec-2-1-1-3">Usage</h5>
+          <div id="outline-container-sec-2-1-3-3" class="outline-5">
+            <h5 id="sec-2-1-3-3">Example</h5>
 
-            <div class="outline-text-5" id="text-2-1-1-3">
+            <div class="outline-text-5" id="text-2-1-3-3">
               <p>A commonly configured option could be:</p>
 
               <div class="org-src-container">
@@ -212,7 +278,13 @@ Further paragraphs come after blank lines.
               </div>
 
               <p>Note the use of <b>3 backslashes</b>!</p>
+            </div>
+          </div>
 
+          <div id="outline-container-sec-2-1-3-4" class="outline-5">
+            <h5 id="sec-2-1-3-4">Files</h5>
+
+            <div class="outline-text-5" id="text-2-1-3-4">
               <p>All the <i>default</i> settings can be overridden in:</p>
 
               <ol class="org-ol">
@@ -233,11 +305,11 @@ Further paragraphs come after blank lines.
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-2" class="outline-4">
-          <h4 id="sec-2-1-2"><span class="section-number-4">2.1.2</span> Helper
+        <div id="outline-container-sec-2-1-4" class="outline-4">
+          <h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Helper
           functions</h4>
 
-          <div class="outline-text-4" id="text-2-1-2">
+          <div class="outline-text-4" id="text-2-1-4">
             <p>The exit status follows the conventions for programs such as
             <code>grep</code>, <code>cmp</code>, and <code>diff</code>:</p>
 
@@ -302,10 +374,10 @@ Further paragraphs come after blank lines.
             </div>
           </div>
 
-          <div id="outline-container-sec-2-1-2-1" class="outline-5">
-            <h5 id="sec-2-1-2-1">VCS in use</h5>
+          <div id="outline-container-sec-2-1-4-1" class="outline-5">
+            <h5 id="sec-2-1-4-1">VCS in use</h5>
 
-            <div class="outline-text-5" id="text-2-1-2-1">
+            <div class="outline-text-5" id="text-2-1-4-1">
               <div class="org-src-container">
                 <pre class="src src-sh">
 <span style="color: #006699;">vcs_info</span> () {
@@ -335,10 +407,10 @@ Further paragraphs come after blank lines.
             </div>
           </div>
 
-          <div id="outline-container-sec-2-1-2-2" class="outline-5">
-            <h5 id="sec-2-1-2-2">TFS</h5>
+          <div id="outline-container-sec-2-1-4-2" class="outline-5">
+            <h5 id="sec-2-1-4-2">TFS</h5>
 
-            <div class="outline-text-5" id="text-2-1-2-2">
+            <div class="outline-text-5" id="text-2-1-4-2">
               <div class="org-src-container">
                 <pre class="src src-sh">
 <span style="color: #006699;">fixtfsbinaryfiles</span> () {
@@ -350,10 +422,10 @@ Further paragraphs come after blank lines.
             </div>
           </div>
 
-          <div id="outline-container-sec-2-1-2-3" class="outline-5">
-            <h5 id="sec-2-1-2-3">Yes/No prompt function</h5>
+          <div id="outline-container-sec-2-1-4-3" class="outline-5">
+            <h5 id="sec-2-1-4-3">Yes/No prompt function</h5>
 
-            <div class="outline-text-5" id="text-2-1-2-3">
+            <div class="outline-text-5" id="text-2-1-4-3">
               <div class="org-src-container">
                 <pre class="src src-sh">
 <span style="color: #006699;">ask</span> () {
@@ -406,8 +478,8 @@ Further paragraphs come after blank lines.
               </div>
 
               <p>See <a href="https://gist.github.com/1965569">usage
-              samples</a> for defaults (when the user presses RET without
-              giving an answer).</p>
+              samples</a> for defaults (when the user presses <code>RET</code>
+              without giving an answer).</p>
 
               <p>See <a href=
               "http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script">
@@ -417,11 +489,11 @@ Further paragraphs come after blank lines.
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-3" class="outline-4">
-          <h4 id="sec-2-1-3"><span class="section-number-4">2.1.3</span>
+        <div id="outline-container-sec-2-1-5" class="outline-4">
+          <h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span>
           Init</h4>
 
-          <div class="outline-text-4" id="text-2-1-3">
+          <div class="outline-text-4" id="text-2-1-5">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #BA36A5;">tmpfile</span>=<span style=
@@ -456,11 +528,11 @@ printf <span style="color: #FF4700;">"VC backend: $vcs\n"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-4" class="outline-4">
-          <h4 id="sec-2-1-4"><span class="section-number-4">2.1.4</span> Check
+        <div id="outline-container-sec-2-1-6" class="outline-4">
+          <h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span> Check
           current directory</h4>
 
-          <div class="outline-text-4" id="text-2-1-4">
+          <div class="outline-text-4" id="text-2-1-6">
             <p>Note that, for TFS, we impose to find a
             <code>sendpatch.common</code> file in order to conclude that we’re
             at the root directory of a working copy, or not.</p>
@@ -487,11 +559,11 @@ printf <span style="color: #FF4700;">"VC backend: $vcs\n"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-5" class="outline-4">
-          <h4 id="sec-2-1-5"><span class="section-number-4">2.1.5</span> Get
+        <div id="outline-container-sec-2-1-7" class="outline-4">
+          <h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span> Get
           URL of project</h4>
 
-          <div class="outline-text-4" id="text-2-1-5">
+          <div class="outline-text-4" id="text-2-1-7">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #0000FF;">case</span> $<span style=
@@ -516,11 +588,11 @@ printf <span style="color: #FF4700;">"VC backend: $vcs\n"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-6" class="outline-4">
-          <h4 id="sec-2-1-6"><span class="section-number-4">2.1.6</span>
+        <div id="outline-container-sec-2-1-8" class="outline-4">
+          <h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span>
           Override settings</h4>
 
-          <div class="outline-text-4" id="text-2-1-6">
+          <div class="outline-text-4" id="text-2-1-8">
             <div class="org-src-container">
               <pre class="src src-sh">
 [[ -f $<span style=
@@ -561,11 +633,11 @@ printf <span style="color: #FF4700;">"$emailcommand"</span> | grep <span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-7" class="outline-4">
-          <h4 id="sec-2-1-7"><span class="section-number-4">2.1.7</span>
+        <div id="outline-container-sec-2-1-9" class="outline-4">
+          <h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span>
           Display changed files</h4>
 
-          <div class="outline-text-4" id="text-2-1-7">
+          <div class="outline-text-4" id="text-2-1-9">
             <p>Shows what files have been modified in your working copy, what
             files have been changed in the repository since your last update,
             and which files, if any, conflict with your modifications. The
@@ -617,11 +689,11 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-8" class="outline-4">
-          <h4 id="sec-2-1-8"><span class="section-number-4">2.1.8</span>
+        <div id="outline-container-sec-2-1-10" class="outline-4">
+          <h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span>
           Display ignored files</h4>
 
-          <div class="outline-text-4" id="text-2-1-8">
+          <div class="outline-text-4" id="text-2-1-10">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #0000FF;">case</span> $<span style=
@@ -656,11 +728,11 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-9" class="outline-4">
-          <h4 id="sec-2-1-9"><span class="section-number-4">2.1.9</span> Ask
+        <div id="outline-container-sec-2-1-11" class="outline-4">
+          <h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> Ask
           for short log message</h4>
 
-          <div class="outline-text-4" id="text-2-1-9">
+          <div class="outline-text-4" id="text-2-1-11">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #0000FF;">if</span> [[ <span style=
@@ -674,11 +746,11 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-10" class="outline-4">
-          <h4 id="sec-2-1-10"><span class="section-number-4">2.1.10</span>
+        <div id="outline-container-sec-2-1-12" class="outline-4">
+          <h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span>
           Generate name for patch files</h4>
 
-          <div class="outline-text-4" id="text-2-1-10">
+          <div class="outline-text-4" id="text-2-1-12">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #BA36A5;">oldcounter</span>=$(ls ${<span style=
@@ -706,11 +778,11 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-11" class="outline-4">
-          <h4 id="sec-2-1-11"><span class="section-number-4">2.1.11</span> Make
+        <div id="outline-container-sec-2-1-13" class="outline-4">
+          <h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span> Make
           patch file</h4>
 
-          <div class="outline-text-4" id="text-2-1-11">
+          <div class="outline-text-4" id="text-2-1-13">
             <p>The patch file generated only reports <code>file.bin: files
             differ</code>. The fix for getting such names included in the log
             (list of modified files) is to replace that one-sentence with a
@@ -755,11 +827,11 @@ makediff $<span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-12" class="outline-4">
-          <h4 id="sec-2-1-12"><span class="section-number-4">2.1.12</span> Edit
+        <div id="outline-container-sec-2-1-14" class="outline-4">
+          <h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span> Edit
           log message</h4>
 
-          <div class="outline-text-4" id="text-2-1-12">
+          <div class="outline-text-4" id="text-2-1-14">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #008200;"># </span><span style=
@@ -817,11 +889,11 @@ sed <span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-13" class="outline-4">
-          <h4 id="sec-2-1-13"><span class="section-number-4">2.1.13</span>
+        <div id="outline-container-sec-2-1-15" class="outline-4">
+          <h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span>
           Convert email contents into UTF-8</h4>
 
-          <div class="outline-text-4" id="text-2-1-13">
+          <div class="outline-text-4" id="text-2-1-15">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #008200;"># </span><span style=
@@ -853,11 +925,11 @@ printf <span style="color: #FF4700;">"Email:         $email\n"</span>
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-14" class="outline-4">
-          <h4 id="sec-2-1-14"><span class="section-number-4">2.1.14</span>
+        <div id="outline-container-sec-2-1-16" class="outline-4">
+          <h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span>
           Deduce log message for commit</h4>
 
-          <div class="outline-text-4" id="text-2-1-14">
+          <div class="outline-text-4" id="text-2-1-16">
             <div class="org-src-container">
               <pre class="src src-sh">
 sed <span style="color: #FF4700;">'/^---$/,$d'</span> &lt; $<span style=
@@ -868,11 +940,11 @@ sed <span style="color: #FF4700;">'/^---$/,$d'</span> &lt; $<span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-15" class="outline-4">
-          <h4 id="sec-2-1-15"><span class="section-number-4">2.1.15</span>
+        <div id="outline-container-sec-2-1-17" class="outline-4">
+          <h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span>
           Deduce subject line for email</h4>
 
-          <div class="outline-text-4" id="text-2-1-15">
+          <div class="outline-text-4" id="text-2-1-17">
             <div class="org-src-container">
               <pre class="src src-sh">
 <span style="color: #008200;"># </span><span style=
@@ -903,11 +975,11 @@ head -n 1 $<span style="color: #BA36A5;">email</span> &gt; $<span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-16" class="outline-4">
-          <h4 id="sec-2-1-16"><span class="section-number-4">2.1.16</span>
+        <div id="outline-container-sec-2-1-18" class="outline-4">
+          <h4 id="sec-2-1-18"><span class="section-number-4">2.1.18</span>
           Auto-commit changes</h4>
 
-          <div class="outline-text-4" id="text-2-1-16">
+          <div class="outline-text-4" id="text-2-1-18">
             <div class="org-src-container">
               <pre class="src src-sh">
 printf <span style="color: #FF4700;">"\n"</span>
@@ -951,11 +1023,11 @@ test $<span style="color: #BA36A5;">rc</span> -eq 0 || die <span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-17" class="outline-4">
-          <h4 id="sec-2-1-17"><span class="section-number-4">2.1.17</span>
+        <div id="outline-container-sec-2-1-19" class="outline-4">
+          <h4 id="sec-2-1-19"><span class="section-number-4">2.1.19</span>
           Auto-send email</h4>
 
-          <div class="outline-text-4" id="text-2-1-17">
+          <div class="outline-text-4" id="text-2-1-19">
             <div class="org-src-container">
               <pre class="src src-sh">
 printf <span style="color: #FF4700;">"\n"</span>
@@ -1007,11 +1079,11 @@ test $<span style="color: #BA36A5;">rc</span> -eq 0 || die <span style=
           </div>
         </div>
 
-        <div id="outline-container-sec-2-1-18" class="outline-4">
-          <h4 id="sec-2-1-18"><span class="section-number-4">2.1.18</span>
+        <div id="outline-container-sec-2-1-20" class="outline-4">
+          <h4 id="sec-2-1-20"><span class="section-number-4">2.1.20</span>
           Auto-delete temporary files</h4>
 
-          <div class="outline-text-4" id="text-2-1-18">
+          <div class="outline-text-4" id="text-2-1-20">
             <div class="org-src-container">
               <pre class="src src-sh">
 printf <span style="color: #FF4700;">"\n"</span>
@@ -1042,6 +1114,9 @@ printf <span style="color: #FF4700;">"\n"</span>
 <span style="color: #0000FF;">fi</span>
 test $<span style="color: #BA36A5;">rc</span> -eq 0 || die <span style=
 "color: #FF4700;">"delete temp files failed"</span>
+
+<span style="color: #008200;">## </span><span style=
+"color: #008200; font-style: italic;">sendpatch ends here</span>
 </pre>
             </div>
           </div>
@@ -1254,10 +1329,10 @@ s/\o374/u/g
           <div class="org-src-container">
             <pre class="src src-sh">
 ln -f -s $(<span style="color: #006FE0;">pwd</span>)/sendpatch ~/bin/sendpatch
-ln -f -s $(<span style="color: #006FE0;">pwd</span>)/makelog ~/bin/makelog
-ln -f -s $(<span style="color: #006FE0;">pwd</span>)/makediff ~/bin/makediff
+ln -f -s $(<span style="color: #006FE0;">pwd</span>)/makelog   ~/bin/makelog
+ln -f -s $(<span style="color: #006FE0;">pwd</span>)/makediff  ~/bin/makediff
 ln -f -s $(<span style="color: #006FE0;">pwd</span>)/svnignore ~/bin/svnignore
-ln -f -s $(<span style="color: #006FE0;">pwd</span>)/unaccent ~/bin/unaccent
+ln -f -s $(<span style="color: #006FE0;">pwd</span>)/unaccent  ~/bin/unaccent
 </pre>
           </div>
         </div>

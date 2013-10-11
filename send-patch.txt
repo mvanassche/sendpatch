@@ -1,14 +1,15 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-04 Fri 15:23>
+#+Time-stamp: <2013-10-11 Fri 10:25>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t ^:{}
 
+#+PROPERTY:  eval     no
+#+PROPERTY:  shebang  "#!/bin/bash\n"
 #+SETUPFILE: bigblow.setup
-#+PROPERTY:  shebang #!/bin/bash
 
 * Commit guidelines
 
@@ -87,7 +88,47 @@ This script sends patches:
 - to the SVN repository (that is, /commits/ them)
 - to mailing lists (that is, /emails/ them)
 
-*** Configuration options
+*** Version number
+
+#+name: time-stamp
+#+begin_src sh :eval yes :results silent :tangle no
+echo "$(date '+%Y%m%d.%H%M')"
+#+end_src
+
+#+begin_src sh :noweb yes
+    cat << EOF
+This is $(basename $0), version: <<time-stamp()>>.
+
+EOF
+#+end_src
+
+*** Usage
+
+#+begin_src sh
+Usage ()
+{
+    cat << EOF 1>&2
+Usage: $(basename $0) [OPTION]... [FILE]...
+Submit patches per email.
+
+  -h, --help                display this help and exit
+
+Report $(basename $0) bugs to fni@xxx.com
+Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>
+EOF
+    exit 1
+}
+
+while true; do
+    case "$1" in
+        -h | --help) Usage; shift ;;
+        ,* ) break ;;
+    esac
+done
+# now do something with $@
+#+end_src
+
+*** Configuration
 
 **** Per project options
 
@@ -110,7 +151,7 @@ autodeletetmpfiles="ask"
 emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <johndoe@example.com>" -charset UTF-8'
 #+end_src
 
-**** Usage
+**** Example
 
 A commonly configured option could be:
 
@@ -119,6 +160,8 @@ excludefileregexp="(\\\.html|\\\.xml)"
 #+end_src
 
 Note the use of *3 backslashes*!
+
+**** Files
 
 All the /default/ settings can be overridden in:
 
@@ -565,6 +608,8 @@ else
     rc=0
 fi
 test $rc -eq 0 || die "delete temp files failed"
+
+## sendpatch ends here
 #+end_src
 
 ** Display list of files
@@ -665,7 +710,7 @@ svn propset svn:ignore "$svnignores" "$targetdirectory"
 
 Remove accents, replacing accented letters by their unaccented equivalent.
 
-#+begin_src sh :shebang #!/bin/sed -f
+#+begin_src sh :shebang "#!/bin/sed -f\n"
 s/\o240/ /g
 s/\o300/A/g
 s/\o301/A/g
@@ -716,10 +761,10 @@ Symlink the files.
 
 #+begin_src sh :results silent
 ln -f -s $(pwd)/sendpatch ~/bin/sendpatch
-ln -f -s $(pwd)/makelog ~/bin/makelog
-ln -f -s $(pwd)/makediff ~/bin/makediff
+ln -f -s $(pwd)/makelog   ~/bin/makelog
+ln -f -s $(pwd)/makediff  ~/bin/makediff
 ln -f -s $(pwd)/svnignore ~/bin/svnignore
-ln -f -s $(pwd)/unaccent ~/bin/unaccent
+ln -f -s $(pwd)/unaccent  ~/bin/unaccent
 #+end_src
 
 #  LocalWords:  Fabrice Niessen inline SVN VCS TFS UTF Unaccent Symlink

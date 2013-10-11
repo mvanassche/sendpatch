@@ -1,5 +1,32 @@
 #!/bin/bash
 
+    cat << EOF
+This is $(basename $0), version: 20131011.1025.
+
+EOF
+
+Usage ()
+{
+    cat << EOF 1>&2
+Usage: $(basename $0) [OPTION]... [FILE]...
+Submit patches per email.
+
+  -h, --help                display this help and exit
+
+Report $(basename $0) bugs to fni@xxx.com
+Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>
+EOF
+    exit 1
+}
+
+while true; do
+    case "$1" in
+        -h | --help) Usage; shift ;;
+        * ) break ;;
+    esac
+done
+# now do something with $@
+
 mailto="mc-reviews@xxx.com"
 prefix="[PATCH]"
 excludefileregexp=""
@@ -325,3 +352,5 @@ else
     rc=0
 fi
 test $rc -eq 0 || die "delete temp files failed"
+
+## sendpatch ends here
