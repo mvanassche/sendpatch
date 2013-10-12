@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20131011.1025.
+This is $(basename $0), version: 20131012.1407.
 
 EOF
 
@@ -11,7 +11,7 @@ Usage ()
 Usage: $(basename $0) [OPTION]... [FILE]...
 Submit patches per email.
 
-  -h, --help                display this help and exit
+  -h, --help     display this help and exit
 
 Report $(basename $0) bugs to fni@xxx.com
 Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>

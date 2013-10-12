@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-11 Fri 10:27>
+#+Time-stamp: <2013-10-12 Sat 14:07>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -10,6 +10,8 @@
 #+SETUPFILE: bigblow.setup
 
 * Tasks
+
+** TODO Add support of Git
 
 ** TODO Check errors from svn diff
 

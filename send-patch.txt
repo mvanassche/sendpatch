@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-11 Fri 10:25>
+#+Time-stamp: <2013-10-11 Fri 16:26>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -111,7 +111,7 @@ Usage ()
 Usage: $(basename $0) [OPTION]... [FILE]...
 Submit patches per email.
 
-  -h, --help                display this help and exit
+  -h, --help     display this help and exit
 
 Report $(basename $0) bugs to fni@xxx.com
 Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>
