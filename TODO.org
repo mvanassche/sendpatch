@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-12 Sat 14:07>
+#+Time-stamp: <2013-10-15 Tue 16:34>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -12,13 +12,6 @@
 * Tasks
 
 ** TODO Add support of Git
-
-** TODO Check errors from svn diff
-
-If =svn diff= stops with an error, print it out (by re-running =svn diff=, sending
-stdout to =/dev/null=?), and do try to make up the commit message.
-
-Steps to reproduce: delete a file which was in SVN, such as a useless =.tex= file.
 
 ** TODO [#A] Add a command-line option to recover last log message
 

@@ -20,4 +20,11 @@ case $vcs in
         mv $tmpfile.out $tmpfile
         ;;
 esac
+
+retval=$?
+
 cat $tmpfile
+
+if [ $retval -ne 0 ]; then
+    exit 2
+fi

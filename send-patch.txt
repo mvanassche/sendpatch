@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-11 Fri 16:26>
+#+Time-stamp: <2013-10-15 Tue 16:33>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -72,7 +72,7 @@ Further paragraphs come after blank lines.
 - Use a hanging indent
 #+end_src
 
-** Real-life example                                                 :noexport:
+** TODO Real-life example                                            :noexport:
 
 With a cover letter: http://patchwork.madduck.net/patch/1141/
 
@@ -121,7 +121,7 @@ EOF
 
 while true; do
     case "$1" in
-        -h | --help) Usage; shift ;;
+        -h | --help) Usage ;;
         ,* ) break ;;
     esac
 done
@@ -442,7 +442,18 @@ getting such names included in the log (list of modified files) is to replace
 that one-sentence with a traditional =Index:= marker.
 
 #+begin_src sh
-makediff $@ | fixtfsbinaryfiles > $patch
+makediff $@ > $patch.tmp
+retval=$?
+
+if [ $retval -ne 0 ]; then
+    printf "\n"
+    cat $patch.tmp > /dev/stderr
+    rm $patch.tmp
+    exit 2
+else
+    cat $patch.tmp | fixtfsbinaryfiles > $patch
+    rm $patch.tmp
+fi
 #+end_src
 
 =excludefileregexp= allows one to exclude useless or unreadable diffs from the
@@ -679,7 +690,14 @@ case $vcs in
         mv $tmpfile.out $tmpfile
         ;;
 esac
+
+retval=$?
+
 cat $tmpfile
+
+if [ $retval -ne 0 ]; then
+    exit 2
+fi
 #+end_src
 
 ** Ignore files from the command line

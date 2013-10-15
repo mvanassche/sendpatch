@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20131012.1407.
+This is $(basename $0), version: 20131015.1633.
 
 EOF
 
@@ -21,7 +21,7 @@ EOF
 
 while true; do
     case "$1" in
-        -h | --help) Usage; shift ;;
+        -h | --help) Usage ;;
         * ) break ;;
     esac
 done
@@ -219,7 +219,18 @@ patch=${patchfileprefix}${filename}.patch
 commitmsg=${commitmsgfileprefix}${filename}.log
 email=${emailfileprefix}${filename}.txt
 
-makediff $@ | fixtfsbinaryfiles > $patch
+makediff $@ > $patch.tmp
+retval=$?
+
+if [ $retval -ne 0 ]; then
+    printf "\n"
+    cat $patch.tmp > /dev/stderr
+    rm $patch.tmp
+    exit 2
+else
+    cat $patch.tmp | fixtfsbinaryfiles > $patch
+    rm $patch.tmp
+fi
 
 if [[ -n "$excludefileregexp" ]]; then
     cat $patch |\

@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Submit patches</title><!-- 2013-10-12 Sat 14:07 -->
+  <title>Submit patches</title><!-- 2013-10-15 Tue 16:33 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -164,7 +164,7 @@ Further paragraphs come after blank lines.
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span style=
-"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131012.1407.</span>
+"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131015.1633.</span>
 
 <span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
 </pre>
@@ -203,7 +203,7 @@ Further paragraphs come after blank lines.
 "color: #006FE0;">true</span>; <span style="color: #0000FF;">do</span>
     <span style="color: #0000FF;">case</span> <span style=
 "color: #FF4700;">"$1"</span><span style="color: #0000FF;"> in</span>
-        -h | --help) Usage; <span style="color: #006FE0;">shift</span> ;;
+        -h | --help) Usage ;;
         * ) <span style="color: #0000FF;">break</span> ;;
     <span style="color: #0000FF;">esac</span>
 <span style="color: #0000FF;">done</span>
@@ -790,9 +790,24 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
 
             <div class="org-src-container">
               <pre class="src src-sh">
-makediff $<span style=
-"color: #BA36A5;">@</span> | fixtfsbinaryfiles &gt; $<span style=
+makediff $<span style="color: #BA36A5;">@</span> &gt; $<span style=
+"color: #BA36A5;">patch</span>.tmp
+<span style="color: #BA36A5;">retval</span>=$<span style=
+"color: #BA36A5;">?</span>
+
+<span style="color: #0000FF;">if</span> [ $<span style=
+"color: #BA36A5;">retval</span> -ne 0 ]; <span style=
+"color: #0000FF;">then</span>
+    printf <span style="color: #FF4700;">"\n"</span>
+    cat $<span style="color: #BA36A5;">patch</span>.tmp &gt; /dev/stderr
+    rm $<span style="color: #BA36A5;">patch</span>.tmp
+    <span style="color: #0000FF;">exit</span> 2
+<span style="color: #0000FF;">else</span>
+    cat $<span style=
+"color: #BA36A5;">patch</span>.tmp | fixtfsbinaryfiles &gt; $<span style=
 "color: #BA36A5;">patch</span>
+    rm $<span style="color: #BA36A5;">patch</span>.tmp
+<span style="color: #0000FF;">fi</span>
 </pre>
             </div>
 
@@ -1223,7 +1238,17 @@ printf <span style="color: #FF4700;">"\n"</span>
 "color: #BA36A5;">tmpfile</span>
         ;;
 <span style="color: #0000FF;">esac</span>
+
+<span style="color: #BA36A5;">retval</span>=$<span style=
+"color: #BA36A5;">?</span>
+
 cat $<span style="color: #BA36A5;">tmpfile</span>
+
+<span style="color: #0000FF;">if</span> [ $<span style=
+"color: #BA36A5;">retval</span> -ne 0 ]; <span style=
+"color: #0000FF;">then</span>
+    <span style="color: #0000FF;">exit</span> 2
+<span style="color: #0000FF;">fi</span>
 </pre>
           </div>
         </div>
