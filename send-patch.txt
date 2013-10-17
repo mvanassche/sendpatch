@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-15 Tue 16:33>
+#+Time-stamp: <2013-10-17 Thu 11:20>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -445,14 +445,12 @@ that one-sentence with a traditional =Index:= marker.
 makediff $@ > $patch.tmp
 retval=$?
 
-if [ $retval -ne 0 ]; then
-    printf "\n"
-    cat $patch.tmp > /dev/stderr
-    rm $patch.tmp
-    exit 2
-else
+if [ $retval -eq 0 ]; then
     cat $patch.tmp | fixtfsbinaryfiles > $patch
     rm $patch.tmp
+else
+    rm $patch.tmp
+    exit 2
 fi
 #+end_src
 
@@ -680,10 +678,12 @@ trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
 case $vcs in
     svn)
-        svn diff -x -w --no-diff-deleted $* > $tmpfile 2>&1
+        svn diff -x -w --no-diff-deleted $* > $tmpfile
+        retval=$?
         ;;
     tfs)
-        tf diff $* /format:Unified > $tmpfile 2>&1
+        tf diff $* /format:Unified > $tmpfile
+        retval=$?
         cat $tmpfile \
             | grep -E -i -v "^(edit|modifier|add|ajouter|renommer): " \
             | sed -r "s/^(File:|Fichier\o240:)/Index:/" > $tmpfile.out
@@ -691,11 +691,9 @@ case $vcs in
         ;;
 esac
 
-retval=$?
-
-cat $tmpfile
-
-if [ $retval -ne 0 ]; then
+if [ $retval -eq 0 ]; then
+    cat $tmpfile
+else
     exit 2
 fi
 #+end_src

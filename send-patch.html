@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Submit patches</title><!-- 2013-10-15 Tue 16:33 -->
+  <title>Submit patches</title><!-- 2013-10-17 Thu 11:20 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -164,7 +164,7 @@ Further paragraphs come after blank lines.
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span style=
-"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131015.1633.</span>
+"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131017.112.</span>
 
 <span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
 </pre>
@@ -796,17 +796,15 @@ makediff $<span style="color: #BA36A5;">@</span> &gt; $<span style=
 "color: #BA36A5;">?</span>
 
 <span style="color: #0000FF;">if</span> [ $<span style=
-"color: #BA36A5;">retval</span> -ne 0 ]; <span style=
+"color: #BA36A5;">retval</span> -eq 0 ]; <span style=
 "color: #0000FF;">then</span>
-    printf <span style="color: #FF4700;">"\n"</span>
-    cat $<span style="color: #BA36A5;">patch</span>.tmp &gt; /dev/stderr
-    rm $<span style="color: #BA36A5;">patch</span>.tmp
-    <span style="color: #0000FF;">exit</span> 2
-<span style="color: #0000FF;">else</span>
     cat $<span style=
 "color: #BA36A5;">patch</span>.tmp | fixtfsbinaryfiles &gt; $<span style=
 "color: #BA36A5;">patch</span>
     rm $<span style="color: #BA36A5;">patch</span>.tmp
+<span style="color: #0000FF;">else</span>
+    rm $<span style="color: #BA36A5;">patch</span>.tmp
+    <span style="color: #0000FF;">exit</span> 2
 <span style="color: #0000FF;">fi</span>
 </pre>
             </div>
@@ -1219,13 +1217,16 @@ printf <span style="color: #FF4700;">"\n"</span>
 "color: #BA36A5;">vcs</span><span style="color: #0000FF;"> in</span>
     svn)
         svn diff -x -w --no-diff-deleted $<span style=
-"color: #BA36A5;">*</span> &gt; $<span style=
-"color: #BA36A5;">tmpfile</span> 2&gt;&amp;1
+"color: #BA36A5;">*</span> &gt; $<span style="color: #BA36A5;">tmpfile</span>
+        <span style="color: #BA36A5;">retval</span>=$<span style=
+"color: #BA36A5;">?</span>
         ;;
     tfs)
         tf diff $<span style=
 "color: #BA36A5;">*</span> /format:Unified &gt; $<span style=
-"color: #BA36A5;">tmpfile</span> 2&gt;&amp;1
+"color: #BA36A5;">tmpfile</span>
+        <span style="color: #BA36A5;">retval</span>=$<span style=
+"color: #BA36A5;">?</span>
         cat $<span style="color: #BA36A5;">tmpfile</span> <span style=
 "color: #FF4700;">\</span>
             | grep -E -i -v <span style=
@@ -1239,14 +1240,11 @@ printf <span style="color: #FF4700;">"\n"</span>
         ;;
 <span style="color: #0000FF;">esac</span>
 
-<span style="color: #BA36A5;">retval</span>=$<span style=
-"color: #BA36A5;">?</span>
-
-cat $<span style="color: #BA36A5;">tmpfile</span>
-
 <span style="color: #0000FF;">if</span> [ $<span style=
-"color: #BA36A5;">retval</span> -ne 0 ]; <span style=
+"color: #BA36A5;">retval</span> -eq 0 ]; <span style=
 "color: #0000FF;">then</span>
+    cat $<span style="color: #BA36A5;">tmpfile</span>
+<span style="color: #0000FF;">else</span>
     <span style="color: #0000FF;">exit</span> 2
 <span style="color: #0000FF;">fi</span>
 </pre>
