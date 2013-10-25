@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-15 Tue 16:34>
+#+Time-stamp: <2013-10-25 Fri 12:43>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -11,20 +11,10 @@
 
 * Tasks
 
-** TODO Add support of Git
-
 ** TODO [#A] Add a command-line option to recover last log message
 
 In case the commit failed, to avoid having to retype it all or find and insert
 the right message.
-
-** DONE [#A] Check answers to questions
-   :LOGBOOK:
-   - State "TODO"        ->  "DONE"       [2012-10-29 Mon 16:55]
-   :END:
-
-The only permitted answers (to binary questions) are "y" or "n". All other
-letters should be discarded, and the question should be asked again.
 
 ** TODO [#A] Check that the configuration files are in Unix format
 
@@ -32,25 +22,14 @@ Check it, or convert them if needed.
 
 This is a common source of problems...
 
-** DONE Stop with an error if the email command is not defined
-   :LOGBOOK:
-   - State "TODO"        ->  "DONE"       [2013-02-04 Mon 17:10]
-   :END:
+** TODO Move to first editing line with if =EDITOR= is =emacsclient=
 
-To avoid mails sent under the name of John Doe.
+Run =forward-paragraph= to skip the comments in the header of the patch file.
+
+Solution : if =EDITOR= = emacsclient, set =EDITOR_OPTIONS= to
+"-e (forward-paragraph)".
 
 ** TODO Add ability to add private notes which won't be committed
-
-** DONE Check what's going on when committing on TFS
-   :LOGBOOK:
-   - State "TODO"        ->  "DONE"       [2012-07-02 Mon 14:10]
-   :END:
-
-When there are multiple workspaces on your machine, are we sure that TF only
-checks in files which are in the current subtree?
-
-Yes, that does work (FPZ has 3 workspaces on his machine, and when committing
-from a subtree, only files from that subtree are committed).
 
 ** TODO Add the ability to make a review
 
@@ -60,6 +39,8 @@ commit should be done.
 ** TODO Check that related programs are accessible
 
 =makelog=, =makediff=, ... are needed, so we better check that they're in the
-PATH.
+=PATH=.
 
 ** TODO For Unix systems, use the default =mail= command
+
+** TODO [#C] Add support of Git

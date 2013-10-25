@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Submit patches</title><!-- 2013-10-17 Thu 11:20 -->
+  <title>Submit patches</title><!-- 2013-10-25 Fri 12:44 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -164,7 +164,7 @@ Further paragraphs come after blank lines.
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span style=
-"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131017.112.</span>
+"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131025.1244.</span>
 
 <span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
 </pre>
@@ -884,7 +884,8 @@ mv $<span style="color: #BA36A5;">patch</span>.excluded $<span style=
 "color: #BA36A5;">patch</span>
 printf <span style=
 "color: #FF4700;">"\nEdit commit log message and email to send to '$mailto'...\n"</span>
-<span style="color: #FF4700;">"$EDITOR"</span> $<span style=
+<span style="color: #FF4700;">"$EDITOR"</span> <span style=
+"color: #FF4700;">"$EDITOR_OPTIONS"</span> $<span style=
 "color: #BA36A5;">email</span>
 test $<span style="color: #BA36A5;">?</span> -eq 0 || die <span style=
 "color: #FF4700;">"edit failed"</span>

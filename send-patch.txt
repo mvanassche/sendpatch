@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-17 Thu 11:20>
+#+Time-stamp: <2013-10-25 Fri 12:41>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -494,7 +494,7 @@ esac
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
 printf "\nEdit commit log message and email to send to '$mailto'...\n"
-"$EDITOR" $email
+"$EDITOR" "$EDITOR_OPTIONS" $email
 test $? -eq 0 || die "edit failed"
 
 # remove comments from editable part
