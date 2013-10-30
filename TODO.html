@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Sendpatch</title><!-- 2013-10-25 Fri 12:43 -->
+  <title>Sendpatch</title><!-- 2013-10-30 Wed 12:27 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -68,8 +68,17 @@ type="text/javascript">
           <p>Run <code>forward-paragraph</code> to skip the comments in the
           header of the patch file.</p>
 
-          <p>Solution&nbsp;: if <code>EDITOR</code> = emacsclient, set
-          <code>EDITOR_OPTIONS</code> to “-e (forward-paragraph)".</p>
+          <p>Solution (for Cygwin emacs-w32): if <code>EDITOR</code> =
+          emacsclient, set command to</p>
+
+          <div class="org-src-container">
+            <pre class="src src-sh">
+emacsclient -e <span style=
+"color: #FF4700;">"(progn (find-file \"0001-.txt\") (beginning-of-buffer) (forward-paragraph))"</span>
+</pre>
+          </div>
+
+          <p><b>Problem:</b> emacsclient does not wait!</p>
         </div>
       </div>
 

@@ -1,12 +1,13 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-25 Fri 12:43>
+#+Time-stamp: <2013-10-30 Wed 12:27>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
 #+OPTIONS:   H:3 num:t toc:t ^:{}
 
+#+PROPERTY:  eval no
 #+SETUPFILE: bigblow.setup
 
 * Tasks
@@ -26,8 +27,13 @@ This is a common source of problems...
 
 Run =forward-paragraph= to skip the comments in the header of the patch file.
 
-Solution : if =EDITOR= = emacsclient, set =EDITOR_OPTIONS= to
-"-e (forward-paragraph)".
+Solution (for Cygwin emacs-w32): if =EDITOR= = emacsclient, set command to
+
+#+begin_src sh
+emacsclient -e "(progn (find-file \"0001-.txt\") (beginning-of-buffer) (forward-paragraph))"
+#+end_src
+
+*Problem:* emacsclient does not wait!
 
 ** TODO Add ability to add private notes which won't be committed
 

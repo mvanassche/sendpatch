@@ -7,7 +7,7 @@
   <meta name="generator" content=
   "HTML Tidy for Cygwin (vers 1st September 2004), see www.w3.org" />
 
-  <title>Submit patches</title><!-- 2013-10-25 Fri 12:44 -->
+  <title>Submit patches</title><!-- 2013-10-30 Wed 12:26 -->
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="generator" content="Org-mode" />
   <meta name="author" content="Fabrice Niessen" />
@@ -164,7 +164,7 @@ Further paragraphs come after blank lines.
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span style=
-"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131025.1244.</span>
+"color: #0000ff; background-color: #EEF5FE;">This is $(basename $0), version: 20131030.1226.</span>
 
 <span style="color: #0000ff; background-color: #EEF5FE;">EOF</span>
 </pre>
@@ -207,7 +207,7 @@ Further paragraphs come after blank lines.
         * ) <span style="color: #0000FF;">break</span> ;;
     <span style="color: #0000FF;">esac</span>
 <span style="color: #0000FF;">done</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">now do something with $@</span>
 </pre>
             </div>
@@ -319,7 +319,7 @@ Further paragraphs come after blank lines.
     printf <span style=
 "color: #FF4700;">"$(basename $0): $@\n"</span> &gt; /dev/stderr
     <span style="color: #0000FF;">exit</span> 2 <span style=
-"color: #008200;"># </span><span style=
+"color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">an </span><span style=
 "color: #008200; background-color: #FFFF88; font-style: italic;">error</span><span style="color: #008200; font-style: italic;"> occurred</span>
 }
@@ -384,7 +384,7 @@ Further paragraphs come after blank lines.
     <span style="color: #006FE0;">local</span> <span style=
 "color: #BA36A5;">default</span>=<span style="color: #FF4700;">"tfs"</span>
 
-    <span style="color: #008200;"># </span><span style=
+    <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">recursively search for `.svn' directory</span>
     <span style=
 "color: #0000FF;">while</span> [[ ! ( -d .svn ) &amp;&amp; ( <span style=
@@ -397,7 +397,7 @@ Further paragraphs come after blank lines.
 "color: #0000FF;">then</span>
         printf <span style="color: #FF4700;">"svn\n"</span>
     <span style="color: #0000FF;">else</span> <span style=
-"color: #008200;"># </span><span style=
+"color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">not found</span>
         printf <span style="color: #FF4700;">"$default\n"</span>
     <span style="color: #0000FF;">fi</span>
@@ -449,15 +449,15 @@ Further paragraphs come after blank lines.
             <span style="color: #BA36A5;">default</span>=
         <span style="color: #0000FF;">fi</span>
 
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">ask the question (without the need to press RET)</span>
         printf <span style="color: #FF4700;">"$1 ($prompt): "</span>
         <span style="color: #006FE0;">read</span> -n 1 -r REPLY
         printf <span style="color: #FF4700;">"\n"</span> <span style=
-"color: #008200;"># </span><span style=
+"color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">just a final linefeed</span>
 
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">default?</span>
         <span style="color: #0000FF;">if</span> [ -z <span style=
 "color: #FF4700;">"$REPLY"</span> ]; <span style="color: #0000FF;">then</span>
@@ -465,7 +465,7 @@ Further paragraphs come after blank lines.
 "color: #BA36A5;">default</span>
         <span style="color: #0000FF;">fi</span>
 
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">check if the reply is valid</span>
         <span style="color: #0000FF;">case</span> <span style=
 "color: #FF4700;">"$REPLY"</span><span style="color: #0000FF;"> in</span>
@@ -574,7 +574,7 @@ printf <span style="color: #FF4700;">"VC backend: $vcs\n"</span>
 "color: #FF4700;">"^URL"</span>)/
         ;;
     tfs)
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">get collection and project</span>
         tf workfold &gt; $<span style="color: #BA36A5;">tmpfile</span>
         <span style="color: #BA36A5;">url</span>=$(cat $<span style=
@@ -668,13 +668,13 @@ cecho <span style="color: #FF4700;">"\nChanged files (to be committed):"</span>
         <span style="color: #006FE0;">export</span> <span style=
 "color: #BA36A5;">rootdirwin</span>=$(cygpath -w -l <span style=
 "color: #FF4700;">"$(pwd)"</span>)
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">printf "Root directory (in Windows format) : $rootdirwin\n"</span>
         ${<span style="color: #BA36A5;">VCS_STATUS</span>} $<span style=
 "color: #BA36A5;">@</span> &gt; $<span style="color: #BA36A5;">tmpfile</span>
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">No idea why, but we can't directly pipe the output of `tf status'</span>
-        <span style="color: #008200;"># </span><span style=
+        <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">command</span>
         cat $<span style=
 "color: #BA36A5;">tmpfile</span> | grep -F -i <span style=
@@ -847,7 +847,7 @@ makediff $<span style="color: #BA36A5;">@</span> &gt; $<span style=
           <div class="outline-text-4" id="text-2-1-14">
             <div class="org-src-container">
               <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">ask for commit message</span>
 cat &lt;&lt;EOF &gt; $<span style="color: #BA36A5;">email</span>
 <span style=
@@ -884,13 +884,12 @@ mv $<span style="color: #BA36A5;">patch</span>.excluded $<span style=
 "color: #BA36A5;">patch</span>
 printf <span style=
 "color: #FF4700;">"\nEdit commit log message and email to send to '$mailto'...\n"</span>
-<span style="color: #FF4700;">"$EDITOR"</span> <span style=
-"color: #FF4700;">"$EDITOR_OPTIONS"</span> $<span style=
+<span style="color: #FF4700;">"$EDITOR"</span> $<span style=
 "color: #BA36A5;">email</span>
 test $<span style="color: #BA36A5;">?</span> -eq 0 || die <span style=
 "color: #FF4700;">"edit failed"</span>
 
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">remove comments from editable part</span>
 sed <span style=
 "color: #FF4700;">'0,/^---$/{/^#[^+].*$/d;}'</span> &lt; $<span style=
@@ -910,7 +909,7 @@ sed <span style=
           <div class="outline-text-4" id="text-2-1-15">
             <div class="org-src-container">
               <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">convert email into UTF-8</span>
 <span style="color: #0000FF;">case</span> <span style=
 "color: #FF4700;">"$(file --brief $email 2&gt; /dev/null | sed 's/unified diff output, //')"</span><span style="color: #0000FF;"> in</span>
@@ -961,12 +960,12 @@ sed <span style="color: #FF4700;">'/^---$/,$d'</span> &lt; $<span style=
           <div class="outline-text-4" id="text-2-1-17">
             <div class="org-src-container">
               <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">get new subject for email (first line of log message)</span>
 head -n 1 $<span style="color: #BA36A5;">email</span> &gt; $<span style=
 "color: #BA36A5;">tmpfile</span>
 
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">replace accented letters by their unaccented equivalent</span>
 <span style="color: #0000FF;">case</span> <span style=
 "color: #FF4700;">"$(file --brief $tmpfile 2&gt; /dev/null)"</span><span style=
@@ -1050,7 +1049,7 @@ printf <span style="color: #FF4700;">"\n"</span>
 "color: #FF4700;">"ask"</span> ]]; <span style="color: #0000FF;">then</span>
     printf <span style=
 "color: #FF4700;">"Environment for sending email:\n"</span>
-    <span style="color: #008200;"># </span><span style=
+    <span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">print the email command</span>
     printf <span style="color: #FF4700;">"$emailcommand\n"</span>
     [[ -f $<span style=
@@ -1129,7 +1128,7 @@ printf <span style="color: #FF4700;">"\n"</span>
 test $<span style="color: #BA36A5;">rc</span> -eq 0 || die <span style=
 "color: #FF4700;">"delete temp files failed"</span>
 
-<span style="color: #008200;">## </span><span style=
+<span style="color: #008200; font-style: italic;">## </span><span style=
 "color: #008200; font-style: italic;">sendpatch ends here</span>
 </pre>
             </div>
@@ -1147,15 +1146,15 @@ test $<span style="color: #BA36A5;">rc</span> -eq 0 || die <span style=
 
           <div class="org-src-container">
             <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">Usage: makelog [-f diff-file] [svn diff options]</span>
-<span style="color: #008200;">#</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;">#</span>
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">Make a log message for a change, including the header, and the relative</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">pathnames of the changed files. Output goes to stdout.</span>
-<span style="color: #008200;">#</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;">#</span>
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">If a you have a pre-existing diff file, use `-f diff-file' to use this file.</span>
 
 printf <span style="color: #FF4700;">"\n"</span>
@@ -1201,12 +1200,12 @@ printf <span style="color: #FF4700;">"\n"</span>
 
           <div class="org-src-container">
             <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">Usage: makediff [svn diff options]</span>
-<span style="color: #008200;">#</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;">#</span>
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">Make a diff file, ready for review. It contains the diffs of all files,</span>
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">followed by the text of new files. Output goes to stdout.</span>
 
 <span style="color: #BA36A5;">tmpfile</span>=<span style=
@@ -1264,7 +1263,7 @@ printf <span style="color: #FF4700;">"\n"</span>
 
           <div class="org-src-container">
             <pre class="src src-sh">
-<span style="color: #008200;"># </span><span style=
+<span style="color: #008200; font-style: italic;"># </span><span style=
 "color: #008200; font-style: italic;">Usage: svnignore admin/notes/\*.tex</span>
 
 <span style="color: #BA36A5;">target</span>=<span style=

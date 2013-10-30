@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20131025.1244.
+This is $(basename $0), version: 20131030.1226.
 
 EOF
 
@@ -262,7 +262,7 @@ esac
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
 printf "\nEdit commit log message and email to send to '$mailto'...\n"
-"$EDITOR" "$EDITOR_OPTIONS" $email
+"$EDITOR" $email
 test $? -eq 0 || die "edit failed"
 
 # remove comments from editable part
