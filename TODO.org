@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-30 Wed 12:27>
+#+Time-stamp: <2014-01-18 Sat 09:38>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -9,6 +9,13 @@
 
 #+PROPERTY:  eval no
 #+SETUPFILE: bigblow.setup
+
+* Bugs
+
+** TODO Exit with failure if there is some file missing (!)
+
+Currently, because of it goes on, the diff we review in the email is not
+complete. What's committed is well complete, hence not what we reviewed!
 
 * Tasks
 
