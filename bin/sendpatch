@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20131030.1226.
+This is $(basename $0), version: 20140606.1201.
 
 EOF
 
@@ -16,7 +16,7 @@ Submit patches per email.
 Report $(basename $0) bugs to fni@xxx.com
 Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>
 EOF
-    exit 1
+    exit 2
 }
 
 while true; do
@@ -42,7 +42,7 @@ emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "m
 
 die () {
     printf "$(basename $0): $@\n" > /dev/stderr
-    exit 2 # an error occurred
+    exit 2                              # an error occurred
 }
 
 cecho () {

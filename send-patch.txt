@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2013-10-30 Wed 12:26>
+#+Time-stamp: <2014-04-23 Wed 15:02>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -90,14 +90,14 @@ This script sends patches:
 
 *** Version number
 
-#+name: time-stamp
-#+begin_src sh :eval yes :results silent :tangle no
-echo "$(date '+%Y%m%d.%H%M')"
+#+name: current-time
+#+begin_src emacs-lisp :eval yes :results silent :tangle no
+(format-time-string "%Y%m%d.%H%M")
 #+end_src
 
 #+begin_src sh :noweb yes
     cat << EOF
-This is $(basename $0), version: <<time-stamp()>>.
+This is $(basename $0), version: <<current-time()>>.
 
 EOF
 #+end_src
@@ -116,7 +116,7 @@ Submit patches per email.
 Report $(basename $0) bugs to fni@xxx.com
 Commit guidelines: <http://svn/mc/xxx/sendpatch/trunk/send-patch.html>
 EOF
-    exit 1
+    exit 2
 }
 
 while true; do
@@ -182,7 +182,7 @@ The exit status follows the conventions for programs such as =grep=, =cmp=, and
 #+begin_src sh
 die () {
     printf "$(basename $0): $@\n" > /dev/stderr
-    exit 2 # an error occurred
+    exit 2                              # an error occurred
 }
 #+end_src
 
