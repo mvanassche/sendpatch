@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2014-01-18 Sat 09:38>
+#+Time-stamp: <2014-06-06 Fri 12:00>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -23,6 +23,17 @@ complete. What's committed is well complete, hence not what we reviewed!
 
 In case the commit failed, to avoid having to retype it all or find and insert
 the right message.
+
+** TODO [#A] Add a command-line option to allow showing non-whitespace line changes
+
+... remove it (option =-x -w= of =svn diff=) by default!
+
+Then, the default behavior is to show all changes (even whitespaces ones).
+
+But, Emacs users (which have deleted many trailing whitespaces) could run
+~sendpatch~ with that option.
+
+They could even have a ~spw~ alias for calling sendpatch with it.
 
 ** TODO [#A] Check that the configuration files are in Unix format
 
