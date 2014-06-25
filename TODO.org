@@ -1,7 +1,7 @@
 #+TITLE:     Sendpatch
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2014-06-06 Fri 12:00>
+#+Time-stamp: <2014-06-25 Wed 16:05>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -41,6 +41,8 @@ Check it, or convert them if needed.
 
 This is a common source of problems...
 
+** TODO Add support of Git
+
 ** TODO Move to first editing line with if =EDITOR= is =emacsclient=
 
 Run =forward-paragraph= to skip the comments in the header of the patch file.
@@ -66,5 +68,3 @@ commit should be done.
 =PATH=.
 
 ** TODO For Unix systems, use the default =mail= command
-
-** TODO [#C] Add support of Git
