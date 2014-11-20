@@ -1,7 +1,7 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2014-04-23 Wed 15:02>
+#+Time-stamp: <2014-11-20 Thu 11:34>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -53,6 +53,22 @@ order to make them stand out, all such notes must be enclosed in a
 
 ** Example
 
+*** Commit message
+
+By settling on an "official commit log format":
+
+#+begin_src text
+TITLE
+
+PARAGRAPH-1
+
+PARAGRAPH-2
+
+,* FILE (FUNC): DESCRIPTION-OF-CHANGE.
+#+end_src
+
+Example:
+
 #+begin_src text
 Short summary of changes
 
@@ -72,7 +88,26 @@ Further paragraphs come after blank lines.
 - Use a hanging indent
 #+end_src
 
-** TODO Real-life example                                            :noexport:
+*** ChangeLog
+
+ChangeLog files could be generated from the commit messages:
+
+#+begin_src text
+YYYY-MM-DD  AUTHOR  <EMAIL>
+
+TITLE
+,* FILE (FUNC): DESCRIPTION-OF-CHANGE.
+#+end_src
+
+(modulo some bol TABs).
+
+Though, ChangeLog and commit logs may be orthogonal:
+
+- A commit log describes /why/ (and /how/) code was changed.
+
+- A ChangeLog helps you understand /where/ and /what/ code changed.
+
+** TODO Real-life example                                             :noexport:
 
 With a cover letter: http://patchwork.madduck.net/patch/1141/
 
