@@ -3,7 +3,7 @@
 # Usage: makelog [-f diff-file] [svn diff options]
 #
 # Make a log message for a change, including the header, and the relative
-# pathnames of the changed files. Output goes to stdout.
+# pathnames of the changed files.  Output goes to stdout.
 #
 # If a you have a pre-existing diff file, use `-f diff-file' to use this file.
 

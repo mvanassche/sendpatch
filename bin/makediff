@@ -2,8 +2,8 @@
 
 # Usage: makediff [svn diff options]
 #
-# Make a diff file, ready for review. It contains the diffs of all files,
-# followed by the text of new files. Output goes to stdout.
+# Make a diff file, ready for review.  It contains the diffs of all files,
+# followed by the text of new files.  Output goes to stdout.
 
 tmpfile="/tmp/$(basename $0).$$"
 trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM

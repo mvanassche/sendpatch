@@ -131,11 +131,11 @@ PARAGRAPH-2
               <pre class="src src-text">
 Short summary of changes
 
-More detailed explanatory text, if necessary. Wrap it to about 72 characters
-or so. In some contexts, the first line is treated as the subject of an email
-and the rest of the text as the body. The blank line separating the summary
-from the body is critical; some tools can get confused if you run the two
-together.
+More detailed explanatory text, if necessary, to present a bird-eye view that is
+hard to grasp by looking at the diffs.  Wrap it to about 72 characters or so.
+In some contexts, the first line is treated as the subject of an email and the
+rest of the text as the body.  The blank line separating the summary from the
+body is critical; some tools can get confused if you run the two together.
 
 Further paragraphs come after blank lines.
 
@@ -216,7 +216,7 @@ TITLE
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span class=
-"org-sh-heredoc">This is $(basename $0), version: 20141120.1134.</span>
+"org-sh-heredoc">This is $(basename $0), version: 20141121.1136.</span>
 
 <span class="org-sh-heredoc">EOF</span>
 </pre>
@@ -899,12 +899,12 @@ makediff $<span class="org-variable-name">@</span> &gt; $<span class=
 cat &lt;&lt;EOF &gt; $<span class="org-variable-name">email</span>
 <span class="org-sh-heredoc"># Hey, Emacs! This is a -*- Diff -*- file</span>
 <span class=
-"org-sh-heredoc"># Please enter the commit message for your changes. Lines starting</span>
-<span class="org-sh-heredoc"># with '#' will be ignored...</span>
+"org-sh-heredoc"># Please enter the commit message for your changes.  Lines starting with '#'</span>
+<span class="org-sh-heredoc"># will be ignored...</span>
 <span class=
-"org-sh-heredoc"># The FIRST LINE of the commit message should be a short description</span>
+"org-sh-heredoc"># The FIRST LINE of the commit message should be a short description and should</span>
 <span class=
-"org-sh-heredoc"># and should skip the full stop. It will become the subject of the email.</span>
+"org-sh-heredoc"># skip the full stop.  It will become the subject of the email.</span>
 <span class="org-sh-heredoc">EOF</span>
 <span class="org-keyword">case</span> $<span class=
 "org-variable-name">vcs</span><span class="org-keyword"> in</span>
@@ -1024,7 +1024,7 @@ head -n 1 $<span class="org-variable-name">email</span> &gt; $<span class=
         ;;
     *)
         die <span class=
-"org-string">"unknown character encoding: $(file --brief $tmpfile). Did you put the subject as first line?"</span>
+"org-string">"unknown character encoding: $(file --brief $tmpfile).  Did you put the subject as first line?"</span>
         ;;
 <span class="org-keyword">esac</span>
 </pre>
@@ -1195,7 +1195,7 @@ test $<span class="org-variable-name">rc</span> -eq 0 || die <span class=
 <span class="org-comment-delimiter"># </span><span class=
 "org-comment">Make a log message for a change, including the header, and the relative</span>
 <span class="org-comment-delimiter"># </span><span class=
-"org-comment">pathnames of the changed files. Output goes to stdout.</span>
+"org-comment">pathnames of the changed files.  Output goes to stdout.</span>
 <span class="org-comment-delimiter">#</span>
 <span class="org-comment-delimiter"># </span><span class=
 "org-comment">If a you have a pre-existing diff file, use `-f diff-file' to use this file.</span>
@@ -1247,9 +1247,9 @@ printf <span class="org-string">"\n"</span>
 "org-comment">Usage: makediff [svn diff options]</span>
 <span class="org-comment-delimiter">#</span>
 <span class="org-comment-delimiter"># </span><span class=
-"org-comment">Make a diff file, ready for review. It contains the diffs of all files,</span>
+"org-comment">Make a diff file, ready for review.  It contains the diffs of all files,</span>
 <span class="org-comment-delimiter"># </span><span class=
-"org-comment">followed by the text of new files. Output goes to stdout.</span>
+"org-comment">followed by the text of new files.  Output goes to stdout.</span>
 
 <span class="org-variable-name">tmpfile</span>=<span class=
 "org-string">"/tmp/$(basename $0).$$"</span>

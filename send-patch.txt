@@ -1,7 +1,6 @@
 #+TITLE:     Submit patches
 #+AUTHOR:    Fabrice Niessen
 #+EMAIL:     fni@xxx.com
-#+Time-stamp: <2014-11-20 Thu 11:34>
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
@@ -47,9 +46,9 @@ that particular commit!
 
 ** Release notes
 
-We have introduced the possibility to insert release notes in log messages. In
-order to make them stand out, all such notes must be enclosed in a
-=#+begin_releasenotes= .. =#end_releasenotes= block.
+We have introduced the possibility to insert release notes in log messages.  In
+order to make them stand out, all such notes must be enclosed in
+a =#+begin_releasenotes= .. =#end_releasenotes= block.
 
 ** Example
 
@@ -72,11 +71,11 @@ Example:
 #+begin_src text
 Short summary of changes
 
-More detailed explanatory text, if necessary. Wrap it to about 72 characters
-or so. In some contexts, the first line is treated as the subject of an email
-and the rest of the text as the body. The blank line separating the summary
-from the body is critical; some tools can get confused if you run the two
-together.
+More detailed explanatory text, if necessary, to present a bird-eye view that is
+hard to grasp by looking at the diffs.  Wrap it to about 72 characters or so.
+In some contexts, the first line is treated as the subject of an email and the
+rest of the text as the body.  The blank line separating the summary from the
+body is critical; some tools can get confused if you run the two together.
 
 Further paragraphs come after blank lines.
 
@@ -383,15 +382,14 @@ esac
 [[ -f $userprojectconfig ]] && . $userprojectconfig
 #+end_src
 
-Default sender of the email is John Doe. If not configured otherwise, bail
-out:
+Default sender of the email is John Doe.  If not configured otherwise, bail out:
 
 #+begin_src sh
 printf "$emailcommand" | grep "John Doe" \
     && die "Please fix the sender address in the email command"
 #+end_src
 
-Default editor is =$EDITOR=. If not found, set Emacs:
+Default editor is =$EDITOR=.  If not found, set Emacs:
 
 #+begin_src sh
 : ${EDITOR:="emacsclient"}
@@ -402,7 +400,7 @@ which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
 
 Shows what files have been modified in your working copy, what files have been
 changed in the repository since your last update, and which files, if any,
-conflict with your modifications. The =-u= option is what forces the command to
+conflict with your modifications.  The =-u= option is what forces the command to
 access the repository for this check.
 
 #+begin_src sh
@@ -439,7 +437,7 @@ case $vcs in
 esac
 #+end_src
 
-Stop if no changes are to be committed. Though, that may mean that you should
+Stop if no changes are to be committed.  Though, that may mean that you should
 =add= some of the files currently ignored; hence, it's good to make this check
 after having sent some information to the user...
 
@@ -472,7 +470,7 @@ email=${emailfileprefix}${filename}.txt
 
 *** Make patch file
 
-The patch file generated only reports =file.bin: files differ=. The fix for
+The patch file generated only reports =file.bin: files differ=.  The fix for
 getting such names included in the log (list of modified files) is to replace
 that one-sentence with a traditional =Index:= marker.
 
@@ -490,7 +488,7 @@ fi
 #+end_src
 
 =excludefileregexp= allows one to exclude useless or unreadable diffs from the
-email contents. That does not have any impact on the commit process itself...
+email contents.  That does not have any impact on the commit process itself...
 
 #+begin_src sh
 if [[ -n "$excludefileregexp" ]]; then
@@ -512,10 +510,10 @@ fi
 # ask for commit message
 cat <<EOF > $email
 # Hey, Emacs! This is a -*- Diff -*- file
-# Please enter the commit message for your changes. Lines starting
-# with '#' will be ignored...
-# The FIRST LINE of the commit message should be a short description
-# and should skip the full stop. It will become the subject of the email.
+# Please enter the commit message for your changes.  Lines starting with '#'
+# will be ignored...
+# The FIRST LINE of the commit message should be a short description and should
+# skip the full stop.  It will become the subject of the email.
 EOF
 case $vcs in
     svn)
@@ -579,7 +577,7 @@ case "$(file --brief $tmpfile 2> /dev/null)" in
         subject="$(cat $tmpfile | unaccent)"
         ;;
     *)
-        die "unknown character encoding: $(file --brief $tmpfile). Did you put the subject as first line?"
+        die "unknown character encoding: $(file --brief $tmpfile).  Did you put the subject as first line?"
         ;;
 esac
 #+end_src
@@ -667,7 +665,7 @@ Display a list of files to be committed, for the commit log message.
 # Usage: makelog [-f diff-file] [svn diff options]
 #
 # Make a log message for a change, including the header, and the relative
-# pathnames of the changed files. Output goes to stdout.
+# pathnames of the changed files.  Output goes to stdout.
 #
 # If a you have a pre-existing diff file, use `-f diff-file' to use this file.
 
@@ -683,9 +681,9 @@ fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
 
 With the option =--show-copies-as-adds=, copied (and moved) files are listed.
 
-Using =sed '/^Index:/!d'= (instead of =egrep "^Index:"=) allows to filter the
-lines we're interested in, even if the file contains binary characters (such
-as non-breakable spaces). On the other hand, =grep= would simply declare that
+Using =sed '/^Index:/!d'= (instead of =egrep "^Index:"=) allows to filter the lines
+we're interested in, even if the file contains binary characters (such as
+non-breakable spaces).  On the other hand, =grep= would simply declare that
 "Binary file matches".
 
 ** Display changes
@@ -705,8 +703,8 @@ printed.
 #+begin_src sh
 # Usage: makediff [svn diff options]
 #
-# Make a diff file, ready for review. It contains the diffs of all files,
-# followed by the text of new files. Output goes to stdout.
+# Make a diff file, ready for review.  It contains the diffs of all files,
+# followed by the text of new files.  Output goes to stdout.
 
 tmpfile="/tmp/$(basename $0).$$"
 trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
