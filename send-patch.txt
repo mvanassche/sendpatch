@@ -48,7 +48,7 @@ that particular commit!
 
 We have introduced the possibility to insert release notes in log messages.  In
 order to make them stand out, all such notes must be enclosed in
-a =#+begin_releasenotes= .. =#end_releasenotes= block.
+a ~#+begin_releasenotes~ .. ~#end_releasenotes~ block.
 
 ** Example
 
@@ -210,8 +210,8 @@ endings*!
 
 *** Helper functions
 
-The exit status follows the conventions for programs such as =grep=, =cmp=, and
-=diff=:
+The exit status follows the conventions for programs such as ~grep~, ~cmp~, and
+~diff~:
 
 #+begin_src sh
 die () {
@@ -309,11 +309,11 @@ ask () {
 }
 #+end_src
 
-See [[https://gist.github.com/1965569][usage samples]] for defaults (when the user presses =RET= without giving an
+See [[https://gist.github.com/1965569][usage samples]] for defaults (when the user presses ~RET~ without giving an
 answer).
 
 See [[http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script][How do I prompt a user for confirmation in bash script?]] for the regexp
-match operator =~.
+match operator "=~".
 
 *** Init
 
@@ -389,7 +389,7 @@ printf "$emailcommand" | grep "John Doe" \
     && die "Please fix the sender address in the email command"
 #+end_src
 
-Default editor is =$EDITOR=.  If not found, set Emacs:
+Default editor is ~$EDITOR~.  If not found, set Emacs:
 
 #+begin_src sh
 : ${EDITOR:="emacsclient"}
@@ -400,7 +400,7 @@ which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
 
 Shows what files have been modified in your working copy, what files have been
 changed in the repository since your last update, and which files, if any,
-conflict with your modifications.  The =-u= option is what forces the command to
+conflict with your modifications.  The ~-u~ option is what forces the command to
 access the repository for this check.
 
 #+begin_src sh
@@ -438,7 +438,7 @@ esac
 #+end_src
 
 Stop if no changes are to be committed.  Though, that may mean that you should
-=add= some of the files currently ignored; hence, it's good to make this check
+~add~ some of the files currently ignored; hence, it's good to make this check
 after having sent some information to the user...
 
 #+begin_src sh
@@ -470,9 +470,9 @@ email=${emailfileprefix}${filename}.txt
 
 *** Make patch file
 
-The patch file generated only reports =file.bin: files differ=.  The fix for
+The patch file generated only reports ~file.bin: files differ~.  The fix for
 getting such names included in the log (list of modified files) is to replace
-that one-sentence with a traditional =Index:= marker.
+that one-sentence with a traditional ~Index:~ marker.
 
 #+begin_src sh
 makediff $@ > $patch.tmp
@@ -487,7 +487,7 @@ else
 fi
 #+end_src
 
-=excludefileregexp= allows one to exclude useless or unreadable diffs from the
+~excludefileregexp~ allows one to exclude useless or unreadable diffs from the
 email contents.  That does not have any impact on the commit process itself...
 
 #+begin_src sh
@@ -679,11 +679,11 @@ else
 fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
 #+end_src
 
-With the option =--show-copies-as-adds=, copied (and moved) files are listed.
+With the option ~--show-copies-as-adds~, copied (and moved) files are listed.
 
-Using =sed '/^Index:/!d'= (instead of =egrep "^Index:"=) allows to filter the lines
+Using ~sed '/^Index:/!d'~ (instead of ~egrep "^Index:"~) allows to filter the lines
 we're interested in, even if the file contains binary characters (such as
-non-breakable spaces).  On the other hand, =grep= would simply declare that
+non-breakable spaces).  On the other hand, ~grep~ would simply declare that
 "Binary file matches".
 
 ** Display changes
@@ -694,10 +694,10 @@ non-breakable spaces).  On the other hand, =grep= would simply declare that
 Display the changes made to all target files, and display deleted and new
 files as well.
 
-With the option =-x -w=, =svn diff= *shows only non-whitespace line changes* between
+With the option ~-x -w~, ~svn diff~ *shows only non-whitespace line changes* between
 two revisions.
 
-With the option =--no-diff-deleted=, differences for deleted files are not
+With the option ~--no-diff-deleted~, differences for deleted files are not
 printed.
 
 #+begin_src sh
@@ -737,7 +737,7 @@ fi
    :END:
 
 Add a file (or a file glob pattern) to ignore without deleting the previous
-value of the =svn:ignore= property... from the command line.
+value of the ~svn:ignore~ property... from the command line.
 
 #+begin_src sh
 # Usage: svnignore admin/notes/\*.tex
