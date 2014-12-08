@@ -31,18 +31,29 @@ This list hopes to help all of us to improve our commits.
 
 ** Commit messages
 
-- The first line of the commit message should be a short description
-  (50 characters is the /soft/ limit), and should *skip the full stop*.
+[[http://chris.beams.io/posts/git-commit/][How to Write a Git Commit Message]]
+
+- The first line of the commit message ("*subject line*") should be a *short
+  description* (50 characters is the /soft/ limit).  It should be *capitalized* and
+  it should *not end with a period*.
 
 - The body should provide a meaningful commit message, which:
+
   + uses the *imperative present tense*: "fix bug", not "fixed bug" or "fixes
-    bug".
-  + includes motivation for the change, and contrasts its implementation with
-    previous behavior.
+    bug" -- we prefer to describe "what the patch does" rather than "what the
+    patch did".
+
+  + includes motivation for the change ("why"), and contrasts its implementation
+    with previous behavior.
 
 Keep in mind that commit messages are often read *without* seeing the diffs, and
 without the possibility to see which other files you committed just before
 that particular commit!
+
+If the ChangeLog is a one-liner, you can use it as the commit summary.
+
+Note for Emacs -- It is suggested to write the ChangeLog first and then use ~C-c
+C-a~ from the ~*VC-Log*~ buffer.
 
 ** Release notes
 
@@ -69,13 +80,18 @@ PARAGRAPH-2
 Example:
 
 #+begin_src text
-Short summary of changes
+Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary, to present a bird-eye view that is
 hard to grasp by looking at the diffs.  Wrap it to about 72 characters or so.
 In some contexts, the first line is treated as the subject of an email and the
 rest of the text as the body.  The blank line separating the summary from the
 body is critical; some tools can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequenses of this
+change? Here's the place to explain them.
 
 Further paragraphs come after blank lines.
 
@@ -85,6 +101,11 @@ Further paragraphs come after blank lines.
   conventions vary here
 
 - Use a hanging indent
+
+If you use an issue tracker, put references to them at the bottom, like this:
+
+Resolves: #123
+See also: #456, #789
 #+end_src
 
 *** ChangeLog
@@ -676,7 +697,7 @@ then
     cat $2
 else
     svn diff -x -w --no-diff-deleted --show-copies-as-adds $* 2>&1
-fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
+fi; } | sed '/^Index:/!d' | sed 's/^Index: /\t* /' | sed 's/$/:/'
 #+end_src
 
 With the option ~--show-copies-as-adds~, copied (and moved) files are listed.

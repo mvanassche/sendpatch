@@ -14,4 +14,4 @@ then
     cat $2
 else
     svn diff -x -w --no-diff-deleted --show-copies-as-adds $* 2>&1
-fi; } | sed '/^Index:/!d' | sed 's/^Index: /  * /' | sed 's/$/:/'
+fi; } | sed '/^Index:/!d' | sed 's/^Index: /\t* /' | sed 's/$/:/'

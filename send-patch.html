@@ -183,19 +183,24 @@
         messages</h3>
 
         <div class="outline-text-3" id="text-1-2">
+          <p><a href="http://chris.beams.io/posts/git-commit/">How to Write a
+          Git Commit Message</a></p>
+
           <ul class="org-ul">
-            <li>The first line of the commit message should be a short
-            description (50&nbsp;characters is the <i>soft</i> limit), and
-            should <b>skip the full stop</b>.</li>
+            <li>The first line of the commit message (“<b>subject line</b>”)
+            should be a <b>short description</b> (50&nbsp;characters is the
+            <i>soft</i> limit). It should be <b>capitalized</b> and it should
+            <b>not end with a period</b>.</li>
 
             <li>The body should provide a meaningful commit message, which:
 
               <ul class="org-ul">
                 <li>uses the <b>imperative present tense</b>: “fix bug”, not
-                “fixed bug” or “fixes bug”.</li>
+                “fixed bug” or “fixes bug” – we prefer to describe “what the
+                patch does” rather than “what the patch did”.</li>
 
-                <li>includes motivation for the change, and contrasts its
-                implementation with previous behavior.</li>
+                <li>includes motivation for the change (“why”), and contrasts
+                its implementation with previous behavior.</li>
               </ul>
             </li>
           </ul>
@@ -203,6 +208,13 @@
           <p>Keep in mind that commit messages are often read <b>without</b>
           seeing the diffs, and without the possibility to see which other
           files you committed just before that particular commit!</p>
+
+          <p>If the ChangeLog is a one-liner, you can use it as the commit
+          summary.</p>
+
+          <p>Note for Emacs – It is suggested to write the ChangeLog first and
+          then use <code>C-c C-a</code> from the <code>*VC-Log*</code>
+          buffer.</p>
         </div>
       </div>
 
@@ -246,13 +258,18 @@ PARAGRAPH-2
 
             <div class="org-src-container">
               <pre class="src src-text">
-Short summary of changes
+Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary, to present a bird-eye view that is
 hard to grasp by looking at the diffs.  Wrap it to about 72 characters or so.
 In some contexts, the first line is treated as the subject of an email and the
 rest of the text as the body.  The blank line separating the summary from the
 body is critical; some tools can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequenses of this
+change? Here's the place to explain them.
 
 Further paragraphs come after blank lines.
 
@@ -262,6 +279,11 @@ Further paragraphs come after blank lines.
   conventions vary here
 
 - Use a hanging indent
+
+If you use an issue tracker, put references to them at the bottom, like this:
+
+Resolves: #123
+See also: #456, #789
 </pre>
             </div>
           </div>
@@ -333,7 +355,7 @@ TITLE
               <pre class="src src-sh">
     cat &lt;&lt; EOF
 <span class=
-"org-sh-heredoc">This is $(basename $0), version: 20141121.1145.</span>
+"org-sh-heredoc">This is $(basename $0), version: 20141208.1203.</span>
 
 <span class="org-sh-heredoc">EOF</span>
 </pre>
@@ -1334,7 +1356,7 @@ printf <span class="org-string">"\n"</span>
 "org-variable-name">*</span> 2&gt;&amp;1
 <span class="org-keyword">fi</span>; } | sed <span class=
 "org-string">'/^Index:/!d'</span> | sed <span class=
-"org-string">'s/^Index: /  * /'</span> | sed <span class=
+"org-string">'s/^Index: /\t* /'</span> | sed <span class=
 "org-string">'s/$/:/'</span>
 </pre>
           </div>
