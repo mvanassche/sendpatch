@@ -39,9 +39,9 @@ This list hopes to help all of us to improve our commits.
 
 - The body should provide a meaningful commit message, which:
 
-  + uses the *imperative present tense*: "fix bug", not "fixed bug" or "fixes
-    bug" -- we prefer to describe "what the patch does" rather than "what the
-    patch did".
+  + uses the active voice in the *imperative present tense*: "fix bug", not "fixed
+    bug" or "fixes bug" -- we prefer to describe "what the patch does" rather
+    than "what the patch did".
 
   + includes motivation for the change ("why"), and contrasts its implementation
     with previous behavior.
