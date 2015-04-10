@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20141208.1526.
+This is $(basename $0), version: 20150410.1021.
 
 EOF
 
@@ -174,7 +174,7 @@ printf "$emailcommand" | grep "John Doe" \
 : ${EDITOR:="emacsclient"}
 which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
 
-cecho "\nChanged files (to be committed):"
+cecho "\nChanged files (to be committed now):"
 case $vcs in
     svn)
         ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile

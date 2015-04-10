@@ -425,7 +425,7 @@ conflict with your modifications.  The ~-u~ option is what forces the command to
 access the repository for this check.
 
 #+begin_src sh
-cecho "\nChanged files (to be committed):"
+cecho "\nChanged files (to be committed now):"
 case $vcs in
     svn)
         ${VCS_STATUS} -u $@ | grep -E -v "^\? " | tee $tmpfile
