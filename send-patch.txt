@@ -781,6 +781,7 @@ svn propset svn:ignore "$svnignores" "$targetdirectory"
 Remove accents, replacing accented letters by their unaccented equivalent.
 
 #+begin_src sh :shebang "#!/bin/sed -f\n"
+# Mappings between accented chars and ASCII chars.
 s/\o240/ /g
 s/\o300/A/g
 s/\o301/A/g
