@@ -67,7 +67,7 @@ a ~#+begin_releasenotes~ .. ~#end_releasenotes~ block.
 
 By settling on an "official commit log format":
 
-#+begin_src text
+#+begin_example
 TITLE
 
 PARAGRAPH-1
@@ -75,11 +75,11 @@ PARAGRAPH-1
 PARAGRAPH-2
 
 ,* FILE (FUNC): DESCRIPTION-OF-CHANGE.
-#+end_src
+#+end_example
 
 Example:
 
-#+begin_src text
+#+begin_example
 Summarize changes in around 50 characters or less
 
 More detailed explanatory text, if necessary, to present a bird-eye view that is
@@ -106,18 +106,18 @@ If you use an issue tracker, put references to them at the bottom, like this:
 
 Resolves: #123
 See also: #456, #789
-#+end_src
+#+end_example
 
 *** ChangeLog
 
 ChangeLog files could be generated from the commit messages:
 
-#+begin_src text
+#+begin_example
 YYYY-MM-DD  AUTHOR  <EMAIL>
 
 TITLE
 ,* FILE (FUNC): DESCRIPTION-OF-CHANGE.
-#+end_src
+#+end_example
 
 (modulo some bol TABs).
 
@@ -150,7 +150,7 @@ This script sends patches:
 (format-time-string "%Y%m%d.%H%M")
 #+end_src
 
-#+begin_src sh :noweb yes
+#+begin_src shell :noweb yes
     cat << EOF
 This is $(basename $0), version: <<current-time()>>.
 
@@ -159,7 +159,7 @@ EOF
 
 *** Usage
 
-#+begin_src sh
+#+begin_src shell
 Usage ()
 {
     cat << EOF 1>&2
@@ -187,7 +187,7 @@ done
 
 **** Per project options
 
-#+begin_src sh
+#+begin_src shell
 mailto="mc-reviews@xxx.com"
 prefix="[PATCH]"
 excludefileregexp=""
@@ -195,7 +195,7 @@ excludefileregexp=""
 
 **** Per user options
 
-#+begin_src sh
+#+begin_src shell
 patchfileprefix=""
 commitmsgfileprefix=""
 emailfileprefix=""
@@ -210,11 +210,19 @@ emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "m
 
 A commonly configured option could be:
 
-#+begin_src sh :tangle no
+#+begin_src shell :tangle no
 excludefileregexp="(\\\.html|\\\.xml)"
 #+end_src
 
+#+begin_warning
 Note the use of *3 backslashes*!
+#+end_warning
+
+Other command-line email agents:
+
+#+begin_src shell :tangle no
+emailcommand='sendemail -s mail -o tls=no -o message-charset=UTF-8 -f "John Doe <johndoe@example.com>" -t $mailto -u "$prefix $subject" -o message-file=$email'
+#+end_src
 
 **** Files
 
@@ -234,14 +242,14 @@ endings*!
 The exit status follows the conventions for programs such as ~grep~, ~cmp~, and
 ~diff~:
 
-#+begin_src sh
+#+begin_src shell
 die () {
     printf "$(basename $0): $@\n" > /dev/stderr
     exit 2                              # an error occurred
 }
 #+end_src
 
-#+begin_src sh
+#+begin_src shell
 cecho () {
     black="\e[30m"
     red="\e[31m"
@@ -270,7 +278,7 @@ cecho () {
 
 **** VCS in use
 
-#+begin_src sh
+#+begin_src shell
 vcs_info () {
     local default="tfs"
 
@@ -289,7 +297,7 @@ vcs_info () {
 
 **** TFS
 
-#+begin_src sh
+#+begin_src shell
 fixtfsbinaryfiles () {
     sed -r "s/^(.*): files differ$/Index: \1\n===================================================================\nCannot display: file marked as a binary type.\n===================================================================/"
 }
@@ -297,7 +305,7 @@ fixtfsbinaryfiles () {
 
 **** Yes/No prompt function
 
-#+begin_src sh
+#+begin_src shell
 ask () {
     while true; do
         if [ "${2:-}" = "Y" ]; then
@@ -338,7 +346,7 @@ match operator "=~".
 
 *** Init
 
-#+begin_src sh
+#+begin_src shell
 tmpfile="/tmp/$(basename $0).$$"
 trap "rm -f $tmpfile" EXIT SIGHUP SIGINT SIGQUIT SIGTERM
 
@@ -367,7 +375,7 @@ esac
 Note that, for TFS, we impose to find a =sendpatch.common= file in order to
 conclude that we're at the root directory of a working copy, or not.
 
-#+begin_src sh
+#+begin_src shell
 case $vcs in
     svn)
         [[ -d .svn ]] \
@@ -382,7 +390,7 @@ esac
 
 *** Get URL of project
 
-#+begin_src sh
+#+begin_src shell
 case $vcs in
     svn)
         url=$(svn info | grep -E "^URL")/
@@ -397,7 +405,7 @@ esac
 
 *** Override settings
 
-#+begin_src sh
+#+begin_src shell
 [[ -f $userconfig ]] && . $userconfig
 [[ -f $projectconfig ]] && . $projectconfig
 [[ -f $userprojectconfig ]] && . $userprojectconfig
@@ -405,14 +413,14 @@ esac
 
 Default sender of the email is John Doe.  If not configured otherwise, bail out:
 
-#+begin_src sh
+#+begin_src shell
 printf "$emailcommand" | grep "John Doe" \
     && die "Please fix the sender address in the email command"
 #+end_src
 
 Default editor is ~$EDITOR~.  If not found, set Emacs:
 
-#+begin_src sh
+#+begin_src shell
 : ${EDITOR:="emacsclient"}
 which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
 #+end_src
@@ -424,7 +432,7 @@ changed in the repository since your last update, and which files, if any,
 conflict with your modifications.  The ~-u~ option is what forces the command to
 access the repository for this check.
 
-#+begin_src sh
+#+begin_src shell
 cecho "\nChanged files (to be committed now):"
 case $vcs in
     svn)
@@ -447,7 +455,7 @@ esac
 
 *** Display ignored files
 
-#+begin_src sh
+#+begin_src shell
 case $vcs in
     svn)
         cecho "\nUntracked files:"
@@ -462,14 +470,14 @@ Stop if no changes are to be committed.  Though, that may mean that you should
 ~add~ some of the files currently ignored; hence, it's good to make this check
 after having sent some information to the user...
 
-#+begin_src sh
+#+begin_src shell
 [[ $(cat $tmpfile | wc -l) -gt 0 ]] \
     || die "no changes to send to the repository"
 #+end_src
 
 *** Ask for short log message
 
-#+begin_src sh
+#+begin_src shell
 if [[ "$asksubject" != "no" ]]; then
     printf "\nSubject (short log): "
     read subject
@@ -478,7 +486,7 @@ fi
 
 *** Generate name for patch files
 
-#+begin_src sh
+#+begin_src shell
 oldcounter=$(ls ${patchfileprefix}0???-*.patch 2> /dev/null | sort --reverse \
     | head -n 1 | sed "s/^${patchfileprefix}00*//" | cut -d "-" -f 1)
 newcounterpadded=$(printf "%04d" "$(( oldcounter + 1 ))")
@@ -495,7 +503,7 @@ The patch file generated only reports ~file.bin: files differ~.  The fix for
 getting such names included in the log (list of modified files) is to replace
 that one-sentence with a traditional ~Index:~ marker.
 
-#+begin_src sh
+#+begin_src shell
 makediff $@ > $patch.tmp
 retval=$?
 
@@ -511,7 +519,7 @@ fi
 ~excludefileregexp~ allows one to exclude useless or unreadable diffs from the
 email contents.  That does not have any impact on the commit process itself...
 
-#+begin_src sh
+#+begin_src shell
 if [[ -n "$excludefileregexp" ]]; then
     cat $patch |\
     awk -v pattern="^Index: .*$excludefileregexp" \
@@ -527,7 +535,7 @@ fi
 
 *** Edit log message
 
-#+begin_src sh
+#+begin_src shell
 # ask for commit message
 cat <<EOF > $email
 # Hey, Emacs! This is a -*- Diff -*- file
@@ -557,7 +565,7 @@ sed '0,/^---$/{/^#[^+].*$/d;}' < $email > $email.nocomment; mv $email.nocomment 
 
 *** Convert email contents into UTF-8
 
-#+begin_src sh
+#+begin_src shell
 # convert email into UTF-8
 case "$(file --brief $email 2> /dev/null | sed 's/unified diff output, //')" in
     UTF-8*)
@@ -579,13 +587,13 @@ printf "Email:         $email\n"
 
 *** Deduce log message for commit
 
-#+begin_src sh
+#+begin_src shell
 sed '/^---$/,$d' < $email > $commitmsg
 #+end_src
 
 *** Deduce subject line for email
 
-#+begin_src sh
+#+begin_src shell
 # get new subject for email (first line of log message)
 head -n 1 $email > $tmpfile
 
@@ -605,7 +613,7 @@ esac
 
 *** Auto-commit changes
 
-#+begin_src sh
+#+begin_src shell
 printf "\n"
 if [[ "$autocommit" = "ask" ]]; then
     ask "Commit?" && askcommit="yes" || askcommit="no"
@@ -631,7 +639,7 @@ test $rc -eq 0 || die "commit failed"
 
 *** Auto-send email
 
-#+begin_src sh
+#+begin_src shell
 printf "\n"
 if [[ "$autosendemail" = "ask" ]]; then
     printf "Environment for sending email:\n"
@@ -656,7 +664,7 @@ test $rc -eq 0 || die "send email failed"
 
 *** Auto-delete temporary files
 
-#+begin_src sh
+#+begin_src shell
 printf "\n"
 if [[ "$autodeletetmpfiles" = "ask" ]]; then
     ask "Delete temp files?" && askdeletetmpfiles="yes" || askdeletetmpfiles="no"
@@ -682,7 +690,7 @@ test $rc -eq 0 || die "delete temp files failed"
 
 Display a list of files to be committed, for the commit log message.
 
-#+begin_src sh
+#+begin_src shell
 # Usage: makelog [-f diff-file] [svn diff options]
 #
 # Make a log message for a change, including the header, and the relative
@@ -721,7 +729,7 @@ two revisions.
 With the option ~--no-diff-deleted~, differences for deleted files are not
 printed.
 
-#+begin_src sh
+#+begin_src shell
 # Usage: makediff [svn diff options]
 #
 # Make a diff file, ready for review.  It contains the diffs of all files,
@@ -760,7 +768,7 @@ fi
 Add a file (or a file glob pattern) to ignore without deleting the previous
 value of the ~svn:ignore~ property... from the command line.
 
-#+begin_src sh
+#+begin_src shell
 # Usage: svnignore admin/notes/\*.tex
 
 target="$1"
@@ -780,7 +788,7 @@ svn propset svn:ignore "$svnignores" "$targetdirectory"
 
 Remove accents, replacing accented letters by their unaccented equivalent.
 
-#+begin_src sh :shebang "#!/bin/sed -f\n"
+#+begin_src shell :shebang "#!/bin/sed -f\n"
 # Mappings between accented chars and ASCII chars.
 s/\o240/ /g
 s/\o300/A/g
@@ -830,7 +838,7 @@ s/\o374/u/g
 
 Symlink the files.
 
-#+begin_src sh :results silent
+#+begin_src shell :results silent
 ln -f -s $(pwd)/sendpatch ~/bin/sendpatch
 ln -f -s $(pwd)/makelog   ~/bin/makelog
 ln -f -s $(pwd)/makediff  ~/bin/makediff
