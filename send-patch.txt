@@ -228,9 +228,10 @@ emailcommand='sendemail -s mail -o tls=no -o message-charset=UTF-8 -f "John Doe 
 
 All the /default/ settings can be overridden in:
 
-1. =~/.sendpatchrc=
-2. =sendpatch.common= in the root directory of a working copy
-3. =sendpatch.params= in the root directory of a working copy
+1. =~/.sendpatchrc= (global user config),
+2. =sendpatch.common= (project config) in the root directory of a working copy, or
+3. =sendpatch.params= (user config for the project) in the root directory of
+   a working copy,
 
 in that order.
 

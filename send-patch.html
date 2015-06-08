@@ -271,7 +271,7 @@ This script sends patches:
 <div class="org-src-container">
 
 <pre class="src src-shell">    cat &lt;&lt; EOF
-<span class="org-sh-heredoc">This is $(basename $0), version: 20150605.1354.</span>
+<span class="org-sh-heredoc">This is $(basename $0), version: 20150608.1152.</span>
 
 <span class="org-sh-heredoc">EOF</span>
 </pre>
@@ -373,9 +373,10 @@ All the <i>default</i> settings can be overridden in:
 </p>
 
 <ol class="org-ol">
-<li><code>~/.sendpatchrc</code></li>
-<li><code>sendpatch.common</code> in the root directory of a working copy</li>
-<li><code>sendpatch.params</code> in the root directory of a working copy</li>
+<li><code>~/.sendpatchrc</code> (global user config),</li>
+<li><code>sendpatch.common</code> (project config) in the root directory of a working copy, or</li>
+<li><code>sendpatch.params</code> (user config for the project) in the root directory of
+a working copy,</li>
 </ol>
 
 <p>
