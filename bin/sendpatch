@@ -1,7 +1,7 @@
 #!/bin/bash
 
     cat << EOF
-This is $(basename $0), version: 20150410.1021.
+This is $(basename $0), version: 20150625.0955.
 
 EOF
 
@@ -172,7 +172,7 @@ printf "$emailcommand" | grep "John Doe" \
     && die "Please fix the sender address in the email command"
 
 : ${EDITOR:="emacsclient"}
-which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
+which "${EDITOR%% *}" > /dev/null 2>&1 || die "editor not found"
 
 cecho "\nChanged files (to be committed now):"
 case $vcs in
@@ -262,7 +262,7 @@ esac
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
 printf "\nEdit commit log message and email to send to '$mailto'...\n"
-"$EDITOR" $email
+$EDITOR $email
 test $? -eq 0 || die "edit failed"
 
 # remove comments from editable part

@@ -3,11 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<title>Submit patches</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Submit patches</title>
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fabrice Niessen" />
-<meta  name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/styles/bigblow/css/htmlize.css"/>
 <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/styles/bigblow/css/bigblow.css"/>
 <link rel="stylesheet" type="text/css" href="http://svn/mc/xxx/org-style/trunk/styles/bigblow/css/hideshow.css"/>
@@ -271,7 +271,7 @@ This script sends patches:
 <div class="org-src-container">
 
 <pre class="src src-shell">    cat &lt;&lt; EOF
-<span class="org-sh-heredoc">This is $(basename $0), version: 20150608.1152.</span>
+<span class="org-sh-heredoc">This is $(basename $0), version: 20150625.0955.</span>
 
 <span class="org-sh-heredoc">EOF</span>
 </pre>
@@ -621,7 +621,7 @@ Default editor is <code>$EDITOR</code>.  If not found, set Emacs:
 <div class="org-src-container">
 
 <pre class="src src-shell">: ${<span class="org-variable-name">EDITOR</span>:=<span class="org-string">"emacsclient"</span>}
-<span class="org-builtin">which</span> <span class="org-string">"$EDITOR"</span> &gt; /dev/null 2&gt;&amp;1 || die <span class="org-string">"editor not found"</span>
+<span class="org-builtin">which</span> <span class="org-string">"${EDITOR%% *}"</span> &gt; /dev/null 2&gt;&amp;1 || die <span class="org-string">"editor not found"</span>
 </pre>
 </div>
 </div>
@@ -797,7 +797,7 @@ cat &lt;&lt;EOF &gt; $<span class="org-variable-name">email</span>
   cat $<span class="org-variable-name">patch</span>.excluded; } &gt;&gt; $<span class="org-variable-name">email</span>
 mv $<span class="org-variable-name">patch</span>.excluded $<span class="org-variable-name">patch</span>
 printf <span class="org-string">"\nEdit commit log message and email to send to '$mailto'...\n"</span>
-<span class="org-string">"$EDITOR"</span> $<span class="org-variable-name">email</span>
+$<span class="org-variable-name">EDITOR</span> $<span class="org-variable-name">email</span>
 test $<span class="org-variable-name">?</span> -eq 0 || die <span class="org-string">"edit failed"</span>
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">remove comments from editable part</span>

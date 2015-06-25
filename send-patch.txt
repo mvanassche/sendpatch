@@ -423,7 +423,7 @@ Default editor is ~$EDITOR~.  If not found, set Emacs:
 
 #+begin_src shell
 : ${EDITOR:="emacsclient"}
-which "$EDITOR" > /dev/null 2>&1 || die "editor not found"
+which "${EDITOR%% *}" > /dev/null 2>&1 || die "editor not found"
 #+end_src
 
 *** Display changed files
@@ -557,7 +557,7 @@ esac
   cat $patch.excluded; } >> $email
 mv $patch.excluded $patch
 printf "\nEdit commit log message and email to send to '$mailto'...\n"
-"$EDITOR" $email
+$EDITOR $email
 test $? -eq 0 || die "edit failed"
 
 # remove comments from editable part
