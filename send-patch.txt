@@ -206,6 +206,11 @@ autodeletetmpfiles="ask"
 emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <johndoe@example.com>" -charset UTF-8'
 #+end_src
 
+A mailsend example with password input
+#+begin_src sh
+emailcommand='printf "password:";read -s password;cat $email | mailsend.exe -smtp mail.xxx.com -to "$mailto" -f johndoe@example.com -sub "$prefix $subject" -user johndoe@example.com -pass "$password" -v -auth -ssl -port 465'
+#+end_src
+
 **** Example
 
 A commonly configured option could be:
