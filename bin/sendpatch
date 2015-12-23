@@ -74,15 +74,20 @@ vcs_info () {
     local default="tfs"
 
     # recursively search for `.svn' directory
-    while [[ ! ( -d .svn ) && ( "$(pwd)" != "/" ) ]]; do
+    while [[ (! ( -d .svn ) && ! ( -d .git )) && ( "$(pwd)" != "/" ) ]]; do
         cd ..
     done
 
     if [[ -d .svn ]]; then
         printf "svn\n"
-    else # not found
-        printf "$default\n"
+    else # svn not found
+        if [[ -d .git ]]; then
+            printf "git\n"
+        else # git not found
+            printf "$default\n"
+        fi
     fi
+
 }
 
 fixtfsbinaryfiles () {
@@ -137,6 +142,9 @@ case $vcs in
     tfs)
         VCS_STATUS="tf status"
         ;;
+    git)
+        VCS_STATUS="git status"
+        ;;
     *)
         die "VCS backend is not supported"
         ;;
@@ -151,11 +159,18 @@ case $vcs in
         [[ -f $projectconfig ]] \
             || die "\`$(pwd)' is not the root directory of a working copy"
         ;;
+    git)
+        [[ -d .git ]] \
+            || die "\`$(pwd)' is not the root directory of a working copy"
+        ;;
 esac
 
 case $vcs in
     svn)
         url=$(svn info | grep -E "^URL")/
+        ;;
+    git)
+        url=$(git config --get remote.origin.url)/
         ;;
     tfs)
         # get collection and project
@@ -191,6 +206,9 @@ case $vcs in
         cat $tmpfile | grep -F -i "$rootdirwin" | tee $tmpfile.out
         mv $tmpfile.out $tmpfile
         ;;
+    git)
+        git diff --name-only | tee $tmpfile
+        ;;
 esac
 
 case $vcs in
@@ -200,7 +218,13 @@ case $vcs in
         ;;
     tfs)
         ;;
+    git)
+        cecho "\nUntracked files:"
+        git ls-files --others --exclude-standard
+        ;;
 esac
+
+# XXX git if no modification, maybe push to do then?
 
 [[ $(cat $tmpfile | wc -l) -gt 0 ]] \
     || die "no changes to send to the repository"
@@ -230,6 +254,7 @@ else
     exit 2
 fi
 
+# XXX support for exclude with git format
 if [[ -n "$excludefileregexp" ]]; then
     cat $patch |\
     awk -v pattern="^Index: .*$excludefileregexp" \
@@ -252,6 +277,9 @@ cat <<EOF > $email
 EOF
 case $vcs in
     svn)
+        makelogparams="$*"
+        ;;
+    git)
         makelogparams="$*"
         ;;
     tfs)
@@ -314,6 +342,9 @@ if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
     case $vcs in
         svn)
             svn commit --file $commitmsg $@
+            ;;
+        git)
+            git commit --all -F $commitmsg $@
             ;;
         tfs)
             tf checkin /comment:@$commitmsg /noprompt $@

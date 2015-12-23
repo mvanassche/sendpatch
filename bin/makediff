@@ -13,6 +13,10 @@ case $vcs in
         svn diff -x -w --no-diff-deleted $* > $tmpfile
         retval=$?
         ;;
+    git)
+        git diff -b -w --irreversible-delete $* >> $tmpfile
+        retval=$?
+        ;;
     tfs)
         tf diff $* /format:Unified > $tmpfile
         retval=$?
