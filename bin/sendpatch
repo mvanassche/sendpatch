@@ -207,7 +207,7 @@ case $vcs in
         mv $tmpfile.out $tmpfile
         ;;
     git)
-        git diff --name-only | tee $tmpfile
+        git diff --name-only HEAD | tee $tmpfile
         ;;
 esac
 
