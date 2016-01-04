@@ -14,7 +14,7 @@ case $vcs in
         retval=$?
         ;;
     git)
-        git diff -b -w --irreversible-delete HEAD $* >> $tmpfile
+        git diff -b -w --irreversible-delete --no-prefix HEAD $* >> $tmpfile
         retval=$?
         ;;
     tfs)

@@ -207,7 +207,7 @@ case $vcs in
         mv $tmpfile.out $tmpfile
         ;;
     git)
-        git diff --name-only HEAD | tee $tmpfile
+        git diff --name-only HEAD > $tmpfile
         ;;
 esac
 
@@ -224,7 +224,6 @@ case $vcs in
         ;;
 esac
 
-# XXX git if no modification, maybe push to do then?
 
 [[ $(cat $tmpfile | wc -l) -gt 0 ]] \
     || die "no changes to send to the repository"
@@ -254,18 +253,50 @@ else
     exit 2
 fi
 
-# XXX support for exclude with git format
-if [[ -n "$excludefileregexp" ]]; then
-    cat $patch |\
-    awk -v pattern="^Index: .*$excludefileregexp" \
-        'BEGIN {deleteline = 0;}
-         $0 ~ pattern {deleteline = 1; next;}
-         // && deleteline == 0 {print $0;}
-         /^Index: / && deleteline == 1 {print $0; deleteline = 0;}' \
-    > $patch.excluded 2> /dev/null
-else
-    cp $patch $patch.excluded
-fi
+case $vcs in
+    svn)
+        if [[ -n "$excludefileregexp" ]]; then
+            cat $patch |\
+            awk -v pattern="^Index: .*$excludefileregexp" \
+                'BEGIN {deleteline = 0;}
+                 $0 ~ pattern {deleteline = 1; next;}
+                 // && deleteline == 0 {print $0;}
+                 /^Index: / && deleteline == 1 {print $0; deleteline = 0;}' \
+            > $patch.excluded 2> /dev/null
+        else
+        # XXX if no exclude still want to do the index manipulation
+            cp $patch $patch.excluded
+        fi
+        ;;
+    tfs)
+        if [[ -n "$excludefileregexp" ]]; then
+            cat $patch |\
+            awk -v pattern="^Index: .*$excludefileregexp" \
+                'BEGIN {deleteline = 0;}
+                 $0 ~ pattern {deleteline = 1; next;}
+                 // && deleteline == 0 {print $0;}
+                 /^Index: / && deleteline == 1 {print $0; deleteline = 0;}' \
+            > $patch.excluded 2> /dev/null
+        else
+        # XXX if no exclude still want to do the index manipulation
+            cp $patch $patch.excluded
+        fi
+        ;;
+    git)
+        if [[ -n "$excludefileregexp" ]]; then
+            cat $patch |\
+            awk -v pattern="^diff --git .*$excludefileregexp .*" \
+                'BEGIN {deleteline = 0;}
+                 $0 ~ pattern {deleteline = 1; next;}
+                 // && deleteline == 0 {print $0;}
+                 /^diff --git / && deleteline == 1 {print $0; deleteline = 0;}' \
+            > $patch.excluded 2> /dev/null
+        else
+        # XXX if no exclude still want to do the index manipulation
+            cp $patch $patch.excluded
+        fi
+        ;;
+esac
 
 # ask for commit message
 cat <<EOF > $email
@@ -322,7 +353,7 @@ head -n 1 $email > $tmpfile
 # replace accented letters by their unaccented equivalent
 case "$(file --brief $tmpfile 2> /dev/null)" in
     UTF-8*)
-        subject="$(cat $tmpfile | iconv -c -f UTF-8 -t ISO-8859-1 | unaccent)"
+        subject="$(cat $tmpfile | iconv -c -f teeUTF-8 -t ISO-8859-1 | unaccent)"
         ;;
     ISO-8859*|ASCII*)
         subject="$(cat $tmpfile | unaccent)"
@@ -344,7 +375,7 @@ if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
             svn commit --file $commitmsg $@
             ;;
         git)
-            git commit --all -F $commitmsg $@
+            git commit -a -F $commitmsg --only $@
             ;;
         tfs)
             tf checkin /comment:@$commitmsg /noprompt $@
