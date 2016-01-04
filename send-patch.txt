@@ -208,7 +208,8 @@ emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "m
 
 A mailsend example with password input
 #+begin_src sh
-emailcommand='printf "password:";read -s password;cat $email | mailsend.exe -smtp mail.xxx.com -to "$mailto" -f johndoe@example.com -sub "$prefix $subject" -user johndoe@example.com -pass "$password" -v -auth -ssl -port 465'
+askemailpassword="yes"
+emailcommand='cat $email | mailsend.exe -smtp mail.missioncriticalit.com -to "$mailto" -f mva@missioncriticalit.com -sub "$prefix $subject" -user mva@missioncriticalit.com -pass "$emailpassword" -v -auth -ssl -port 465'
 #+end_src
 
 **** Example

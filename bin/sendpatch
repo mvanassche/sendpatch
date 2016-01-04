@@ -37,6 +37,7 @@ emailfileprefix=""
 asksubject="yes"
 autocommit="ask"
 autosendemail="ask"
+askemailpassword="no"
 autodeletetmpfiles="ask"
 emailcommand='blat "$email" -to "$mailto" -subject "$prefix $subject" -server "mail" -f "John Doe <johndoe@example.com>" -charset UTF-8'
 
@@ -207,7 +208,7 @@ case $vcs in
         mv $tmpfile.out $tmpfile
         ;;
     git)
-        git diff --name-only HEAD > $tmpfile
+        git diff --name-only HEAD $@ > $tmpfile
         ;;
 esac
 
@@ -375,7 +376,8 @@ if [[ "$autocommit" = "yes" || "$askcommit" = "yes" ]]; then
             svn commit --file $commitmsg $@
             ;;
         git)
-            git commit -a -F $commitmsg --only $@
+            git add -u $@
+            git commit -F $commitmsg --only $@
             ;;
         tfs)
             tf checkin /comment:@$commitmsg /noprompt $@
@@ -400,9 +402,31 @@ if [[ "$autosendemail" = "ask" ]]; then
 fi
 
 if [[ "$autosendemail" = "yes" || "$asksendemail" = "yes" ]]; then
-    printf "Sending email...\n"
-    eval "$emailcommand"
-    rc=$?
+    if [[ "$askemailpassword" = "yes" ]]; then
+        printf "Email password:"
+        read -s emailpassword
+        printf "Trying to send email...\n"
+        eval "$emailcommand"
+        rc=$?
+        if [ $rc -ne 0 ]; then
+            printf "Second attempt email password:"
+            read -s emailpassword
+            printf "Trying to send email...\n"
+            eval "$emailcommand"
+            rc=$?
+            if [ $rc -ne 0 ]; then
+                printf "Last attempt email password:"
+                read -s emailpassword
+                printf "Trying to send email...\n"
+                eval "$emailcommand"
+                rc=$?
+            fi
+        fi
+    else
+        printf "Sending email...\n"
+        eval "$emailcommand"
+        rc=$?
+    fi
 else
     printf "Nothing gets sent...\n"
     rc=0
